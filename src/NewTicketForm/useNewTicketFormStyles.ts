@@ -51,30 +51,6 @@ export const useNewTicketFormStyles = createStyles(
       justifyContent: "center",
     },
 
-    dragonTicketUnauthWrapper: {
-      ...rowStyles,
-
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      width: "100%",
-      paddingBottom: "clamp(4rem, calc(3vw + 4vh), 8rem)",
-
-      minHeight: "600px",
-      background: "#F2D0D1",
-      h2: {
-        //   ...headerTextStyles,
-      },
-      p: {
-        //   ...bodyTextStyles,
-      },
-      "& .mantine-Image-root img": {
-        border: "8px solid #fff",
-        boxShadow: "1px 2px 10px 2px #00000025",
-      },
-    },
-
     dragonTicketSuccessWrapper: {
       ...rowStyles,
 
@@ -86,14 +62,12 @@ export const useNewTicketFormStyles = createStyles(
       width: "100%",
       paddingBottom: "clamp(3rem, calc(5vw + 5vh), 9rem)",
       h2: {
-        //   ...headerTextStyles,
+    
         fontSize: "clamp(1.75rem, 6vw, 2rem)",
         fontWeight: 700,
         marginBlock: "1.75em 0.25em",
       },
-      p: {
-        //   ...bodyTextStyles,
-      },
+
     },
 
     formFieldsBox: {
