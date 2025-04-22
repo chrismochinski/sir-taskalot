@@ -1,54 +1,66 @@
-# React + TypeScript + Vite
+<h1 align="left" style="display:flex; align-items:center; gap:0.5rem;">
+  <strong style="font-size:2rem;">Sir Taskalot</strong>
+  <img src="./src/assets/dragon-butler.png" alt="Sir Taskalot" width="50" height="50" />
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+_Making internal work requests magical (and stupid simple)_
 
-Currently, two official plugins are available:
+Sir Taskalot is a focused, delightful desktop app for **non-technical team members** to submit tickets — with no context switching, no clunky Jira fields, and no Slack confusion.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Requests submitted through this app are instantly routed to Slack (for visibility) and Jira (for tracking), with formatting and metadata handled automagically in the background.
 
-## Expanding the ESLint configuration
+> _"Make kindness normal — and make ticketing invisible."_ — Mo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## ✨ Why?
+
+Our goal is simple: **remove every possible barrier** to getting support, submitting ideas, and communicating work between teams.
+
+- No need to log into Jira or learn its interface
+- No need to worry about ticket formatting or field selection
+- No need to remember Slack threads or who to tag
+
+Just fill out a tiny form and hit submit. Sir Taskalot handles the rest.
+
+---
+
+## 🚀 Getting Started (for Developers)
+
+To run the app locally:
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+To build a production variation for desktop install:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash 
+npm run dist
 ```
+
+## ✅ Environment Variables
+
+Follow the schema of `.env.example` to build your own `.env` file (this will change the "Reporter" output in Jira):
+
+```env
+VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL=https://hooks.slack.com/services/...
+VITE_JIRA_API_TOKEN=your-jira-api-token
+VITE_JIRA_EMAIL=your-jira-email@example.com
+...
+```
+
+## 🧪 Tech Stack
+
+- Vite + React
+- Electron (Chromium app runtime)
+- Mantine (component system)
+- Slack Webhooks + Jira REST API
+
+## 🐉 Author
+
+**Chris “Mo” Mochinski**  
+<sub style="color:gray"><a href="https://chrismochinski.github.io/">Wreck Shop Media</a></sub>  
+<sub style="color:gray"><a href="https://characterstrong.com/">CharacterStrong</a></sub>
+
