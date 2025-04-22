@@ -23,7 +23,9 @@ import { useNewTicketFormStyles, submitTicket } from ".";
 export function NewTicketForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("Medium");
+  const [priority, setPriority] = useState<"Lowest" | "Low" | "Medium" | "High" | "Highest">(
+    "Medium"
+  );
   const [ticketType, setTicketType] = useState<"Bug" | "Story">("Story");
   const [slackThread, setSlackThread] = useState("");
   const [reporter, setReporter] = useState("");
@@ -104,7 +106,9 @@ export function NewTicketForm() {
               label="Priority"
               data={["Lowest", "Low", "Medium", "High", "Highest"]}
               value={priority}
-              onChange={(value) => setPriority(value || "")}
+              onChange={(value) =>
+                setPriority(value as "Lowest" | "Low" | "Medium" | "High" | "Highest")
+              }
               placeholder="Select priority"
               className={classes.dragonFormInput}
             />
