@@ -2,14 +2,18 @@
   "main": "electron/main.cjs",
   "name": "sir-taskalot",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Sir Taskalot: A friendly desktop ticket creator and notifier for CharacterStrong Marketing requests.",
+  "author": "Chris 'Mo' Mochinski <mo@characterstrong.com>",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"vite\" \"cross-env ELECTRON_ENABLE_LOGGING=true electron .\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "electron": "electron ."
+    "electron": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -33,6 +37,7 @@
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "electron": "^35.2.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.22.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
@@ -40,5 +45,28 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1"
+  },
+  "build": {
+    "appId": "com.characterstrong.sirtaskalot",
+    "productName": "Sir Taskalot",
+    "mac": {
+      "icon": "build/icons/icon.icns",
+      "target": ["dmg", "zip"]
+    },
+    "files": [
+      "dist/",
+      "electron/",
+      "preload.js",
+      "main.cjs",
+      "ipcHandlers.cjs",
+      "node_modules/",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "public/",
+        "to": "public"
+      }
+    ]
   }
 }
