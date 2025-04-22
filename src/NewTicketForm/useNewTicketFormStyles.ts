@@ -5,28 +5,17 @@ type NewTicketFormStylesProps = {
   ticketTypeStyle: "Bug" | "Story";
 };
 
-const rowStyles = {
-  paddingInline: "max(6vw, (100vw - 1280px)/2)",
-  marginBlock: "min(2.5rem, calc(2vw + 2vh))",
-  marginInline: 0,
-  width: "100%",
-  // [mq.max.xs]: {
-  //   paddingInline: '3vw',
-  // },
-};
-
 export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
-    
     //h2
     headerText: {
       fontFamily: '"Archivo", sans-serif',
-      fontSize: "1.5rem",
-      fontWeight: 600,
+      fontWeight: 700,
       textWrap: "balance",
       textAlign: "center",
       color: "#000",
-      marginBlock: "0",
+      marginBlock: "0 0.25em",
+      fontSize: "clamp(2rem, 5vw, 3rem)",
     },
 
     // p
@@ -42,32 +31,26 @@ export const useNewTicketFormStyles = createStyles(
     },
 
     dragonTicketPageWrapper: {
-      paddingTop: "140px",
-
       backgroundColor: "#FFF",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-    },
+    }, 
 
     dragonTicketSuccessWrapper: {
-      ...rowStyles,
-
+      paddingInline: "max(6vw, (100vw - 1280px)/2)",
+      marginBlock: "0min(2.5rem, calc(2vw + 2vh))",
+      marginInline: 0,
+      width: "100%",
       background: "#DEFCEE",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      width: "100%",
-      paddingBottom: "clamp(3rem, calc(5vw + 5vh), 9rem)",
-      h2: {
-    
-        fontSize: "clamp(1.75rem, 6vw, 2rem)",
-        fontWeight: 700,
-        marginBlock: "1.75em 0.25em",
-      },
 
+      paddingBottom: "clamp(3rem, calc(5vw + 5vh), 9rem)",
+      paddingTop: "clamp(0.75rem, calc(2vw + 2vh), 1.75rem)",
     },
 
     formFieldsBox: {

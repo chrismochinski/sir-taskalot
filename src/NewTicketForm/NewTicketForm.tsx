@@ -65,10 +65,10 @@ export function NewTicketForm() {
 
   return (
     <Box id="dragon-ticket-form-v1">
-      <Box className={cx(classes.dragonTicketPageWrapper)} pb="0" mt="-80px">
+      <Box className={cx(classes.dragonTicketPageWrapper)} pb="0">
         <Box className={cx(classes.dragonTicketSuccessWrapper)} my="0">
           <Title order={2} className={classes.headerText}>
-            Create a Dragon Ticket
+            Sir Taskalot
           </Title>
 
           <Text component="p" className={classes.bodyText} maw="600px" ta="center">
