@@ -8,6 +8,38 @@ export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
     flexHeaderWrapper: {
       zIndex: 2,
+      WebkitAppRegion: 'drag',
+      paddingBlock: '1.5rem 0.25rem',
+    },
+    
+    dragRegion: {
+      WebkitAppRegion: 'drag',
+      position: 'absolute',
+      '&#left': {
+        left: 0,
+        top: 0,
+        bottom: 0,
+        height: '100%',
+        background: 'transparent',
+        width: '95px',
+      },
+      '&#right': {
+        right: 0,
+        top: 0,
+        bottom: 0,
+        height: '100%',
+        background: 'transparent',
+        width: '95px',
+      },
+      '&#bottom': {
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '60px',
+        background: 'transparent',
+        
+      },
+
     },
 
     //h2
@@ -42,13 +74,14 @@ export const useNewTicketFormStyles = createStyles(
       alignItems: "center",
       justifyContent: "center",
       overflow: "hidden",
+      background: "#DEFCEE",
     },
 
     blobWrapper: {
       width: "clamp(300px, 82%, 700px)",
       height: "clamp(300px, 82%, 700px)",
       position: "absolute",
-      inset: "-7% 0 0 -8%",
+      inset: "-9% 0 0 -12%",
       fill: "#41E894",
       zIndex: 0,
       animation: "blob 11000ms ease-in-out infinite",
@@ -81,7 +114,6 @@ export const useNewTicketFormStyles = createStyles(
       marginBlock: 0,
       marginInline: 0,
       width: "100%",
-      background: "#DEFCEE",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -101,6 +133,7 @@ export const useNewTicketFormStyles = createStyles(
       marginTop: "0.75rem",
       backgroundColor: "#ffffffdf",
       backdropFilter: "blur(6px)",
+      WebkitBackdropFilter: "blur(6px)",
       borderRadius: "12px",
       boxShadow: "2px 3px 17px #00000036",
       zIndex: 1,
@@ -112,6 +145,10 @@ export const useNewTicketFormStyles = createStyles(
         fontFamily: '"Roboto", sans-serif',
         color: "#000",
       },
+
+      '& button, & input, & textarea': {
+        WebkitAppRegion: 'no-drag',
+      }
     },
 
     ticketType: {

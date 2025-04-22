@@ -8,12 +8,16 @@ require('./ipcHandlers.cjs'); // just added
 function createWindow() {
   const win = new BrowserWindow({
     width: 650,
-    height: 870,
+    height: 860,
     resizable: false, // idea no resize?
     minWidth: 650,
     maxWidth: 650,
-    minHeight: 870,
-    maxHeight: 870,
+    minHeight: 860,
+    maxHeight: 860,
+    frame: false,
+    vibrancy: "under-window",
+    titleBarStyle: "hidden",
+    vibrancy: "under-window", // or "fullscreen-ui" for fancier glow
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'), // now using preload
       contextIsolation: true,                     
