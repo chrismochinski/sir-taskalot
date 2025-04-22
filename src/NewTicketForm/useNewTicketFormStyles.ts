@@ -14,8 +14,8 @@ export const useNewTicketFormStyles = createStyles(
       textWrap: "balance",
       textAlign: "center",
       color: "#000",
-      marginBlock: "0 0.25em",
-      fontSize: "clamp(2rem, 5vw, 3rem)",
+      marginBlock: "0 0.15rem",
+      fontSize: "clamp(2.5rem, 10vw, 3rem)",
     },
 
     // p
@@ -26,7 +26,7 @@ export const useNewTicketFormStyles = createStyles(
       lineHeight: "1.35em",
       fontWeight: 400,
       textWrap: "balance",
-      marginBlock: "0.5em",
+      marginBlock: "0.25em",
       marginInline: "auto",
     },
 
@@ -36,7 +36,7 @@ export const useNewTicketFormStyles = createStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-    }, 
+    },
 
     dragonTicketSuccessWrapper: {
       paddingInline: "max(6vw, (100vw - 1280px)/2)",
@@ -113,19 +113,19 @@ export const useNewTicketFormStyles = createStyles(
     button: {
       backgroundColor: "#ff4658",
       fontFamily: '"Archivo", sans-serif',
-      fontWeight: 600,
+      fontWeight: 700,
       color: "#ffffff",
-      padding: "0.65em 1.6em",
+      padding: "0.65em 1.4em",
       borderRadius: "64px",
       border: "none",
       cursor: "pointer",
-      transition:
-        "transform 150ms ease-in-out, box-shadow 150ms ease-in-out, font-weight 150ms ease-in-out",
+      fontSize: "15px",
+      transition: "transform 250ms ease-in-out, box-shadow 250ms ease-in-out",
       transformOrigin: "50%",
       "&:hover": {
+        transition: "transform 150ms ease-in-out, box-shadow 150ms ease-in-out",
         backgroundColor: "#ff4658",
         transform: "scale(1.03)",
-        fontWeight: 700,
         boxShadow: "2px 4px 12px rgb(0 0 0 / 35%)",
       },
     },

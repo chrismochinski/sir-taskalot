@@ -1,12 +1,14 @@
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 600,
-    height: 900,
+    width: 650,
+    height: 920,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // only if you use preload
+      // preload: path.join(__dirname, 'preload.js'), // only if you use preload
     },
   });
 
