@@ -1,5 +1,5 @@
 const { ipcMain } = require("electron");
-const { fetch } = require("undici"); // using undici's fetch
+const { fetch } = require("undici");
 require("dotenv").config();
 
 ipcMain.handle("submit-ticket", async (_event, payload) => {
@@ -9,73 +9,16 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   const projectKey = process.env.VITE_PROJECT_KEY;
   const teamId = "00bb1530-8e23-4546-9ee2-74de5b81d280";
 
-  console.log("✅ ENV loaded:");
-  console.log(
-    "VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL:",
-    process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL
-  );
-  console.log("VITE_JIRA_EMAIL:", process.env.VITE_JIRA_EMAIL);
-  console.log("VITE_JIRA_API_TOKEN:", process.env.VITE_JIRA_API_TOKEN);
-  console.log("VITE_PROJECT_KEY:", process.env.VITE_PROJECT_KEY);
+  const priorityEmojiMap = {
+    Lowest: ":priority-lowest:",
+    Low: ":priority-low:",
+    Medium: ":priority-medium:",
+    High: ":priority-high:",
+    Highest: ":priority-highest:",
+  };
 
   try {
-    // ✅ FORMAT SLACK PAYLOAD LIKE CLI SCRIPT
-    const slackPayload = {
-      username: "DragonBot",
-      icon_emoji: ":dragon_face:",
-      text: "🐉 *New Dragon Ticket Submitted*",
-      blocks: [
-        {
-          type: "section",
-          text: {
-            type: "mrkdwn",
-            text: `*Title:* ${payload.title}\n*Type:* ${payload.ticketType}\n*Priority:* ${payload.priority}`,
-          },
-        },
-        ...(payload.description
-          ? [
-              {
-                type: "section",
-                text: {
-                  type: "mrkdwn",
-                  text: `*Description:* ${payload.description}`,
-                },
-              },
-            ]
-          : []),
-        ...(payload.slackThread
-          ? [
-              {
-                type: "section",
-                text: {
-                  type: "mrkdwn",
-                  text: `*Slack Thread:* ${payload.slackThread}`,
-                },
-              },
-            ]
-          : []),
-      ],
-    };
-
-    // 📨 POST TO SLACK
-    if (webhookUrl) {
-      console.log("📨 Posting to Slack...");
-      console.log("📦 Slack Payload:", JSON.stringify(slackPayload, null, 2));
-
-      const slackRes = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(slackPayload),
-      });
-
-      const slackText = await slackRes.text();
-      console.log("✅ Slack status:", slackRes.status);
-      console.log("📬 Slack response:", slackText);
-    } else {
-      console.warn("⚠️ No Slack webhook URL found!");
-    }
-
-    // 📨 POST TO JIRA
+    // 📨 1. POST TO JIRA FIRST
     const jiraPayload = {
       fields: {
         summary: payload.title,
@@ -90,6 +33,20 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
           version: 1,
           content: [
             { type: "paragraph", content: [{ type: "text", text: payload.description }] },
+            ...(payload.reporter
+              ? [
+                  {
+                    type: "paragraph",
+                    content: [
+                      {
+                        type: "text",
+                        text: `Reported by ${payload.reporter}`,
+                        marks: [{ type: "small" }],
+                      },
+                    ],
+                  },
+                ]
+              : []),
             { type: "paragraph" },
             { type: "rule" },
             {
@@ -129,7 +86,87 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     const jiraResult = await jiraResponse.json();
     console.log("✅ Jira response:", jiraResult);
 
-    return { success: jiraResponse.ok, key: jiraResult.key || "" };
+    if (!jiraResult.key) {
+      throw new Error("❌ Jira ticket creation failed");
+    }
+
+    // ✅ 2. Use Jira ticket key in the Slack message
+    const jiraTicketUrl = `https://characterstrong.atlassian.net/browse/${jiraResult.key}`;
+    const priorityEmoji = priorityEmojiMap[payload.priority] || "";
+
+    const slackPayload = {
+      blocks: [
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: ":dragon-butler: SIR TASKALOT :jira:",
+            emoji: true,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `🧾 *New Ticket Submitted*${payload.reporter ? ` by *${payload.reporter}*` : ""}`,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*Ticket ID:* <${jiraTicketUrl}|${jiraResult.key}>`,
+          },
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `*Title:* ${payload.title}\n*Type:* ${payload.ticketType}\n*Priority:* ${payload.priority} ${priorityEmoji}`,
+          },
+        },
+        ...(payload.description
+          ? [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*Description:* ${payload.description}`,
+                },
+              },
+            ]
+          : []),
+        ...(payload.slackThread
+          ? [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*Slack Thread:* ${payload.slackThread}`,
+                },
+              },
+            ]
+          : []),
+      ],
+    };
+
+    // ✅ 3. POST TO SLACK (now that we have ticket key)
+    if (webhookUrl) {
+      console.log("📨 Posting to Slack...");
+      const slackRes = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(slackPayload),
+      });
+
+      const slackText = await slackRes.text();
+      console.log("✅ Slack status:", slackRes.status);
+      console.log("📬 Slack response:", slackText);
+    } else {
+      console.warn("⚠️ No Slack webhook URL found!");
+    }
+
+    return { success: true, key: jiraResult.key };
   } catch (error) {
     console.error("❌ Error submitting ticket:", error);
     return { success: false };
