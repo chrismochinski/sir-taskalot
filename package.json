@@ -50,9 +50,11 @@
     "appId": "com.characterstrong.sirtaskalot",
     "productName": "Sir Taskalot",
     "mac": {
-      "artifactName": "Sir-Taskalot-Installer.dmg",
       "icon": "build/icons/icon.icns",
-      "target": ["dmg", "zip"]
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "files": [
       "dist/",
