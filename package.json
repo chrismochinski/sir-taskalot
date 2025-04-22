@@ -1,5 +1,5 @@
 {
-  "main": "electron/main.ts",
+  "main": "electron/main.js",
   "name": "sir-taskalot",
   "private": true,
   "version": "0.0.0",
