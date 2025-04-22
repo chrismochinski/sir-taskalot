@@ -6,6 +6,10 @@ type NewTicketFormStylesProps = {
 
 export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
+    flexHeaderWrapper: {
+      zIndex: 2,
+    },
+
     //h2
     headerText: {
       fontFamily: '"BioRhyme", sans-serif',
@@ -39,7 +43,39 @@ export const useNewTicketFormStyles = createStyles(
       overflow: "hidden",
     },
 
+    blobWrapper: {
+      width: "clamp(300px, 86%, 700px)",
+      height: "clamp(300px, 86%, 700px)",
+      position: "absolute",
+      inset: 0,
+      fill: "#41E894",
+      zIndex: 0,
+      animation: "blob 14000ms ease-in-out infinite",
+      transformOrigin: "50% 50%",
+      "@keyframes blob": {
+        "0%": {
+          transform: "scale(1) translate(10px, -30px)",
+        },
+        "38%": {
+          transform: "scale(0.8, 1) translate(80vw, 30vh) rotate(160deg)",
+        },
+        "40%": {
+          transform: "scale(0.8, 1) translate(80vw, 30vh) rotate(160deg)",
+        },
+        "78%": {
+          transform: "scale(1.3) translate(0vw, 50vh) rotate(-20deg)",
+        },
+        "80%": {
+          transform: "scale(1.3) translate(0vw, 50vh) rotate(-20deg)",
+        },
+        "100%": {
+          transform: "scale(1) translate(10px, -30px)",
+        },
+      },
+    },
+
     dragonTicketSuccessWrapper: {
+      overflow: "hidden",
       paddingInline: "max(3vw, (100vw - 1280px)/2)",
       marginBlock: 0,
       marginInline: 0,
@@ -49,9 +85,7 @@ export const useNewTicketFormStyles = createStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-
       paddingBlock: "1rem 4rem",
-      
     },
 
     formFieldsBox: {
@@ -64,13 +98,13 @@ export const useNewTicketFormStyles = createStyles(
       padding: "1rem 1.25rem",
       gap: "1rem",
       marginTop: "0.75rem",
-      backgroundColor: "#fff",
-      // borderRadius: "16px",
-      boxShadow: "2px 3px 15px #00000030",
+      backgroundColor: "#ffffffcc",
       backdropFilter: "blur(5px)",
-      WebkitBackdropFilter: "blur(5px)",
-      border: "2px solid #ffffff",
-      // transform: 'rotate(1deg)',
+      borderRadius: "12px",
+      boxShadow: "2px 3px 15px #00000030",
+      zIndex: 1,
+      border: "2px solid #FFFFFF60",
+
       label: {
         fontSize: "1rem",
         fontWeight: 400,
@@ -132,6 +166,10 @@ export const useNewTicketFormStyles = createStyles(
       },
     },
 
-    dragonFormInput: {},
+    dragonFormInput: {
+      "& input, & textarea": {
+        background: "#ffffffaa",
+      },
+    },
   })
 );
