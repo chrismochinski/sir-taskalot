@@ -36,12 +36,22 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
             ...(payload.reporter
               ? [
                   {
-                    type: "paragraph",
+                    type: "heading",
+                    attrs: {
+                      level: 4,
+                    },
                     content: [
                       {
                         type: "text",
                         text: `Reported by ${payload.reporter}`,
-                        marks: [{ type: "small" }],
+                        marks: [
+                          {
+                            type: "textColor",
+                            attrs: {
+                              color: "#0747a6",
+                            },
+                          },
+                        ],
                       },
                     ],
                   },
@@ -53,7 +63,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
               type: "paragraph",
               content: [
                 {
-                  type: "text",
+                  type: "heading",
+                  attrs: {
+                    level: 5,
+                  },
                   text: "🐉 This ticket was created via Sir Taskalot.",
                   marks: [
                     { type: "em" },
@@ -115,7 +128,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `*Ticket ID:* <${jiraTicketUrl}|${jiraResult.key}>`,
+            text: `*Ticket ID: <${jiraTicketUrl}|${jiraResult.key}>*`,
           },
         },
         {
