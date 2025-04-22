@@ -128,7 +128,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `*Ticket ID: <${jiraTicketUrl}|${jiraResult.key}>*`,
+            text: `*Ticket ID:* <${jiraTicketUrl}|${jiraResult.key}>`,
           },
         },
         {
