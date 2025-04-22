@@ -8,7 +8,12 @@ require('./ipcHandlers.cjs'); // just added
 function createWindow() {
   const win = new BrowserWindow({
     width: 650,
-    height: 920,
+    height: 870,
+    resizable: false, // idea no resize?
+    minWidth: 650,
+    maxWidth: 650,
+    minHeight: 870,
+    maxHeight: 870,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'), // now using preload
       contextIsolation: true,                     

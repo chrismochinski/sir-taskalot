@@ -11,8 +11,10 @@ import {
   Button,
   SegmentedControl,
   Flex,
+  Image,
 } from "@mantine/core";
 import { useNewTicketFormStyles, submitTicket } from ".";
+import dragonButler from "../assets/dragon-butler.png";
 
 /**
  * @component {NewTicketForm}
@@ -54,7 +56,7 @@ export function NewTicketForm() {
     });
 
     if (success) {
-      alert("🎉 Ticket submitted to Slack!");
+      alert("Ticket submitted to Slack 🚀");
       setTitle("");
       setDescription("");
       setSlackThread("");
@@ -66,117 +68,128 @@ export function NewTicketForm() {
   };
 
   return (
-    <Box id="dragon-ticket-form-v1">
-      <Box className={cx(classes.dragonTicketPageWrapper)} pb="0">
-        <Box className={cx(classes.dragonTicketSuccessWrapper)} my="0">
-          <Title order={2} className={classes.headerText}>
-            Sir Taskalot
-          </Title>
-
-          <Text component="p" className={classes.bodyText} maw="600px" ta="center">
-            Please fill out the form below to submit your request. We will review it, reach out with
-            any questions or clarifications, and get started on. Thanks!
-          </Text>
-          <Box className={classes.formFieldsBox}>
-            <TextInput
-              w="100%"
-              radius="xl"
-              label="Title"
-              required
-              value={title}
-              onChange={(e) => setTitle(e.currentTarget.value)}
-              className={classes.dragonFormInput}
-              placeholder="Just the meat & taters here"
-            />
-
-            <Textarea
-              w="100%"
-              radius="md"
-              label="Description"
-              minRows={4}
-              value={description}
-              onChange={(e) => setDescription(e.currentTarget.value)}
-              className={classes.dragonFormInput}
-              placeholder="Share as much or as little as you can - we love context & clarity!"
-            />
-
-            <Select
-              radius="xl"
-              w="50%"
-              label="Priority"
-              data={["Lowest", "Low", "Medium", "High", "Highest"]}
-              value={priority}
-              onChange={(value) =>
-                setPriority(value as "Lowest" | "Low" | "Medium" | "High" | "Highest")
-              }
-              placeholder="Select priority"
-              className={classes.dragonFormInput}
-            />
-            <Box className={classes.flex}>
-              <Text component="label">Ticket Type</Text>
-              <Text component="span">
-                <Text component="span" fw={500} color="#1D96D2">
-                  Story
-                </Text>{" "}
-                = content addition/update
-                <br />
-                <Text component="span" fw={500} color="#F0AD1E">
-                  Bug
-                </Text>{" "}
-                = error or issue with existing content
-              </Text>
-              <SegmentedControl
-                size="xs"
-                className={classes.ticketType}
-                radius="12px"
-                data={[
-                  {
-                    value: "Story",
-                    label: (
-                      <Flex w="90px" justify="center" align="center" gap="0.5rem">
-                        <FaBook size={16} />
-                        <Text component="span">Story</Text>
-                      </Flex>
-                    ),
-                  },
-                  {
-                    value: "Bug",
-                    label: (
-                      <Flex w="90px" justify="center" align="center" gap="0.5rem">
-                        <FaBug size={16} />
-                        <Text component="span">Bug</Text>
-                      </Flex>
-                    ),
-                  },
-                ]}
-                value={ticketType}
-                onChange={(value) => setTicketType(value as "Bug" | "Story")}
-              />
-            </Box>
-            <TextInput
-              w="100%"
-              radius="xl"
-              label="Slack Thread"
-              placeholder="If applicable & if contextually helpful"
-              value={slackThread}
-              onChange={(e) => setSlackThread(e.currentTarget.value)}
-              className={classes.dragonFormInput}
-            />
-
-            <TextInput
-              w="100%"
-              radius="xl"
-              label="Your Name"
-              placeholder="NEW FORM WHO DIS"
-              value={reporter}
-              onChange={(e) => setReporter(e.currentTarget.value)}
-              className={classes.dragonFormInput}
-            />
-
-            <Button onClick={handleSubmit} my="1rem" mx="auto" className={classes.button}>
-              Submit Ticket
-            </Button>
+    <Box className={cx(classes.dragonTicketPageWrapper)} pb="0">
+      <Box className={cx(classes.dragonTicketSuccessWrapper)} my="0">
+        <Flex justify="center" align="center" maw="470px" mb="0" gap="min(0.25rem, 0.3vw)">
+          <Image
+            src={dragonButler}
+            alt="Sir Taskalot - who happens to be a dragon"
+            width="clamp(80px, 17vw, 120px)"
+            height="clamp(80px, 17vw, 120px)"
+            m={0}
+            p={0}
+          />
+          <Box>
+            <Title order={2} className={classes.headerText}>
+              SIR TASKALOT
+            </Title>
+            <Text component="p" className={classes.bodyText}>
+              Please fill out the form below to submit your request. We will review it, reach out
+              with any questions or clarifications, and get started on. Thanks!
+            </Text>
           </Box>
+        </Flex>
+
+        <Box className={classes.formFieldsBox}>
+          <TextInput
+            w="100%"
+            radius="xl"
+            label="Title"
+            required
+            value={title}
+            onChange={(e) => setTitle(e.currentTarget.value)}
+            className={classes.dragonFormInput}
+            placeholder="Just the meat & taters here"
+          />
+
+          <Textarea
+            w="100%"
+            radius="md"
+            label="Description"
+            required
+            minRows={3}
+            value={description}
+            onChange={(e) => setDescription(e.currentTarget.value)}
+            className={classes.dragonFormInput}
+            placeholder="Share as much or as little as you can - we love context & clarity!"
+          />
+
+          <Select
+            radius="xl"
+            w="50%"
+            label="Priority"
+            data={["Lowest", "Low", "Medium", "High", "Highest"]}
+            value={priority}
+            onChange={(value) =>
+              setPriority(value as "Lowest" | "Low" | "Medium" | "High" | "Highest")
+            }
+            placeholder="Select priority"
+            className={classes.dragonFormInput}
+          />
+          <Box className={classes.flex}>
+            <Text component="label">Ticket Type</Text>
+            <Text component="span">
+              <Text component="span" fw={500} color="#1D96D2">
+                Story
+              </Text>{" "}
+              = content addition/update
+              <br />
+              <Text component="span" fw={500} color="#F0AD1E">
+                Bug
+              </Text>{" "}
+              = error or issue with existing content
+            </Text>
+            <SegmentedControl
+              size="xs"
+              className={classes.ticketType}
+              radius="12px"
+              data={[
+                {
+                  value: "Story",
+                  label: (
+                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                      <FaBook size={16} />
+                      <Text component="span">Story</Text>
+                    </Flex>
+                  ),
+                },
+                {
+                  value: "Bug",
+                  label: (
+                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                      <FaBug size={16} />
+                      <Text component="span">Bug</Text>
+                    </Flex>
+                  ),
+                },
+              ]}
+              value={ticketType}
+              onChange={(value) => setTicketType(value as "Bug" | "Story")}
+            />
+          </Box>
+          <TextInput
+            w="100%"
+            radius="xl"
+            label="Slack Thread"
+            placeholder="If applicable & if contextually helpful"
+            value={slackThread}
+            onChange={(e) => setSlackThread(e.currentTarget.value)}
+            className={classes.dragonFormInput}
+          />
+
+          <TextInput
+            w="100%"
+            radius="xl"
+            label="Your Name"
+            placeholder="NEW FORM WHO DIS"
+            value={reporter}
+            onChange={(e) => setReporter(e.currentTarget.value)}
+            className={classes.dragonFormInput}
+          />
+
+          <Button onClick={handleSubmit} my="1rem" mx="auto" className={classes.button}>
+            Submit Ticket
+          </Button>
         </Box>
       </Box>
     </Box>

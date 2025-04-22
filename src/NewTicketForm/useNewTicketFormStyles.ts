@@ -1,5 +1,4 @@
 import { createStyles } from "@mantine/core";
-// import { CSSObject } from "@emotion/react";
 
 type NewTicketFormStylesProps = {
   ticketTypeStyle: "Bug" | "Story";
@@ -9,24 +8,25 @@ export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
     //h2
     headerText: {
-      fontFamily: '"Archivo", sans-serif',
-      fontWeight: 700,
+      fontFamily: '"BioRhyme", sans-serif',
+      fontWeight: 800,
       textWrap: "balance",
-      textAlign: "center",
+      textAlign: "left",
       color: "#000",
-      marginBlock: "0 0.15rem",
-      fontSize: "clamp(2.5rem, 10vw, 3rem)",
+      fontSize: "clamp(1.75rem, 6vw, 2.25rem)",
+      letterSpacing: "0.02em",
     },
 
     // p
     bodyText: {
       fontStyle: "normal",
+      textAlign: "left",
       fontFamily: '"Roboto", sans-serif',
-      fontSize: "clamp(15px, 2.5vw, 1rem)",
-      lineHeight: "1.35em",
+      fontSize: "clamp(13px, 2.4vw, 15px)",
+      lineHeight: "1.25em",
       fontWeight: 400,
-      textWrap: "balance",
-      marginBlock: "0.25em",
+      textWrap: "pretty",
+      marginBlock: "0.175em",
       marginInline: "auto",
     },
 
@@ -36,11 +36,12 @@ export const useNewTicketFormStyles = createStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      overflow: "hidden",
     },
 
     dragonTicketSuccessWrapper: {
-      paddingInline: "max(6vw, (100vw - 1280px)/2)",
-      marginBlock: "0min(2.5rem, calc(2vw + 2vh))",
+      paddingInline: "max(3vw, (100vw - 1280px)/2)",
+      marginBlock: 0,
       marginInline: 0,
       width: "100%",
       background: "#DEFCEE",
@@ -49,8 +50,8 @@ export const useNewTicketFormStyles = createStyles(
       alignItems: "center",
       justifyContent: "center",
 
-      paddingBottom: "clamp(3rem, calc(5vw + 5vh), 9rem)",
-      paddingTop: "clamp(0.75rem, calc(2vw + 2vh), 1.75rem)",
+      paddingBlock: "1rem 4rem",
+      
     },
 
     formFieldsBox: {
@@ -62,15 +63,16 @@ export const useNewTicketFormStyles = createStyles(
       width: "100%",
       padding: "1rem 1.25rem",
       gap: "1rem",
-      marginBlock: "clamp(0.75rem, 2vw, 1.5rem)",
+      marginTop: "0.75rem",
       backgroundColor: "#fff",
-      borderRadius: "16px",
-      boxShadow: "1px 3px 15px #00000020",
+      // borderRadius: "16px",
+      boxShadow: "2px 3px 15px #00000030",
       backdropFilter: "blur(5px)",
       WebkitBackdropFilter: "blur(5px)",
       border: "2px solid #ffffff",
+      // transform: 'rotate(1deg)',
       label: {
-        fontSize: "1.1rem",
+        fontSize: "1rem",
         fontWeight: 400,
         fontFamily: '"Roboto", sans-serif',
         color: "#000",
