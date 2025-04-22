@@ -19,6 +19,7 @@ export const useNewTicketFormStyles = createStyles(
       color: "#000",
       fontSize: "clamp(1.75rem, 6vw, 2.25rem)",
       letterSpacing: "0.02em",
+      textShadow: "1px 1px 4px #FFFFFF50, -1px -1px 4px #FFFFFF50, 1px -1px 4px #FFFFFF50, -1px 1px 4px #FFFFFF50",
     },
 
     // p
@@ -44,13 +45,13 @@ export const useNewTicketFormStyles = createStyles(
     },
 
     blobWrapper: {
-      width: "clamp(300px, 86%, 700px)",
-      height: "clamp(300px, 86%, 700px)",
+      width: "clamp(300px, 82%, 700px)",
+      height: "clamp(300px, 82%, 700px)",
       position: "absolute",
-      inset: 0,
+      inset: "-7% 0 0 -8%",
       fill: "#41E894",
       zIndex: 0,
-      animation: "blob 14000ms ease-in-out infinite",
+      animation: "blob 11000ms ease-in-out infinite",
       transformOrigin: "50% 50%",
       "@keyframes blob": {
         "0%": {
@@ -98,10 +99,10 @@ export const useNewTicketFormStyles = createStyles(
       padding: "1rem 1.25rem",
       gap: "1rem",
       marginTop: "0.75rem",
-      backgroundColor: "#ffffffcc",
-      backdropFilter: "blur(5px)",
+      backgroundColor: "#ffffffdf",
+      backdropFilter: "blur(6px)",
       borderRadius: "12px",
-      boxShadow: "2px 3px 15px #00000030",
+      boxShadow: "2px 3px 17px #00000036",
       zIndex: 1,
       border: "2px solid #FFFFFF60",
 

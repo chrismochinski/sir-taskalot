@@ -79,7 +79,13 @@ export function NewTicketForm() {
         </svg>
       </Box>
       <Box className={cx(classes.dragonTicketSuccessWrapper)} my="0">
-        <Flex className={classes.flexHeaderWrapper} justify="center" align="center" maw="470px" mb="0" gap="min(0.25rem, 0.3vw)">
+        <Flex
+          className={classes.flexHeaderWrapper}
+          justify="center"
+          align="center"
+          maw="470px"
+          mb="0"
+          gap="min(0.25rem, 0.3vw)">
           <Image
             src={dragonButler}
             alt="Sir Taskalot - who happens to be a dragon"
@@ -108,7 +114,7 @@ export function NewTicketForm() {
             value={title}
             onChange={(e) => setTitle(e.currentTarget.value)}
             className={classes.dragonFormInput}
-            placeholder="Just the meat & taters here"
+            placeholder="Just the meat & taters"
           />
 
           <Textarea
@@ -120,7 +126,7 @@ export function NewTicketForm() {
             value={description}
             onChange={(e) => setDescription(e.currentTarget.value)}
             className={classes.dragonFormInput}
-            placeholder="Share as much or as little as you can - we love context & clarity!"
+            placeholder="We love context & clarity"
           />
 
           <Select
@@ -180,7 +186,7 @@ export function NewTicketForm() {
             w="100%"
             radius="xl"
             label="Slack Thread"
-            placeholder="If applicable & if contextually helpful"
+            placeholder="If applicable"
             value={slackThread}
             onChange={(e) => setSlackThread(e.currentTarget.value)}
             className={classes.dragonFormInput}
