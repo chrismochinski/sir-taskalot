@@ -16,7 +16,6 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     High: ":priority-high:",
     Highest: ":priority-highest:",
   };
-
   try {
     // 📨 1. POST TO JIRA FIRST
     const jiraPayload = {
@@ -38,13 +37,28 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
                   {
                     type: "heading",
                     attrs: {
-                      level: 4,
+                      level: 3,
                     },
                     content: [
                       {
                         type: "text",
-                        text: `Reported by ${payload.reporter}`,
+                        text: `Reported by: `,
                         marks: [
+                          {
+                            type: "textColor",
+                            attrs: {
+                              color: "#0747a6",
+                            },
+                          },
+                        ],
+                      },
+                      {
+                        type: "text",
+                        text: `${payload.reporter}`,
+                        marks: [
+                          {
+                            type: "strong",
+                          },
                           {
                             type: "textColor",
                             attrs: {
@@ -57,8 +71,6 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
                   },
                 ]
               : []),
-            { type: "paragraph" },
-            { type: "rule" },
             { type: "paragraph" },
             { type: "rule" },
             {
