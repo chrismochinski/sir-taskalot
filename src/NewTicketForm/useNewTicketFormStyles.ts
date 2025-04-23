@@ -51,7 +51,7 @@ export const useNewTicketFormStyles = createStyles(
       color: "#000",
       fontSize: "clamp(1.75rem, 6vw, 2.25rem)",
       letterSpacing: "0.02em",
-      textShadow: "1px 1px 4px #FFFFFF50, -1px -1px 4px #FFFFFF50, 1px -1px 4px #FFFFFF50, -1px 1px 4px #FFFFFF50",
+      textShadow: "1px 1px 5px #FFFFFF40, -1px -1px 5px #FFFFFF40, 1px -1px 5px #FFFFFF40, -1px 1px 5px #FFFFFF40",
     },
 
     // p
