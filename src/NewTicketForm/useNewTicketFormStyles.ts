@@ -8,10 +8,12 @@ export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
     flexHeaderWrapper: {
       zIndex: 2,
-      WebkitAppRegion: 'drag',
+      WebkitAppRegion: 'drag', // can drag app by header text area
       paddingBlock: '1.5rem 0.25rem',
     },
     
+    // manually added to several sections of page edges 
+    // to eliminate header bar (removed via main.cjs)
     dragRegion: {
       WebkitAppRegion: 'drag',
       position: 'absolute',
@@ -37,9 +39,7 @@ export const useNewTicketFormStyles = createStyles(
         right: 0,
         height: '60px',
         background: 'transparent',
-        
       },
-
     },
 
     //h2
