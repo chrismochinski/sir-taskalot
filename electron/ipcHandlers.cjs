@@ -59,25 +59,47 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
               : []),
             { type: "paragraph" },
             { type: "rule" },
+            { type: "paragraph" },
+            { type: "rule" },
             {
-              type: "paragraph",
+              type: "heading",
+              attrs: {
+                level: 5,
+              },
               content: [
                 {
-                  type: "heading",
-                  attrs: {
-                    level: 5,
-                  },
-                  text: "🐉 This ticket was created via Sir Taskalot.",
+                  type: "text",
+                  text: "🐉 This ticket was created via the ",
+                  marks: [{ type: "em" }, { type: "textColor", attrs: { color: "#4c9aff" } }],
+                },
+                {
+                  type: "text",
+                  text: "Sir Taskalot™ CLI Tool",
                   marks: [
                     { type: "em" },
                     { type: "strong" },
-                    { type: "textColor", attrs: { color: "#6554c0" } },
+                    { type: "textColor", attrs: { color: "#0747a6" } },
                   ],
                 },
                 {
                   type: "text",
-                  text: " This is V.1.0 of a Chromium App experience that is still being improved.",
-                  marks: [{ type: "em" }, { type: "textColor", attrs: { color: "#6554c0" } }],
+                  text: ". This workflow provides minimal description information and may require manual addition of links, screenshots, acceptance criteria, and general context before estimation, progress, or completion. Got an improvement idea? Find a bug? ",
+                  marks: [{ type: "em" }, { type: "textColor", attrs: { color: "#4c9aff" } }],
+                },
+                {
+                  type: "text",
+                  text: "Hit me in Slack!",
+                  marks: [
+                    {
+                      type: "link",
+                      attrs: {
+                        href: "https://fullbloom.enterprise.slack.com/team/U02P7EVQU4F",
+                      },
+                    },
+                    { type: "em" },
+                    { type: "textColor", attrs: { color: "#4c9aff" } },
+                    { type: "underline" },
+                  ],
                 },
               ],
             },

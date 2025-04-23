@@ -1,15 +1,14 @@
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
-
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
-require('./ipcHandlers.cjs'); // just added
+const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
+require("./ipcHandlers.cjs");
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 650,
     height: 860,
-    resizable: false, // idea no resize?
+    resizable: false,
     minWidth: 650,
     maxWidth: 650,
     minHeight: 860,
@@ -17,24 +16,24 @@ function createWindow() {
     frame: false,
     vibrancy: "under-window",
     titleBarStyle: "hidden",
-    vibrancy: "under-window", // or "fullscreen-ui" for fancier glow
+    vibrancy: "under-window",
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // now using preload
-      contextIsolation: true,                     
+      preload: path.join(__dirname, "preload.js"),
+      contextIsolation: true,
     },
   });
 
-  win.loadURL('http://localhost:5173');
+  win.loadURL("http://localhost:5173");
 }
 
 app.whenReady().then(() => {
   createWindow();
 
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });
