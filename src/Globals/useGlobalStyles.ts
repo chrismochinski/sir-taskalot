@@ -54,7 +54,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontWeight: 700,
       textWrap: "pretty",
       lineHeight: "1.25em",
-      fontSize: "1.6rem",
+      fontSize: "1.4rem",
       marginBlock: 0,
     },
 
