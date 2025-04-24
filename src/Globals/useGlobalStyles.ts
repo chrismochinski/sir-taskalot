@@ -4,6 +4,19 @@ export const bounce = "cubic-bezier(0.12, 1.22, 0.63, 1.8)";
 export const textVisibilityShadow =
   "0.03em 0.03em 0.1em #FFFFFF42, -0.03em -0.03em 0.1em #FFFFFF42, 0.03em -0.03em 0.1em #FFFFFF42, -0.03em 0.03em 0.1em #FFFFFF42";
 
+// create color scheme object called "colors" to export and import into other files
+export const colors = {
+  purple: "#5E3393",
+  navy: "#0D3258",
+  red: "#FF4658",
+  green: "#41E894",
+  lightGreen: "#DEFCEE",
+  lightBlue: "#C1EAFF",
+  lightOrange: "#FCE6D8",
+  white: "#ffffff",
+  black: "#000000",
+};
+
 export const useGlobalStyles = createStyles(() => ({
   appWrapper: {
     position: "relative",
@@ -13,7 +26,7 @@ export const useGlobalStyles = createStyles(() => ({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
-    background: "#DEFCEE",
+    background: colors.lightGreen,
     paddingInline: "max(3vw, (100vw - 1280px)/2)",
     height: "850px",
     width: "600px",
@@ -71,7 +84,7 @@ export const useGlobalStyles = createStyles(() => ({
       textWrap: "pretty",
       marginInline: "auto",
       fontSize: "13px",
-      color: "#5E3393",
+      color: colors.purple,
       opacity: 0.6,
       letterSpacing: "-0.0125em",
     },
@@ -83,7 +96,7 @@ export const useGlobalStyles = createStyles(() => ({
       marginInline: "auto",
       textAlign: "center",
       lineHeight: "1.125em",
-      color: "#5E3393",
+      color: colors.purple,
       fontSize: "13px",
       marginBlock: 0,
       paddingBlock: "0.02em 0.15em",
@@ -104,7 +117,7 @@ export const useGlobalStyles = createStyles(() => ({
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "#5E3393",
+          backgroundColor: colors.purple,
           transform: "scaleY(0.1) ",
           transformOrigin: "50% 100%",
           opacity: 0.4,
@@ -122,7 +135,7 @@ export const useGlobalStyles = createStyles(() => ({
           // textDecorationColor: "#5E339380",
           // textUnderlineOffset: "0.185em",
           // textDecorationThickness: "0.115em",
-          // backgroundColor: "#5E3393",
+          // backgroundColor: colors.purple,
           // color: "#ffffff",
         },
       },
@@ -159,7 +172,7 @@ export const useGlobalStyles = createStyles(() => ({
   },
 
   button: {
-    backgroundColor: "#ff4658",
+    backgroundColor: colors.red,
     fontFamily: '"Archivo", sans-serif',
     fontWeight: 700,
     color: "#ffffff",
@@ -173,7 +186,7 @@ export const useGlobalStyles = createStyles(() => ({
     transformOrigin: "50%",
     "&:hover": {
       transition: "transform 180ms ease-in-out, box-shadow 180ms ease-in-out",
-      backgroundColor: "#ff4658",
+      backgroundColor: colors.red,
       transform: "scale(1.03)",
       boxShadow: "2px 4px 12px rgb(0 0 0 / 35%)",
     },
@@ -219,16 +232,15 @@ export const useGlobalStyles = createStyles(() => ({
     },
   },
 
-
   infoButton: {
     position: "absolute",
-    bottom: '0.4rem',
-    right: '0.7rem',
+    bottom: "0.4rem",
+    right: "0.7rem",
     cursor: "pointer",
     zIndex: 10,
     "& svg": {
-      fill: "#5E3393",
-      stroke: "#5E3393",
+      fill: colors.purple,
+      stroke: colors.purple,
       "&:first-of-type": {
         opacity: 0,
         position: "absolute",

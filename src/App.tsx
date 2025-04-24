@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { MantineProvider, Box, UnstyledButton } from "@mantine/core";
 import { NewTicketForm } from "./NewTicketForm";
 import { Onboarding } from "./Onboarding";
-import { useGlobalStyles } from "./Globals/useGlobalStyles";
+import { InfoModal } from "./InfoModal";
+import { useGlobalStyles } from "./Globals";
 import { IoIosInformationCircle, IoIosInformationCircleOutline } from "react-icons/io";
 
 function App() {
   const { classes: globalClasses, cx } = useGlobalStyles();
   const [reporterName, setReporterName] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false); // <- modal state
 
   // check localStorage for reporter name
   useEffect(() => {
@@ -27,10 +29,6 @@ function App() {
   const handleResetReporter = () => {
     localStorage.removeItem("dragon-reporter");
     setReporterName(null);
-  };
-
-  const infoButtonClicked = () => {
-    console.log("Info button clicked");
   };
 
   // check reporter name on change
@@ -65,13 +63,14 @@ function App() {
 
         <UnstyledButton
           className={globalClasses.infoButton}
-          onClick={infoButtonClicked}
+          onClick={() => setModalOpen(true)}
           title="Info"
           aria-label="Info"
           aria-describedby="info">
-          <IoIosInformationCircle size="30px" />
-          <IoIosInformationCircleOutline size="30px" />
+          <IoIosInformationCircle size="27px" />
+          <IoIosInformationCircleOutline size="27px" />
         </UnstyledButton>
+        <InfoModal opened={modalOpen} onClose={() => setModalOpen(false)} />
       </Box>
     </MantineProvider>
   );

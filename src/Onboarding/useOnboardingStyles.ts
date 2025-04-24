@@ -1,4 +1,5 @@
 import { createStyles } from "@mantine/core";
+import { colors } from "../Globals/";
 
 export const useOnboardingStyles = createStyles(() => ({
   onboardingWrapper: {
@@ -22,7 +23,7 @@ export const useOnboardingStyles = createStyles(() => ({
     fontSize: "inherit",
     fontWeight: 500,
     color: "white",
-    background: "#5E3393",
+    background: colors.purple,
     padding: "0.015em 0.18em 0.1em",
     marginInline: "-0.075em",
     textShadow: "none",
