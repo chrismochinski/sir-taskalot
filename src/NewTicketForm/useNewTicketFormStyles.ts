@@ -37,7 +37,7 @@ export const useNewTicketFormStyles = createStyles(
       padding: "1rem 1.25rem",
       gap: "1rem",
       marginTop: "0.75rem",
-      backgroundColor: "#ffffffbb",
+      backgroundColor: "#ffffffda",
       backdropFilter: "blur(7px)",
       WebkitBackdropFilter: "blur(7px)",
       borderRadius: "12px",

@@ -12,7 +12,7 @@ export const useOnboardingStyles = createStyles(() => ({
     overflow: "hidden",
     zIndex: 2,
     input: {
-        backgroundColor: "#ffffffcc",
+        backgroundColor: "#ffffffde",
         backdropFilter: "blur(8px)",
     },
   },
