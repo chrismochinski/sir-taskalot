@@ -5,7 +5,7 @@ import { Onboarding } from "./Onboarding";
 import { useGlobalStyles } from "./Globals/useGlobalStyles";
 
 function App() {
-  const { classes: globalClasses } = useGlobalStyles();
+  const { classes: globalClasses, cx } = useGlobalStyles();
   const [reporterName, setReporterName] = useState<string | null>(null);
 
   // check localStorage for reporter name
@@ -31,7 +31,7 @@ function App() {
   // check reporter name on change
   useEffect(() => {
     console.log("🐉 Current Reporter:", reporterName || "Not set yet");
-  }, [reporterName]);  
+  }, [reporterName]);
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
@@ -41,7 +41,11 @@ function App() {
         ) : (
           <Onboarding onSave={handleSaveName} />
         )}
-        <Box id="blob-wrapper" className={globalClasses.blobWrapper} m="0" p="0">
+        <Box
+          id="blob-wrapper"
+          className={cx(globalClasses.blobWrapper, !reporterName && "paused")}
+          m="0"
+          p="0">
           <svg
             id="blob"
             xmlnsXlink="http://www.w3.org/1999/xlink"

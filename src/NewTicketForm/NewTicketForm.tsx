@@ -176,16 +176,20 @@ export function NewTicketForm(props: NewTicketFormProps) {
           onChange={(e) => setSlackThread(e.currentTarget.value)}
         />
 
-        <Button onClick={handleSubmit} mt="0.5rem" mb="1rem" mx="auto" className={globalClasses.button}>
+        <Button
+          onClick={handleSubmit}
+          mt="0.5rem"
+          mb="1rem"
+          mx="auto"
+          className={globalClasses.button}>
           Submit Ticket
         </Button>
         {reporter && onResetReporter && (
           <Text component="h6">
             Not {reporter}?{" "}
-            <Text component="a"  onClick={onResetReporter}>
+            <Text component="a" onClick={onResetReporter}>
               Click here to update your name!
             </Text>
-            {/* {" "}to update your name. */}
           </Text>
         )}
       </Box>

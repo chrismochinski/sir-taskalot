@@ -33,16 +33,25 @@ export function Onboarding({ onSave }: OnboardingProps) {
           </Text>
         </Box>
       </Flex>
-      <Text component="h4" fw={600} mt="0.5rem">
+      <Text component="h4" fw={600} pt="0.5rem">
         Who are you?
+      </Text>
+      <Text component="h5" fw={300} mt="1em" mb="0">
+        (don't worry - you can change this)
       </Text>
       <TextInput
         radius="xl"
         placeholder="NEW FORM WHO DIS?"
         value={name}
-        onChange={(e) => setName(e.currentTarget.value)!}
+        onChange={(e) => setName(e.currentTarget.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && name.trim()) {
+            onSave(name);
+          }
+        }}
         w="270px"
-        mt="0.85rem" mb="1.5rem"
+        mt="0.5rem"
+        mb="1.5rem"
       />
       <Button
         className={cx(globalClasses.button, classes.goButton)}

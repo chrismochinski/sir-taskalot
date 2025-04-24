@@ -1,6 +1,8 @@
 import { createStyles } from "@mantine/core";
 
 export const bounce = "cubic-bezier(0.12, 1.22, 0.63, 1.8)";
+export const textVisibilityShadow =
+  "0.03em 0.03em 0.1em #FFFFFF50, -0.03em -0.03em 0.1em #FFFFFF50, 0.03em -0.03em 0.1em #FFFFFF50, -0.03em 0.03em 0.1em #FFFFFF50";
 
 export const useGlobalStyles = createStyles(() => ({
   appWrapper: {
@@ -23,8 +25,7 @@ export const useGlobalStyles = createStyles(() => ({
       color: "#000",
       fontSize: "clamp(1.75rem, 6vw, 2.25rem)",
       letterSpacing: "0.02em",
-      textShadow:
-        "1px 1px 5px #FFFFFF40, -1px -1px 5px #FFFFFF40, 1px -1px 5px #FFFFFF40, -1px 1px 5px #FFFFFF40",
+      textShadow: textVisibilityShadow,
     },
 
     // onboarding title
@@ -34,6 +35,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontWeight: 800,
       textWrap: "balance",
       letterSpacing: "-0.35px",
+      textShadow: textVisibilityShadow,
     },
 
     // just one question
@@ -46,6 +48,7 @@ export const useGlobalStyles = createStyles(() => ({
       marginBottom: 0,
       marginTop: "0.25em",
       letterSpacing: "0.02em",
+      textShadow: textVisibilityShadow,
     },
 
     // who are you?
@@ -53,9 +56,21 @@ export const useGlobalStyles = createStyles(() => ({
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 700,
       textWrap: "pretty",
-      lineHeight: "1.25em",
-      fontSize: "1.4rem",
+      lineHeight: "1.2em",
+      fontSize: "1.45rem",
       marginBlock: 0,
+      textShadow: textVisibilityShadow,
+    },
+
+    h5: {
+      fontFamily: '"Roboto", sans-serif',
+      fontWeight: 400,
+      textWrap: "pretty",
+      marginInline: "auto",
+      fontSize: "13px",
+      color: "#5E3393",
+      opacity: 0.6,
+      letterSpacing: "-0.0125em",
     },
 
     h6: {
@@ -65,20 +80,49 @@ export const useGlobalStyles = createStyles(() => ({
       marginInline: "auto",
       textAlign: "center",
       lineHeight: "1.125em",
-      color: "#1D96D2",
+      color: "#5E3393",
       fontSize: "13px",
       marginBlock: 0,
+      paddingBlock: "0.02em 0.15em",
+
+      textShadow: textVisibilityShadow,
       a: {
         fontSize: "inherit",
         fontFamily: "inherit",
         fontWeight: 600,
         textDecoration: "none",
         cursor: "pointer",
+        textShadow: "none",
+        padding: "0.02em 0.2em 0.15em",
+        position: "relative",
+        transition: "color 125ms ease-in-out",
+        "&:before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "#5E3393",
+          transform: "scaleY(0.1) ",
+          transformOrigin: "50% 100%",
+          opacity: 0.4,
+          zIndex: -1,
+          transition: "transform 125ms ease-in-out, opacity 125ms ease-in-out",
+        },
         "&:hover": {
-          textDecoration: "underline",
-          textDecorationColor: "#1D96D270",
-          textUnderlineOffset: "0.17em",
-          textDecorationThickness: "0.12em",
+          textDecoration: "none",
+          color: '#FFFFFF',
+          '&:before': {
+            transform: "scaleY(1)",
+            opacity: 0.9,
+          },
+          // textDecoration: "underline",
+          // textDecorationColor: "#5E339380",
+          // textUnderlineOffset: "0.185em",
+          // textDecorationThickness: "0.115em",
+          // backgroundColor: "#5E3393",
+          // color: "#ffffff",
         },
       },
     },
@@ -94,6 +138,7 @@ export const useGlobalStyles = createStyles(() => ({
       textWrap: "pretty",
       marginBlock: "0.175em",
       marginInline: "auto",
+      textShadow: textVisibilityShadow,
     },
     input: {
       zIndex: 10,
@@ -139,15 +184,21 @@ export const useGlobalStyles = createStyles(() => ({
     position: "absolute",
     inset: 0,
     zIndex: 0,
-    animation: "blob 32000ms ease-in-out infinite",
+    transform: "scale(1.3, 0.9) translate(-18vw, -38vh) rotate(8deg)",
     transformOrigin: "50% 50%",
+    animation: "blob 32000ms ease-in-out infinite",
+    animationPlayState: "running",
+    "&.paused": {
+      animationPlayState: "paused",
+    },
+
     svg: {
       width: "clamp(360px, 80%, 720px)",
       inset: "-8% 0 0 -10%",
       height: "clamp(300px, 82%, 700px)",
       fill: "#41E894",
       "@keyframes blob": {
-        "0%": { transform: "scale(1) translate(-16vw, -30vh) rotate(0deg)" },
+        "0%": { transform: "scale(1.3, 0.9) translate(-18vw, -38vh) rotate(8deg)" },
         "12%": { transform: "scale(1.2, 0.9) translate(19vw, -18vh) rotate(45deg)" },
         "13%": { transform: "scale(1.2, 0.9) translate(19vw, -18vh) rotate(45deg)" },
         "24%": { transform: "scale(0.9, 1.2) translate(4vw, 32vh) rotate(110deg)" },
@@ -162,7 +213,7 @@ export const useGlobalStyles = createStyles(() => ({
         "73%": { transform: "scale(0.8, 1.3) translate(8vw, 9vh) rotate(160deg)" },
         "84%": { transform: "scale(1.1, 1.2) translate(23vw, -4vh) rotate(-60deg)" },
         "85%": { transform: "scale(1.1, 1.2) translate(23vw, -4vh) rotate(-60deg)" },
-        "100%": { transform: "scale(1) translate(-16vw, -30vh) rotate(0deg)" },
+        "100%": { transform: "scale(1.3, 0.9) translate(-18vw, -38vh) rotate(8deg)" },
       },
     },
   },

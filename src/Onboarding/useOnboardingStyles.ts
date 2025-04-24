@@ -20,12 +20,12 @@ export const useOnboardingStyles = createStyles(() => ({
   highlightSpan: {
     fontFamily: "inherit",
     fontSize: "inherit",
-    fontWeight: 520,
+    fontWeight: 500,
     color: "white",
-    background: "#1D96D2",
+    background: "#5E3393",
     padding: "0.015em 0.18em 0.1em",
     marginInline: '-0.075em',
-    
+    textShadow: 'none',
   },
 
   goButton: {
