@@ -12,8 +12,8 @@ export const useOnboardingStyles = createStyles(() => ({
     overflow: "hidden",
     zIndex: 2,
     input: {
-        backgroundColor: "#ffffffde",
-        backdropFilter: "blur(8px)",
+      backgroundColor: "#ffffffde",
+      backdropFilter: "blur(8px)",
     },
   },
 
@@ -24,16 +24,16 @@ export const useOnboardingStyles = createStyles(() => ({
     color: "white",
     background: "#5E3393",
     padding: "0.015em 0.18em 0.1em",
-    marginInline: '-0.075em',
-    textShadow: 'none',
+    marginInline: "-0.075em",
+    textShadow: "none",
   },
 
   goButton: {
-    transition: "all 400ms ease-in-out",
+    transition: "all 275ms ease-in-out",
     opacity: 1,
     zIndex: 0,
-    height: '2.25em',
-    paddingBlock: '0',
+    height: "2.25em",
+    paddingBlock: "0",
     filter: "blur(0)",
     transformOrigin: "50% 0%",
     transform: "scaleY(1) scaleX(1) translateY(0)",

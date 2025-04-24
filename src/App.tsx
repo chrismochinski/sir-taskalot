@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { MantineProvider, Box } from "@mantine/core";
+import { MantineProvider, Box, UnstyledButton } from "@mantine/core";
 import { NewTicketForm } from "./NewTicketForm";
 import { Onboarding } from "./Onboarding";
 import { useGlobalStyles } from "./Globals/useGlobalStyles";
+import { IoIosInformationCircle, IoIosInformationCircleOutline } from "react-icons/io";
 
 function App() {
   const { classes: globalClasses, cx } = useGlobalStyles();
@@ -26,6 +27,10 @@ function App() {
   const handleResetReporter = () => {
     localStorage.removeItem("dragon-reporter");
     setReporterName(null);
+  };
+
+  const infoButtonClicked = () => {
+    console.log("Info button clicked");
   };
 
   // check reporter name on change
@@ -57,7 +62,16 @@ function App() {
         </Box>
         <Box className={globalClasses.dragRegion} id="left" />
         <Box className={globalClasses.dragRegion} id="right" />
-        <Box className={globalClasses.dragRegion} id="bottom" />
+
+        <UnstyledButton
+          className={globalClasses.infoButton}
+          onClick={infoButtonClicked}
+          title="Info"
+          aria-label="Info"
+          aria-describedby="info">
+          <IoIosInformationCircle size="30px" />
+          <IoIosInformationCircleOutline size="30px" />
+        </UnstyledButton>
       </Box>
     </MantineProvider>
   );

@@ -193,6 +193,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
           </Text>
         )}
       </Box>
+      <Box className={globalClasses.dragRegion} id="form-bottom"/>
+      <Box className={globalClasses.dragRegion} id="form-top"/>
     </Box>
   );
 }

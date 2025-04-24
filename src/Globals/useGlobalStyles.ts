@@ -2,7 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const bounce = "cubic-bezier(0.12, 1.22, 0.63, 1.8)";
 export const textVisibilityShadow =
-  "0.03em 0.03em 0.1em #FFFFFF50, -0.03em -0.03em 0.1em #FFFFFF50, 0.03em -0.03em 0.1em #FFFFFF50, -0.03em 0.03em 0.1em #FFFFFF50";
+  "0.03em 0.03em 0.1em #FFFFFF42, -0.03em -0.03em 0.1em #FFFFFF42, 0.03em -0.03em 0.1em #FFFFFF42, -0.03em 0.03em 0.1em #FFFFFF42";
 
 export const useGlobalStyles = createStyles(() => ({
   appWrapper: {
@@ -17,6 +17,10 @@ export const useGlobalStyles = createStyles(() => ({
     paddingInline: "max(3vw, (100vw - 1280px)/2)",
     height: "850px",
     width: "600px",
+    "& h1, & h2, & h3, & h4, & h5, & h6, & a ": {
+      WebkitAppRegion: "no-drag",
+      zIndex: 10,
+    },
     h1: {
       fontFamily: '"BioRhyme", serif',
       fontWeight: 800,
@@ -31,7 +35,7 @@ export const useGlobalStyles = createStyles(() => ({
     // onboarding title
     h2: {
       fontFamily: '"BioRhyme", serif',
-      fontSize: "1.6rem",
+      fontSize: "1.75rem",
       fontWeight: 800,
       textWrap: "balance",
       letterSpacing: "-0.35px",
@@ -41,14 +45,13 @@ export const useGlobalStyles = createStyles(() => ({
     // just one question
     h3: {
       fontFamily: '"Roboto", sans-serif',
-      fontWeight: 300,
+      fontWeight: 400,
       textWrap: "pretty",
       lineHeight: "1.4em",
       fontSize: "17px",
       marginBottom: 0,
       marginTop: "0.25em",
       letterSpacing: "0.02em",
-      textShadow: textVisibilityShadow,
     },
 
     // who are you?
@@ -56,8 +59,8 @@ export const useGlobalStyles = createStyles(() => ({
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 700,
       textWrap: "pretty",
-      lineHeight: "1.2em",
-      fontSize: "1.45rem",
+      lineHeight: "1em",
+      fontSize: "1.5rem",
       marginBlock: 0,
       textShadow: textVisibilityShadow,
     },
@@ -84,8 +87,6 @@ export const useGlobalStyles = createStyles(() => ({
       fontSize: "13px",
       marginBlock: 0,
       paddingBlock: "0.02em 0.15em",
-
-      textShadow: textVisibilityShadow,
       a: {
         fontSize: "inherit",
         fontFamily: "inherit",
@@ -112,8 +113,8 @@ export const useGlobalStyles = createStyles(() => ({
         },
         "&:hover": {
           textDecoration: "none",
-          color: '#FFFFFF',
-          '&:before': {
+          color: "#FFFFFF",
+          "&:before": {
             transform: "scaleY(1)",
             opacity: 0.9,
           },
@@ -184,9 +185,9 @@ export const useGlobalStyles = createStyles(() => ({
     position: "absolute",
     inset: 0,
     zIndex: 0,
-    transform: "scale(1.3, 0.9) translate(-18vw, -38vh) rotate(8deg)",
+    transform: "scale(1.1, 0.7) translate(-25vw, -55vh) rotate(2deg)",
     transformOrigin: "50% 50%",
-    animation: "blob 32000ms ease-in-out infinite",
+    animation: "blob 34000ms ease-in-out infinite",
     animationPlayState: "running",
     "&.paused": {
       animationPlayState: "paused",
@@ -198,7 +199,7 @@ export const useGlobalStyles = createStyles(() => ({
       height: "clamp(300px, 82%, 700px)",
       fill: "#41E894",
       "@keyframes blob": {
-        "0%": { transform: "scale(1.3, 0.9) translate(-18vw, -38vh) rotate(8deg)" },
+        "0%": { transform: "scale(1.1, 0.7) translate(-25vw, -55vh) rotate(2deg)" },
         "12%": { transform: "scale(1.2, 0.9) translate(19vw, -18vh) rotate(45deg)" },
         "13%": { transform: "scale(1.2, 0.9) translate(19vw, -18vh) rotate(45deg)" },
         "24%": { transform: "scale(0.9, 1.2) translate(4vw, 32vh) rotate(110deg)" },
@@ -213,8 +214,36 @@ export const useGlobalStyles = createStyles(() => ({
         "73%": { transform: "scale(0.8, 1.3) translate(8vw, 9vh) rotate(160deg)" },
         "84%": { transform: "scale(1.1, 1.2) translate(23vw, -4vh) rotate(-60deg)" },
         "85%": { transform: "scale(1.1, 1.2) translate(23vw, -4vh) rotate(-60deg)" },
-        "100%": { transform: "scale(1.3, 0.9) translate(-18vw, -38vh) rotate(8deg)" },
+        "100%": { transform: "scale(1.1, 0.7) translate(-25vw, -55vh) rotate(2deg)" },
       },
+    },
+  },
+
+
+  infoButton: {
+    position: "absolute",
+    bottom: '0.4rem',
+    right: '0.7rem',
+    cursor: "pointer",
+    zIndex: 10,
+    "& svg": {
+      fill: "#5E3393",
+      stroke: "#5E3393",
+      "&:first-of-type": {
+        opacity: 0,
+        position: "absolute",
+        borderRadius: "50%",
+      },
+      "&:last-of-type": {
+        opacity: 0.7,
+      },
+    },
+
+    "&:hover > svg:first-of-type": {
+      opacity: 0.9,
+    },
+    "&:hover > svg:last-of-type": {
+      opacity: 0,
     },
   },
 
@@ -223,6 +252,7 @@ export const useGlobalStyles = createStyles(() => ({
   dragRegion: {
     WebkitAppRegion: "drag",
     position: "absolute",
+    zIndex: -10,
     "&#left": {
       left: 0,
       top: 0,
@@ -235,15 +265,36 @@ export const useGlobalStyles = createStyles(() => ({
       right: 0,
       top: 0,
       bottom: 0,
-      height: "100%",
+      height: "94%",
       background: "transparent",
       width: "95px",
     },
-    "&#bottom": {
+    "&#form-bottom": {
       bottom: 0,
       left: 0,
+      right: "80px", // space for help and info buttons
+      height: "70px",
+      background: "transparent",
+    },
+    "&#form-top": {
+      top: 0,
+      left: 0,
+      right: 0, // space for help and info buttons
+      height: "40px",
+      background: "transparent",
+    },
+    "&#onboard-top": {
+      top: 0,
+      left: 0,
       right: 0,
-      height: "60px",
+      height: "50vh",
+      background: "transparent",
+    },
+    "&#onboard-bottom": {
+      bottom: 0,
+      left: 0,
+      right: "80px", // space for help and info buttons
+      height: "30vh",
       background: "transparent",
     },
   },

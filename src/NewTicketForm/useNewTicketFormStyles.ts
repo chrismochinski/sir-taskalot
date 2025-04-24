@@ -6,14 +6,11 @@ type NewTicketFormStylesProps = {
 
 export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
-   
     flexHeaderWrapper: {
       zIndex: 2,
       WebkitAppRegion: "drag", // can drag app by header text area
       paddingBlock: "1.5rem 0.25rem",
     },
-
- 
 
     newTicketFormWrapper: {
       overflow: "hidden",
@@ -89,8 +86,5 @@ export const useNewTicketFormStyles = createStyles(
         },
       },
     },
-
-
-
   })
 );

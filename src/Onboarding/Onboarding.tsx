@@ -15,6 +15,7 @@ export function Onboarding({ onSave }: OnboardingProps) {
 
   return (
     <Box className={classes.onboardingWrapper} w="100%" h="100%">
+      <Box className={globalClasses.dragRegion} id="onboard-top" />
       <Flex justify="center" align="center" gap="0.5rem" mb="1.5rem">
         <Image
           src={dragonButler}
@@ -36,8 +37,8 @@ export function Onboarding({ onSave }: OnboardingProps) {
       <Text component="h4" fw={600} pt="0.5rem">
         Who are you?
       </Text>
-      <Text component="h5" fw={300} mt="1em" mb="0">
-        (don't worry - you can change this)
+      <Text component="h5" fw={300} mt="0.6em" mb="2px">
+        (don't worry - you can change this later)
       </Text>
       <TextInput
         radius="xl"
@@ -59,6 +60,7 @@ export function Onboarding({ onSave }: OnboardingProps) {
         disabled={!name.trim()}>
         Go!
       </Button>
+      <Box className={globalClasses.dragRegion} id="onboard-bottom" />
     </Box>
   );
 }
