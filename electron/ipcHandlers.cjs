@@ -81,12 +81,12 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
               content: [
                 {
                   type: "text",
-                  text: "🐉 This ticket was created via the ",
+                  text: "🐉 This ticket was created via ",
                   marks: [{ type: "em" }, { type: "textColor", attrs: { color: "#4c9aff" } }],
                 },
                 {
                   type: "text",
-                  text: "Sir Taskalot™ CLI Tool",
+                  text: "Sir Taskalot™",
                   marks: [
                     { type: "em" },
                     { type: "strong" },
@@ -95,7 +95,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
                 },
                 {
                   type: "text",
-                  text: ". This workflow provides minimal description information and may require manual addition of links, screenshots, acceptance criteria, and general context before estimation, progress, or completion. Got an improvement idea? Find a bug? ",
+                  text: ". This lightweight app is intentionally designed to deliver minimal, foundational description content. As a trade-off for simplicity, it may require manual addition of links, screenshots, acceptance criteria, and general context before estimation, progress, or completion. ",
                   marks: [{ type: "em" }, { type: "textColor", attrs: { color: "#4c9aff" } }],
                 },
                 {

@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { MantineProvider, Box } from "@mantine/core";
+import { NewTicketForm } from "./NewTicketForm";
+import { Onboarding } from "./Onboarding";
+import { useGlobalStyles } from "./Globals/useGlobalStyles";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { classes: globalClasses } = useGlobalStyles();
+  const [reporterName, setReporterName] = useState<string | null>(null);
+
+  // check localStorage for reporter name
+  useEffect(() => {
+    const saved = localStorage.getItem("dragon-reporter");
+    if (saved) {
+      setReporterName(saved);
+    }
+  }, []);
+
+  // save reporter name to localStorage
+  const handleSaveName = (name: string) => {
+    localStorage.setItem("dragon-reporter", name);
+    setReporterName(name);
+  };
+
+  // reset reporter name
+  const handleResetReporter = () => {
+    localStorage.removeItem("dragon-reporter");
+    setReporterName(null);
+  };
+
+  // check reporter name on change
+  useEffect(() => {
+    console.log("🐉 Current Reporter:", reporterName || "Not set yet");
+  }, [reporterName]);  
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Box className={globalClasses.appWrapper} my="0" py="0">
+        {reporterName ? (
+          <NewTicketForm reporter={reporterName} onResetReporter={handleResetReporter} />
+        ) : (
+          <Onboarding onSave={handleSaveName} />
+        )}
+        <Box id="blob-wrapper" className={globalClasses.blobWrapper} m="0" p="0">
+          <svg
+            id="blob"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 310 350">
+            <path d="M156.4,339.5c31.8-2.5,59.4-26.8,80.2-48.5c28.3-29.5,40.5-47,56.1-85.1c14-34.3,20.7-75.6,2.3-111  c-18.1-34.8-55.7-58-90.4-72.3c-11.7-4.8-24.1-8.8-36.8-11.5l-0.9-0.9l-0.6,0.6c-27.7-5.8-56.6-6-82.4,3c-38.8,13.6-64,48.8-66.8,90.3c-3,43.9,17.8,88.3,33.7,128.8c5.3,13.5,10.4,27.1,14.9,40.9C77.5,309.9,111,343,156.4,339.5z" />
+          </svg>
+        </Box>
+        <Box className={globalClasses.dragRegion} id="left" />
+        <Box className={globalClasses.dragRegion} id="right" />
+        <Box className={globalClasses.dragRegion} id="bottom" />
+      </Box>
+    </MantineProvider>
+  );
 }
 
-export default App
+export default App;
