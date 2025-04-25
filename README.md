@@ -9,7 +9,7 @@ Sir Taskalot is a focused, delightful desktop app for **non-technical team membe
 
 Requests submitted through this app are instantly routed to Slack (for visibility) and Jira (for tracking), with formatting and metadata handled automagically in the background.
 
-> _"Make kindness normal. Make ticketing invisible."_ — Mo
+> _"Make kindness normal. Make ticketing invisible."_ — Dennis Rodman
 
 ---
 
