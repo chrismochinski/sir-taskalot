@@ -13,7 +13,6 @@ export const useNewTicketFormStyles = createStyles(
     },
 
     newTicketFormWrapper: {
-      overflow: "hidden",
       marginBlock: 0,
       marginInline: 0,
       width: "100%",

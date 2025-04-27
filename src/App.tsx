@@ -48,7 +48,7 @@ function App() {
           id="blob-wrapper"
           className={cx(globalClasses.blobWrapper, !reporterName && "paused")}
           m="0"
-          p="0">
+          p="0"> 
           <svg
             id="blob"
             xmlnsXlink="http://www.w3.org/1999/xlink"

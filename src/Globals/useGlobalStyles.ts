@@ -27,7 +27,7 @@ export const useGlobalStyles = createStyles(() => ({
     justifyContent: "center",
     overflow: "hidden",
     background: colors.lightGreen,
-    paddingInline: "max(3vw, (100vw - 1280px)/2)",
+    // paddingInline: "max(3vw, (100vw - 1280px)/2)", // revisit // deletelater
     height: "850px",
     width: "600px",
     "& h1, & h2, & h3, & h4, & h5, & h6, & a ": {

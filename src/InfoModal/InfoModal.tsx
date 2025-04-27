@@ -17,7 +17,7 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       onClose={onClose}
       title="What in tarnation is going on here?"
       centered
-      transitionProps={{ transition: "rotate-right", duration: 300 }}
+      transitionProps={{ transition: "slide-up", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner}>
         <Title order={4}>👋 Welcome!</Title>
