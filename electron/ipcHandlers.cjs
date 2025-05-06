@@ -7,26 +7,22 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   const TurndownService = require("turndown");
   const turndownService = new TurndownService();
 
-  // important slack markdown fix
-  let slackMarkdown = turndownService.turndown(payload.description);
-
+  // un-pad extra junk like <p> tags in <li>
+  const htmlDescription = payload.description
+    .replace(/<li>\s*<p>(.*?)<\/p>\s*<\/li>/g, "<li>$1</li>")
+    .replace(/<p>\s*<\/p>/g, ""); // Remove empty <p> tags
+  let slackMarkdown = turndownService.turndown(htmlDescription);
   // Fix bold: ** → *
   slackMarkdown = slackMarkdown.replace(/\*\*(.*?)\*\*/g, "*$1*");
-
   // Fix unordered lists: * → -
   // slackMarkdown = slackMarkdown.replace(/^\* /gm, "- "); // ver w/ space after
   slackMarkdown = slackMarkdown.replace(/^\*\s+(.*)$/gm, "- $1");
-
   // Fix ordered lists: 1. → 1.
   // slackMarkdown = slackMarkdown.replace(/^(\d+)\. /gm, "$1. "); // ver w/ space after
   slackMarkdown = slackMarkdown.replace(/^(\d+)\.\s+(.*)$/gm, "$1. $2");
-
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
-  // important END SLACK MARKDOWN FIX
 
-  const htmlDescription = payload.description;
-  const markdownDescription = turndownService.turndown(htmlDescription);
   // idea
 
   const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
@@ -53,6 +49,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
           id: { Lowest: "5", Low: "4", Medium: "3", High: "2", Highest: "1" }[payload.priority],
         },
         customfield_10001: teamId,
+        ...(payload.slackThread && { customfield_10084: payload.slackThread }),
         description: {
           type: "doc",
           version: 1,
