@@ -3,7 +3,7 @@ import { FaBug, FaBook } from "react-icons/fa";
 import { useGlobalStyles } from "../Globals";
 // IMPORTANT RICH TEXT EDITOR STUFF
 import { RichTextEditor, Link } from "@mantine/tiptap";
-import { useEditor, BubbleMenu } from "@tiptap/react";
+import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
@@ -15,7 +15,6 @@ import {
   Title,
   Text,
   TextInput,
-  // Textarea,
   Select,
   Button,
   SegmentedControl,

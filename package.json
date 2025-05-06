@@ -7,7 +7,7 @@
   "author": "Chris 'Mo' Mochinski <mo@characterstrong.com>",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"cross-env ELECTRON_ENABLE_LOGGING=true electron .\"",
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && cross-env ELECTRON_ENABLE_LOGGING=true electron .\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -33,6 +33,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
+    "turndown": "^7.2.0",
     "undici": "^7.8.0"
   },
   "devDependencies": {
@@ -52,7 +53,8 @@
     "globals": "^16.0.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "wait-on": "^8.0.3"
   },
   "build": {
     "appId": "com.characterstrong.sirtaskalot",
