@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import { FaBug, FaBook } from "react-icons/fa";
 import { useGlobalStyles } from "../Globals";
+// IMPORTANT RICH TEXT EDITOR STUFF
+import { RichTextEditor, Link } from "@mantine/tiptap";
+import { useEditor, BubbleMenu } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import TextAlign from "@tiptap/extension-text-align";
+import Placeholder from "@tiptap/extension-placeholder";
+// IMPORTANT RICH TEXT EDITOR STUFF
 
 import {
   Box,
   Title,
   Text,
   TextInput,
-  Textarea,
+  // Textarea,
   Select,
   Button,
   SegmentedControl,
@@ -37,6 +45,25 @@ export function NewTicketForm(props: NewTicketFormProps) {
   );
   const [ticketType, setTicketType] = useState<"Bug" | "Story">("Story");
   const [slackThread, setSlackThread] = useState("");
+
+  // IMPORTANT RICH TEXT EDITOR STUFF
+
+  const rteEditor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        heading: { levels: [2] }, // Only allow H2
+      }),
+      Placeholder.configure({ placeholder: "We love context and clarity!" }),
+      Underline,
+      Link,
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+    ],
+    content: description,
+    onUpdate: ({ editor }) => {
+      setDescription(editor.getHTML());
+    },
+  });
+  // IMPORTANT RICH TEXT EDITOR STUFF
 
   const { classes, cx } = useNewTicketFormStyles({ ticketTypeStyle: ticketType });
   const { classes: globalClasses } = useGlobalStyles();
@@ -104,16 +131,32 @@ export function NewTicketForm(props: NewTicketFormProps) {
           placeholder="Just the meat & taters"
         />
 
-        <Textarea
-          w="100%"
-          radius="md"
-          label="Description"
-          required
-          minRows={3}
-          value={description}
-          onChange={(e) => setDescription(e.currentTarget.value)}
-          placeholder="We love context & clarity"
-        />
+ {/* IMPORTANT CHANGE ICONS  */}
+        <Box w="100%" className={classes.rteBox}>
+          <Text component="label">Description</Text>
+          <RichTextEditor editor={rteEditor} className={classes.richTextEditor}>
+            <RichTextEditor.Toolbar sticky stickyOffset={0} className={classes.rteToolbar}>
+              <RichTextEditor.ControlsGroup>
+                <RichTextEditor.Bold />
+                <RichTextEditor.Italic />
+                <RichTextEditor.Underline />
+                <RichTextEditor.ClearFormatting />
+              </RichTextEditor.ControlsGroup>
+
+              <RichTextEditor.ControlsGroup>
+                <RichTextEditor.BulletList />
+                <RichTextEditor.OrderedList />
+              </RichTextEditor.ControlsGroup>
+
+              <RichTextEditor.ControlsGroup>
+                <RichTextEditor.Link />
+                <RichTextEditor.Unlink />
+              </RichTextEditor.ControlsGroup>
+            </RichTextEditor.Toolbar>
+
+            <RichTextEditor.Content />
+          </RichTextEditor>
+        </Box>
 
         <Select
           radius="xl"
@@ -175,7 +218,6 @@ export function NewTicketForm(props: NewTicketFormProps) {
           value={slackThread}
           onChange={(e) => setSlackThread(e.currentTarget.value)}
         />
-
         <Button
           onClick={handleSubmit}
           mt="0.5rem"
@@ -193,8 +235,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
           </Text>
         )}
       </Box>
-      <Box className={globalClasses.dragRegion} id="form-bottom"/>
-      <Box className={globalClasses.dragRegion} id="form-top"/>
+      <Box className={globalClasses.dragRegion} id="form-bottom" />
+      <Box className={globalClasses.dragRegion} id="form-top" />
     </Box>
   );
 }

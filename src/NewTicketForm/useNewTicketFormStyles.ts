@@ -85,5 +85,25 @@ export const useNewTicketFormStyles = createStyles(
         },
       },
     },
+
+    rteBox: {
+      borderRadius: "0 0 10px 10px",
+    },
+
+    richTextEditor: {
+      borderRadius: "10px",
+      '& .mantine-TypographyStylesProvider-root': {
+        
+        borderRadius: "0 0 10px 10px",
+      },
+      '& .mantine-RichTextEditor-content': {
+        borderRadius: "0 0 10px 10px",
+        minHeight: '100px',
+      },
+    },
+
+    rteToolbar: {
+      borderRadius: "10px 10px 0 0",
+    },
   })
 );

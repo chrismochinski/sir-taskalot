@@ -286,4 +286,5 @@ export const useGlobalStyles = createStyles(() => ({
       background: "transparent",
     },
   },
+
 }));
