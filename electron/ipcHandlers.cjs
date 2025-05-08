@@ -3,7 +3,7 @@ const { fetch } = require("undici");
 require("dotenv").config();
 
 ipcMain.handle("submit-ticket", async (_event, payload) => {
-  // idea
+  // idea SLACK FORMATTING
   const TurndownService = require("turndown");
   const turndownService = new TurndownService();
 
@@ -22,8 +22,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   slackMarkdown = slackMarkdown.replace(/^(\d+)\.\s+(.*)$/gm, "$1. $2");
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
-
-  // idea
+  // idea END SLACK FORMATTING
 
   const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
