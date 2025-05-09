@@ -3,10 +3,10 @@ const { fetch } = require("undici");
 require("dotenv").config();
 
 ipcMain.handle("submit-ticket", async (_event, payload) => {
+
   // idea SLACK FORMATTING
   const TurndownService = require("turndown");
   const turndownService = new TurndownService();
-
   // un-pad extra junk like <p> tags in <li>
   const htmlDescription = payload.description
     .replace(/<li>\s*<p>(.*?)<\/p>\s*<\/li>/g, "<li>$1</li>")
@@ -15,15 +15,12 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   // Fix bold: ** → *
   slackMarkdown = slackMarkdown.replace(/\*\*(.*?)\*\*/g, "*$1*");
   // Fix unordered lists: * → -
-  // slackMarkdown = slackMarkdown.replace(/^\* /gm, "- "); // ver w/ space after
   slackMarkdown = slackMarkdown.replace(/^\*\s+(.*)$/gm, "- $1");
   // Fix ordered lists: 1. → 1.
-  // slackMarkdown = slackMarkdown.replace(/^(\d+)\. /gm, "$1. "); // ver w/ space after
   slackMarkdown = slackMarkdown.replace(/^(\d+)\.\s+(.*)$/gm, "$1. $2");
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
-  // idea END SLACK FORMATTING
-
+  
   const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
   const jiraEmail = process.env.VITE_JIRA_EMAIL;
