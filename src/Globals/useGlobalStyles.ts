@@ -27,9 +27,9 @@ export const useGlobalStyles = createStyles(() => ({
     justifyContent: "center",
     overflow: "hidden",
     background: colors.lightGreen,
-    // paddingInline: "max(3vw, (100vw - 1280px)/2)", // revisit // deletelater
-    height: "850px",
-    width: "600px",
+
+    height: "750",
+    width: "500px",
     "& h1, & h2, & h3, & h4, & h5, & h6, & a ": {
       WebkitAppRegion: "no-drag",
       zIndex: 10,
@@ -40,9 +40,10 @@ export const useGlobalStyles = createStyles(() => ({
       textWrap: "balance",
       textAlign: "left",
       color: "#000",
-      fontSize: "clamp(1.75rem, 6vw, 2.25rem)",
+      fontSize: "clamp(1.75rem, 6vw, 2.125rem)",
       letterSpacing: "0.02em",
       textShadow: textVisibilityShadow,
+      lineHeight: '1em',
     },
 
     // onboarding title
@@ -111,8 +112,8 @@ export const useGlobalStyles = createStyles(() => ({
         "&:hover": {
           textDecoration: "underline",
           textDecorationColor: "#5E3393",
-          textUnderlineOffset: "0.185em",
-          textDecorationThickness: "0.12em",
+          textUnderlineOffset: "0.175em",
+          textDecorationThickness: "0.1em",
         },
       },
     },
@@ -147,12 +148,21 @@ export const useGlobalStyles = createStyles(() => ({
     },
   },
 
+  trademark: {
+    fontSize: "0.5em",
+    verticalAlign: "super",
+    fontFamily: '"Roboto", sans-serif',
+    fontWeight: 500,
+    lineHeight: "inherit",
+    paddingLeft: "0.15em",
+  },
+
   button: {
     backgroundColor: colors.red,
     fontFamily: '"Archivo", sans-serif',
     fontWeight: 700,
     color: "#ffffff",
-    padding: "0.65em 1.4em",
+    padding: "0.4em 2em",
     borderRadius: "64px",
     border: "none",
     cursor: "pointer",
@@ -169,8 +179,8 @@ export const useGlobalStyles = createStyles(() => ({
   },
 
   blobWrapper: {
-    width: "600px",
-    height: "850px",
+    width: "500px",
+    height: "750",
     position: "absolute",
     inset: 0,
     zIndex: 0,
@@ -247,7 +257,7 @@ export const useGlobalStyles = createStyles(() => ({
       bottom: 0,
       height: "100%",
       background: "transparent",
-      width: "95px",
+      width: "50px",
     },
     "&#right": {
       right: 0,
@@ -255,7 +265,7 @@ export const useGlobalStyles = createStyles(() => ({
       bottom: 0,
       height: "94%",
       background: "transparent",
-      width: "95px",
+      width: "50px",
     },
     "&#form-bottom": {
       bottom: 0,
@@ -286,5 +296,4 @@ export const useGlobalStyles = createStyles(() => ({
       background: "transparent",
     },
   },
-
 }));

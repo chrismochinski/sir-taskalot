@@ -2,9 +2,92 @@ const { ipcMain } = require("electron");
 const { fetch } = require("undici");
 require("dotenv").config();
 
-ipcMain.handle("submit-ticket", async (_event, payload) => {
+// TIPTAP TO ADF CONVERSION
+function tiptapToADF(tiptapJSON) {
+  const convertNode = (node) => {
+    switch (node.type) {
+      case "paragraph":
+        // Check for line breaks within a paragraph and split them into separate paragraphs
+        const contentArray = node.content?.map(convertNode).filter(Boolean) || [];
+        const splitContent = contentArray.reduce((acc, item) => {
+          if (item.type === "text" && item.text.includes("\n")) {
+            const lines = item.text.split("\n").map((line) => ({
+              type: "paragraph",
+              content: [{ type: "text", text: line.trim() }]
+            }));
+            return [...acc, ...lines];
+          }
+          return [...acc, item];
+        }, []);
+        return splitContent.length > 1 ? splitContent : { type: "paragraph", content: contentArray };
 
-  // idea SLACK FORMATTING
+      case "text":
+        return {
+          type: "text",
+          text: node.text,
+          marks: node.marks?.map((mark) => {
+            switch (mark.type) {
+              case "bold":
+                return { type: "strong" };
+              case "italic":
+                return { type: "em" };
+              case "underline":
+                return { type: "underline" };
+              case "link":
+                return {
+                  type: "link",
+                  attrs: {
+                    href: mark.attrs.href,
+                  },
+                };
+              default:
+                return null;
+            }
+          }).filter(Boolean),
+        };
+
+      case "bulletList":
+        return {
+          type: "bulletList",
+          content: node.content?.map(convertNode),
+        };
+
+      case "orderedList":
+        return {
+          type: "orderedList",
+          content: node.content?.map(convertNode),
+        };
+
+      case "listItem":
+        return {
+          type: "listItem",
+          content: node.content?.map(convertNode),
+        };
+
+      case "heading":
+        return {
+          type: "heading",
+          attrs: { level: node.attrs.level },
+          content: node.content?.map(convertNode),
+        };
+
+      default:
+        return null;
+    }
+  };
+
+  return {
+    version: 1,
+    type: "doc",
+    content: tiptapJSON.content?.flatMap(convertNode).filter(Boolean),
+  };
+}
+
+
+// END TIPTAP TO ADF CONVERSION
+
+ipcMain.handle("submit-ticket", async (_event, payload) => {
+  // SLACK FORMATTING
   const TurndownService = require("turndown");
   const turndownService = new TurndownService();
   // un-pad extra junk like <p> tags in <li>
@@ -12,6 +95,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     .replace(/<li>\s*<p>(.*?)<\/p>\s*<\/li>/g, "<li>$1</li>")
     .replace(/<p>\s*<\/p>/g, ""); // Remove empty <p> tags
   let slackMarkdown = turndownService.turndown(htmlDescription);
+
   // Fix bold: ** → *
   slackMarkdown = slackMarkdown.replace(/\*\*(.*?)\*\*/g, "*$1*");
   // Fix unordered lists: * → -
@@ -20,7 +104,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   slackMarkdown = slackMarkdown.replace(/^(\d+)\.\s+(.*)$/gm, "$1. $2");
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
-  
+
   const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
   const jiraEmail = process.env.VITE_JIRA_EMAIL;
@@ -36,6 +120,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   };
   try {
     // 📨 1. POST TO JIRA FIRST
+
+    // idea convert JSON for Jira
+    const jiraADF = tiptapToADF(payload.descriptionJson);
+
     const jiraPayload = {
       fields: {
         summary: payload.title,
@@ -50,7 +138,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
           type: "doc",
           version: 1,
           content: [
-            { type: "paragraph", content: [{ type: "text", text: payload.description }] },
+            // MAIN CONTENT FROM jiraADF
+            ...jiraADF.content,
+
+            // REPORTER BLOCK (if present)
             ...(payload.reporter
               ? [
                   {
@@ -75,13 +166,33 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
                         type: "text",
                         text: `${payload.reporter}`,
                         marks: [
+                          { type: "strong" },
+                          { type: "textColor", attrs: { color: "#0747a6" } },
+                        ],
+                      },
+                    ],
+                  },
+                ]
+              : []),
+
+            // SLACK THREAD (if present)
+            ...(payload.slackThread
+              ? [
+                  {
+                    type: "paragraph",
+                    content: [
+                      {
+                        type: "text",
+                        text: "Slack Thread: ",
+                      },
+                      {
+                        type: "text",
+                        text: payload.slackThread,
+                        marks: [
                           {
-                            type: "strong",
-                          },
-                          {
-                            type: "textColor",
+                            type: "link",
                             attrs: {
-                              color: "#0747a6",
+                              href: payload.slackThread,
                             },
                           },
                         ],
@@ -90,8 +201,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
                   },
                 ]
               : []),
-            { type: "paragraph" },
+
             { type: "rule" },
+
+            // FOOTER CONTENT
             {
               type: "heading",
               attrs: {

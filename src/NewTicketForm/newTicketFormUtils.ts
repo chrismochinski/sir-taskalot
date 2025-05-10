@@ -1,6 +1,7 @@
 type TicketPayload = {
   title: string;
-  description: string;
+ description: string; // Slack HTML
+  descriptionJson: Record<string, unknown>; // Jira JSON
   priority: 'Lowest' | 'Low' | 'Medium' | 'High' | 'Highest';
   ticketType: 'Bug' | 'Story';
   slackThread?: string;

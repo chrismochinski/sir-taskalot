@@ -9,7 +9,7 @@ export const useNewTicketFormStyles = createStyles(
     flexHeaderWrapper: {
       zIndex: 2,
       WebkitAppRegion: "drag", // can drag app by header text area
-      paddingBlock: "1.5rem 0.25rem",
+      paddingBlock: "1.745rem 0.25rem",
     },
 
     newTicketFormWrapper: {
@@ -20,18 +20,18 @@ export const useNewTicketFormStyles = createStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      paddingBlock: "0 4rem",
+      paddingBlock: "0 2rem",
     },
 
     formFieldsBox: {
-      maxWidth: "450px",
+      maxWidth: "400px",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "flex-start",
       width: "100%",
       padding: "1rem 1.25rem",
-      gap: "1rem",
+      gap: "0.5rem",
       marginTop: "0.75rem",
       backgroundColor: "#ffffffda",
       backdropFilter: "blur(7px)",
@@ -42,7 +42,7 @@ export const useNewTicketFormStyles = createStyles(
       border: "2px solid #FFFFFF60",
 
       label: {
-        fontSize: "1rem",
+        fontSize: "15px",
         fontWeight: 400,
         fontFamily: '"Roboto", sans-serif',
         color: "#000",
@@ -62,7 +62,7 @@ export const useNewTicketFormStyles = createStyles(
       "& .mantine-SegmentedControl-control": {
         span: {
           fontFamily: '"Archivo", sans-serif',
-          fontSize: "16px",
+          fontSize: "14px",
         },
       },
     },
@@ -75,7 +75,7 @@ export const useNewTicketFormStyles = createStyles(
         lineHeight: "1.125em",
       },
       "& > span": {
-        fontSize: "13px",
+        fontSize: "12px",
         lineHeight: "1.25em",
         paddingBottom: "5px",
         color: "#aaaaaa",
@@ -92,13 +92,35 @@ export const useNewTicketFormStyles = createStyles(
 
     richTextEditor: {
       borderRadius: "10px",
-      '& .mantine-TypographyStylesProvider-root': {
-        
+      "& .mantine-TypographyStylesProvider-root": {
         borderRadius: "0 0 10px 10px",
       },
-      '& .mantine-RichTextEditor-content': {
+      "& .mantine-RichTextEditor-toolbar": {
+        padding: '0.5em 0.75em',
+        '& .mantine-RichTextEditor-control': {
+        minWidth: '1.4rem',
+        height: '1.4rem',
+        
+        },
+      },
+      // rich text box - keep at 100px tall and scroll on overflow
+      "& .mantine-RichTextEditor-content": {
         borderRadius: "0 0 10px 10px",
-        minHeight: '100px',
+        minHeight: "90px",
+        maxHeight: "90px",
+        overflowY: "auto",
+        "& .tiptap.ProseMirror": {
+          padding: "1em",
+
+          // ------- USER ENTERED TEXT ------- //
+          h2: {
+            fontSize: "1.25rem",
+            fontWeight: 600,
+          },
+          p: {
+            fontSize: "13px",
+          },
+        },
       },
     },
 
