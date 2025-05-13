@@ -14,6 +14,8 @@ export const colors = {
   lightBlue: "#C1EAFF", // light humility
   borderBlue: "#1D96D2", // dark humility
   lightOrange: "#FCE6D8",
+  darkBlue: '#187DAF',
+  darkOrange: "#FF6105",
   white: "#ffffff",
   black: "#000000",
   gray: "#D4D6D8", // border gray

@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { useEffect, useState } from "react";
 import { FaBug, FaBook } from "react-icons/fa";
 import { useGlobalStyles } from "../Globals";
@@ -20,6 +21,15 @@ import {
 } from "react-icons/ri";
 import { BiLink, BiUnlink } from "react-icons/bi";
 
+// jira priority icons + asset(s)
+import LowestIcon from "../assets/jira/Lowest.png";
+import LowIcon from "../assets/jira/Low.png";
+import MediumIcon from "../assets/jira/Medium.png";
+import HighIcon from "../assets/jira/High.png";
+import HighestIcon from "../assets/jira/Highest.png";
+import dragonButler from "../assets/dragon-butler.png";
+
+// mantine imports and stuff
 import {
   Box,
   Title,
@@ -30,13 +40,17 @@ import {
   SegmentedControl,
   Flex,
   Image,
+  SelectItemProps
 } from "@mantine/core";
 import { useNewTicketFormStyles, submitTicket } from ".";
-import dragonButler from "../assets/dragon-butler.png";
 
 interface NewTicketFormProps {
   reporter?: string;
   onResetReporter?: () => void;
+}
+
+interface PriorityOptionProps extends SelectItemProps {
+  icon: string;
 }
 
 const iconSize = 13;
@@ -105,7 +119,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
     });
 
     if (success) {
-      alert("Ticket submitted to Slack 🚀");
+      alert("Ticket submitted 🚀");
       setTitle("");
       setDescription(""); // SLACK
       setDescriptionJson({}); // JIRA
@@ -121,6 +135,28 @@ export function NewTicketForm(props: NewTicketFormProps) {
       alert("Slack post failed.");
     }
   };
+
+  // Map each priority level to its icon
+  const priorityOptions = [
+    { value: "Highest", label: "Highest", icon: HighestIcon },
+    { value: "High", label: "High", icon: HighIcon },
+    { value: "Medium", label: "Medium", icon: MediumIcon },
+    { value: "Low", label: "Low", icon: LowIcon },
+    { value: "Lowest", label: "Lowest", icon: LowestIcon },
+  ];
+
+// Custom item component with forwardRef
+const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
+  ({ label, icon, ...rest }: PriorityOptionProps, ref) => (
+    <Flex ref={ref} {...rest} gap="0.5rem" align="center">
+      <Image src={icon} width={12} height={12} alt={`${label} icon`} />
+      <Text>{label}</Text>
+    </Flex>
+  )
+);
+
+  SelectItem.displayName = "SelectItem"; // Required for forwardRef
+
 
   return (
     <Box className={cx(classes.newTicketFormWrapper)} pt="0" my="0">
@@ -163,7 +199,6 @@ export function NewTicketForm(props: NewTicketFormProps) {
           placeholder="Just the meat & taters"
         />
 
-        {/* IMPORTANT CHANGE ICONS  */}
         <Box w="100%" className={classes.rteBox}>
           <Text component="label">Description</Text>
           <RichTextEditor editor={rteEditor} className={classes.richTextEditor}>
@@ -195,19 +230,29 @@ export function NewTicketForm(props: NewTicketFormProps) {
         </Box>
 
         <Box className={classes.priorityTypeFlex}>
-          <Select
-            size="xs"
-            radius="xl"
-            w="110px"
-            label="Priority"
-            data={["Lowest", "Low", "Medium", "High", "Highest"]}
-            value={priority}
-            onChange={(value) =>
-              setPriority(value as "Lowest" | "Low" | "Medium" | "High" | "Highest")
-            }
-            placeholder="Select priority"
+           <Select
+      size="xs"
+      radius="xl"
+      w="115px"
+      label="Priority"
+      placeholder="Select priority"
+      data={priorityOptions}
+      value={priority}
+      onChange={(value) =>
+        setPriority(value as "Low" | "Lowest" | "Medium" | "Highest" | "High")
+      }
+      icon={
+        priority ? (
+          <Image
+            height={12}
+            width={12}
+            src={priorityOptions.find((p) => p.value === priority)?.icon}
           />
-          <Box w="min-content">
+        ) : null
+      }
+      itemComponent={SelectItem}
+    />
+          <Box w="min-content" pos="relative">
             <Text component="label">Ticket Type</Text>
 
             <SegmentedControl
@@ -218,7 +263,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
                 {
                   value: "Story",
                   label: (
-                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                    <Flex w="92px" justify="center" align="center" gap="0.5rem">
                       <FaBook size={14} />
                       <Text component="span">New</Text>
                     </Flex>
@@ -227,7 +272,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
                 {
                   value: "Bug",
                   label: (
-                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                    <Flex w="92px" justify="center" align="center" gap="0.5rem">
                       <FaBug size={14} />
                       <Text component="span">Bug</Text>
                     </Flex>
@@ -237,6 +282,11 @@ export function NewTicketForm(props: NewTicketFormProps) {
               value={ticketType}
               onChange={(value) => setTicketType(value as "Bug" | "Story")}
             />
+            <Text component="span" className={classes.typeSubLabel}>
+              {ticketType === "Story"
+                ? "New/updated page, content, feature"
+                : "Issue, error, or problem to fix"}
+            </Text>
           </Box>
         </Box>
         <TextInput

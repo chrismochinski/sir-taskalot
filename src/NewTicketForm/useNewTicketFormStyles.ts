@@ -124,5 +124,15 @@ export const useNewTicketFormStyles = createStyles(
     rteToolbar: {
       borderRadius: "10px 10px 0 0",
     },
+
+    typeSubLabel: {
+      position: "absolute",
+      display: 'block',
+      top: '100%',
+      fontSize: "12px",
+      fontFamily: '"Roboto", sans-serif',
+      fontWeight: 500,
+      color: ticketTypeStyle === "Story" ? `${colors.darkBlue}` : `${colors.darkOrange}`,
+    },  
   })
 );
