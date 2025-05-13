@@ -46,7 +46,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontSize: "clamp(1.75rem, 6vw, 2.125rem)",
       letterSpacing: "0.02em",
       textShadow: textVisibilityShadow,
-      lineHeight: '1em',
+      lineHeight: "1em",
     },
 
     // onboarding title
@@ -55,7 +55,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontSize: "1.6rem",
       fontWeight: 800,
       textWrap: "balance",
-      letterSpacing: "-0.35px",
+
       textShadow: textVisibilityShadow,
     },
 
@@ -138,7 +138,7 @@ export const useGlobalStyles = createStyles(() => ({
       // fontSize: "13px", // set in TextInput size prop
       borderWidth: "1.5px",
       background: "#ffffff99",
-      paddingInline: 'calc(2rem / 3)',
+      paddingInline: "calc(2rem / 3)",
       "&:focus": {
         borderColor: "#1D96D2",
       },
@@ -166,19 +166,20 @@ export const useGlobalStyles = createStyles(() => ({
     fontFamily: '"Archivo", sans-serif',
     fontWeight: 700,
     color: "#ffffff",
-    padding: "0.4em 2em",
+    padding: "0em 1.5em",
     borderRadius: "64px",
     border: "none",
     cursor: "pointer",
     lineHeight: "1.25em",
-    fontSize: "15px",
-    transition: "transform 350ms ease-in-out, box-shadow 350ms ease-in-out",
+    fontSize: "14px",
+    height: '2.125rem',
+    transition: "transform 250ms ease-in-out, box-shadow 250ms ease-in-out",
     transformOrigin: "50%",
     "&:hover": {
-      transition: "transform 180ms ease-in-out, box-shadow 180ms ease-in-out",
+      transition: "transform 150ms ease-in-out, box-shadow 150ms ease-in-out",
       backgroundColor: colors.red,
       transform: "scale(1.03)",
-      boxShadow: "2px 4px 12px rgb(0 0 0 / 35%)",
+      boxShadow: "1px 2px 8px rgb(0 0 0 / 30%)",
     },
   },
 
@@ -243,7 +244,7 @@ export const useGlobalStyles = createStyles(() => ({
     "&:before": {
       position: "absolute",
       content: "'Quick App Info'",
-      top: '50%',
+      top: "50%",
       transform: "translateY(-50%) translateX(-25px)",
       right: "115%",
       fontFamily: '"Archivo", sans-serif',
@@ -256,10 +257,10 @@ export const useGlobalStyles = createStyles(() => ({
       opacity: 0,
       pointerEvents: "none",
     },
-    '&:hover': {
-      '&:before': {
+    "&:hover": {
+      "&:before": {
         transform: "translateY(-50%) translateX(0px)",
-        
+
         opacity: 1,
       },
     },
@@ -270,7 +271,6 @@ export const useGlobalStyles = createStyles(() => ({
     "&:hover > svg:last-of-type": {
       opacity: 0,
     },
-
   },
 
   // manually added to several sections of page edges
