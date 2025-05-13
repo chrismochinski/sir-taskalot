@@ -109,6 +109,11 @@ export function NewTicketForm(props: NewTicketFormProps) {
       setTitle("");
       setDescription(""); // SLACK
       setDescriptionJson({}); // JIRA
+
+      if (rteEditor) {
+        rteEditor.commands.clearContent();
+      }
+
       setSlackThread("");
       setPriority("Medium");
       setTicketType("Story");
@@ -123,7 +128,6 @@ export function NewTicketForm(props: NewTicketFormProps) {
         className={cx(classes.flexHeaderWrapper)}
         justify="center"
         align="center"
-        maw="450px"
         gap="min(0.25rem, 0.3vw)">
         <Image
           src={dragonButler}
@@ -149,6 +153,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
 
       <Box className={classes.formFieldsBox}>
         <TextInput
+          size="xs"
           w="100%"
           radius="xl"
           label="Title"
@@ -189,59 +194,53 @@ export function NewTicketForm(props: NewTicketFormProps) {
           </RichTextEditor>
         </Box>
 
-        <Select
-          radius="xl"
-          w="50%"
-          label="Priority"
-          data={["Lowest", "Low", "Medium", "High", "Highest"]}
-          value={priority}
-          onChange={(value) =>
-            setPriority(value as "Lowest" | "Low" | "Medium" | "High" | "Highest")
-          }
-          placeholder="Select priority"
-        />
-        <Box className={classes.flex}>
-          <Text component="label">Ticket Type</Text>
-          <Text component="span">
-            <Text component="span" fw={500} color="#1D96D2">
-              New
-            </Text>{" "}
-            = new or updated page, content, or feature
-            <br />
-            <Text component="span" fw={500} color="#F0AD1E">
-              Bug
-            </Text>{" "}
-            = issue with existing content
-          </Text>
-          <SegmentedControl
+        <Box className={classes.priorityTypeFlex}>
+          <Select
             size="xs"
-            className={classes.ticketType}
-            radius="12px"
-            data={[
-              {
-                value: "Story",
-                label: (
-                  <Flex w="90px" justify="center" align="center" gap="0.5rem">
-                    <FaBook size={16} />
-                    <Text component="span">New</Text>
-                  </Flex>
-                ),
-              },
-              {
-                value: "Bug",
-                label: (
-                  <Flex w="90px" justify="center" align="center" gap="0.5rem">
-                    <FaBug size={16} />
-                    <Text component="span">Bug</Text>
-                  </Flex>
-                ),
-              },
-            ]}
-            value={ticketType}
-            onChange={(value) => setTicketType(value as "Bug" | "Story")}
+            radius="xl"
+            w="110px"
+            label="Priority"
+            data={["Lowest", "Low", "Medium", "High", "Highest"]}
+            value={priority}
+            onChange={(value) =>
+              setPriority(value as "Lowest" | "Low" | "Medium" | "High" | "Highest")
+            }
+            placeholder="Select priority"
           />
+          <Box w="min-content">
+            <Text component="label">Ticket Type</Text>
+
+            <SegmentedControl
+              size="xs"
+              className={classes.ticketType}
+              radius="lg"
+              data={[
+                {
+                  value: "Story",
+                  label: (
+                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                      <FaBook size={14} />
+                      <Text component="span">New</Text>
+                    </Flex>
+                  ),
+                },
+                {
+                  value: "Bug",
+                  label: (
+                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                      <FaBug size={14} />
+                      <Text component="span">Bug</Text>
+                    </Flex>
+                  ),
+                },
+              ]}
+              value={ticketType}
+              onChange={(value) => setTicketType(value as "Bug" | "Story")}
+            />
+          </Box>
         </Box>
         <TextInput
+          size="xs"
           w="100%"
           radius="xl"
           label="Slack Thread"
@@ -261,7 +260,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
           <Text component="h6">
             Not {reporter}?{" "}
             <Text component="a" onClick={onResetReporter}>
-              Click here to update your name!
+              Update your name.
             </Text>
           </Text>
         )}

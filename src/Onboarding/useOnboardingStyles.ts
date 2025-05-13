@@ -3,7 +3,7 @@ import { colors } from "../Globals/";
 
 export const useOnboardingStyles = createStyles(() => ({
   onboardingWrapper: {
-    height: "750px",
+    height: "650px",
     width: "500px",
     textAlign: "left",
     display: "flex",

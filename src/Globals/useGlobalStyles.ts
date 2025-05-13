@@ -11,10 +11,13 @@ export const colors = {
   red: "#FF4658",
   green: "#41E894",
   lightGreen: "#DEFCEE",
-  lightBlue: "#C1EAFF",
+  lightBlue: "#C1EAFF", // light humility
+  borderBlue: "#1D96D2", // dark humility
   lightOrange: "#FCE6D8",
   white: "#ffffff",
   black: "#000000",
+  gray: "#D4D6D8", // border gray
+  lightGray: "#F7F7F7",
 };
 
 export const useGlobalStyles = createStyles(() => ({
@@ -28,7 +31,7 @@ export const useGlobalStyles = createStyles(() => ({
     overflow: "hidden",
     background: colors.lightGreen,
 
-    height: "750",
+    height: "650px",
     width: "500px",
     "& h1, & h2, & h3, & h4, & h5, & h6, & a ": {
       WebkitAppRegion: "no-drag",
@@ -49,7 +52,7 @@ export const useGlobalStyles = createStyles(() => ({
     // onboarding title
     h2: {
       fontFamily: '"BioRhyme", serif',
-      fontSize: "1.75rem",
+      fontSize: "1.6rem",
       fontWeight: 800,
       textWrap: "balance",
       letterSpacing: "-0.35px",
@@ -62,7 +65,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontWeight: 400,
       textWrap: "pretty",
       lineHeight: "1.4em",
-      fontSize: "17px",
+      fontSize: "16px",
       marginBottom: 0,
       marginTop: "0.25em",
       letterSpacing: "0.02em",
@@ -74,7 +77,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontWeight: 700,
       textWrap: "pretty",
       lineHeight: "1em",
-      fontSize: "1.5rem",
+      fontSize: "1.25rem",
       marginBlock: 0,
       textShadow: textVisibilityShadow,
     },
@@ -123,7 +126,7 @@ export const useGlobalStyles = createStyles(() => ({
       fontStyle: "normal",
       textAlign: "left",
       fontFamily: '"Roboto", sans-serif',
-      fontSize: "clamp(13px, 2.4vw, 15px)",
+      fontSize: "13px",
       lineHeight: "1.25em",
       fontWeight: 400,
       textWrap: "pretty",
@@ -132,9 +135,10 @@ export const useGlobalStyles = createStyles(() => ({
       textShadow: textVisibilityShadow,
     },
     input: {
-      zIndex: 10,
+      // fontSize: "13px", // set in TextInput size prop
       borderWidth: "1.5px",
       background: "#ffffff99",
+      paddingInline: 'calc(2rem / 3)',
       "&:focus": {
         borderColor: "#1D96D2",
       },
@@ -180,7 +184,7 @@ export const useGlobalStyles = createStyles(() => ({
 
   blobWrapper: {
     width: "500px",
-    height: "750",
+    height: "650px",
     position: "absolute",
     inset: 0,
     zIndex: 0,
@@ -195,7 +199,7 @@ export const useGlobalStyles = createStyles(() => ({
     svg: {
       width: "clamp(360px, 80%, 720px)",
       inset: "-8% 0 0 -10%",
-      height: "clamp(300px, 82%, 700px)",
+      height: "clamp(300px, 82%, 650px)",
       fill: "#41E894",
       "@keyframes blob": {
         "0%": { transform: "scale(1.1, 0.7) translate(-25vw, -55vh) rotate(2deg)" },
@@ -236,6 +240,29 @@ export const useGlobalStyles = createStyles(() => ({
         opacity: 0.7,
       },
     },
+    "&:before": {
+      position: "absolute",
+      content: "'Quick App Info'",
+      top: '50%',
+      transform: "translateY(-50%) translateX(-25px)",
+      right: "115%",
+      fontFamily: '"Archivo", sans-serif',
+      fontWeight: 500,
+      letterSpacing: "0.02em",
+      fontSize: "12px",
+      width: "max-content",
+      color: colors.purple,
+      transition: "transform 170ms ease-out, opacity 170ms ease-out",
+      opacity: 0,
+      pointerEvents: "none",
+    },
+    '&:hover': {
+      '&:before': {
+        transform: "translateY(-50%) translateX(0px)",
+        
+        opacity: 1,
+      },
+    },
 
     "&:hover > svg:first-of-type": {
       opacity: 0.9,
@@ -243,6 +270,7 @@ export const useGlobalStyles = createStyles(() => ({
     "&:hover > svg:last-of-type": {
       opacity: 0,
     },
+
   },
 
   // manually added to several sections of page edges
@@ -271,7 +299,7 @@ export const useGlobalStyles = createStyles(() => ({
       bottom: 0,
       left: 0,
       right: "80px", // space for help and info buttons
-      height: "70px",
+      height: "55px",
       background: "transparent",
     },
     "&#form-top": {

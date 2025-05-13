@@ -20,7 +20,7 @@ export function Onboarding({ onSave }: OnboardingProps) {
         <Image
           src={dragonButler}
           alt="Sir Taskalot - who happens to be a dragon"
-          width="115px"
+          width="90px"
           height="auto"
         />
         <Box>
@@ -41,6 +41,7 @@ export function Onboarding({ onSave }: OnboardingProps) {
         (don't worry - you can change this later)
       </Text>
       <TextInput
+        size="xs"
         radius="xl"
         placeholder="NEW FORM WHO DIS?"
         value={name}

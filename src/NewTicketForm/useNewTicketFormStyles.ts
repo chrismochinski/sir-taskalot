@@ -1,4 +1,5 @@
 import { createStyles } from "@mantine/core";
+import { colors } from "../Globals";
 
 type NewTicketFormStylesProps = {
   ticketTypeStyle: "Bug" | "Story";
@@ -9,7 +10,8 @@ export const useNewTicketFormStyles = createStyles(
     flexHeaderWrapper: {
       zIndex: 2,
       WebkitAppRegion: "drag", // can drag app by header text area
-      paddingBlock: "1.745rem 0.25rem",
+      paddingBlock: "1rem 0.25rem",
+      maxWidth: "400px",
     },
 
     newTicketFormWrapper: {
@@ -33,19 +35,19 @@ export const useNewTicketFormStyles = createStyles(
       padding: "1rem 1.25rem",
       gap: "0.5rem",
       marginTop: "0.75rem",
-      backgroundColor: "#ffffffda",
+      backgroundColor: `${colors.white}da`,
       backdropFilter: "blur(7px)",
       WebkitBackdropFilter: "blur(7px)",
       borderRadius: "12px",
       boxShadow: "2px 3px 17px #00000036",
       zIndex: 1,
-      border: "2px solid #FFFFFF60",
+      border: `2px solid ${colors.white}60`,
 
       label: {
-        fontSize: "15px",
+        fontSize: "14px",
         fontWeight: 400,
         fontFamily: '"Roboto", sans-serif',
-        color: "#000",
+        color: `${colors.black}`,
       },
 
       "& button, & input, & textarea": {
@@ -54,10 +56,14 @@ export const useNewTicketFormStyles = createStyles(
     },
 
     ticketType: {
+      backgroundColor: `${colors.white}`,
+      // border: `0.0625rem solid ${colors.gray}`,
       marginBlock: "0",
       "& .mantine-SegmentedControl-indicator": {
         transition: "all 300ms ease",
-        backgroundColor: ticketTypeStyle === "Story" ? "#C1EAFF" : "#FCE6D8",
+        boxShadow: "0 0 0 0",
+        backgroundColor:
+          ticketTypeStyle === "Story" ? `${colors.lightBlue}` : `${colors.lightOrange}`,
       },
       "& .mantine-SegmentedControl-control": {
         span: {
@@ -67,23 +73,12 @@ export const useNewTicketFormStyles = createStyles(
       },
     },
 
-    flex: {
+    priorityTypeFlex: {
       display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      "& > label": {
-        lineHeight: "1.125em",
-      },
-      "& > span": {
-        fontSize: "12px",
-        lineHeight: "1.25em",
-        paddingBottom: "5px",
-        color: "#aaaaaa",
-        fontWeight: 300,
-        span: {
-          lineHeight: "1.125em",
-        },
-      },
+      flexDirection: "row",
+      alignItems: "center",
+      width: "100%",
+      justifyContent: "space-between",
     },
 
     rteBox: {
@@ -96,11 +91,10 @@ export const useNewTicketFormStyles = createStyles(
         borderRadius: "0 0 10px 10px",
       },
       "& .mantine-RichTextEditor-toolbar": {
-        padding: '0.5em 0.75em',
-        '& .mantine-RichTextEditor-control': {
-        minWidth: '1.4rem',
-        height: '1.4rem',
-        
+        padding: "0.5em 0.75em",
+        "& .mantine-RichTextEditor-control": {
+          minWidth: "1.4rem",
+          height: "1.4rem",
         },
       },
       // rich text box - keep at 100px tall and scroll on overflow
@@ -110,8 +104,7 @@ export const useNewTicketFormStyles = createStyles(
         maxHeight: "90px",
         overflowY: "auto",
         "& .tiptap.ProseMirror": {
-          padding: "1em",
-
+          padding: "calc(2em / 3)",
           // ------- USER ENTERED TEXT ------- //
           h2: {
             fontSize: "1.25rem",
@@ -121,6 +114,10 @@ export const useNewTicketFormStyles = createStyles(
             fontSize: "13px",
           },
         },
+      },
+      "&:focus-within": {
+        backgroundColor: "#ffffff99",
+        border: `1.5px solid ${colors.borderBlue}`,
       },
     },
 

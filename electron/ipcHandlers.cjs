@@ -6,44 +6,39 @@ require("dotenv").config();
 function tiptapToADF(tiptapJSON) {
   const convertNode = (node) => {
     switch (node.type) {
+      // IDEA finding JIRA format...latest updated
       case "paragraph":
-        // Check for line breaks within a paragraph and split them into separate paragraphs
-        const contentArray = node.content?.map(convertNode).filter(Boolean) || [];
-        const splitContent = contentArray.reduce((acc, item) => {
-          if (item.type === "text" && item.text.includes("\n")) {
-            const lines = item.text.split("\n").map((line) => ({
-              type: "paragraph",
-              content: [{ type: "text", text: line.trim() }]
-            }));
-            return [...acc, ...lines];
-          }
-          return [...acc, item];
-        }, []);
-        return splitContent.length > 1 ? splitContent : { type: "paragraph", content: contentArray };
+        return {
+          type: "paragraph",
+          content: node.content?.map(convertNode).filter(Boolean),
+        };
 
+      // idea last friday updates
       case "text":
         return {
           type: "text",
           text: node.text,
-          marks: node.marks?.map((mark) => {
-            switch (mark.type) {
-              case "bold":
-                return { type: "strong" };
-              case "italic":
-                return { type: "em" };
-              case "underline":
-                return { type: "underline" };
-              case "link":
-                return {
-                  type: "link",
-                  attrs: {
-                    href: mark.attrs.href,
-                  },
-                };
-              default:
-                return null;
-            }
-          }).filter(Boolean),
+          marks: node.marks
+            ?.map((mark) => {
+              switch (mark.type) {
+                case "bold":
+                  return { type: "strong" };
+                case "italic":
+                  return { type: "em" };
+                case "underline":
+                  return { type: "underline" };
+                case "link":
+                  return {
+                    type: "link",
+                    attrs: {
+                      href: mark.attrs.href,
+                    },
+                  };
+                default:
+                  return null;
+              }
+            })
+            .filter(Boolean),
         };
 
       case "bulletList":
@@ -82,7 +77,6 @@ function tiptapToADF(tiptapJSON) {
     content: tiptapJSON.content?.flatMap(convertNode).filter(Boolean),
   };
 }
-
 
 // END TIPTAP TO ADF CONVERSION
 
@@ -123,6 +117,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
 
     // idea convert JSON for Jira
     const jiraADF = tiptapToADF(payload.descriptionJson);
+
+    // idea DEBUG
+    console.log("🧾👀 Jira ADF Content JSON sent:", JSON.stringify(jiraADF, null, 2));
+
 
     const jiraPayload = {
       fields: {

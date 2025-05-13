@@ -67,8 +67,8 @@ function App() {
           title="Info"
           aria-label="Info"
           aria-describedby="info">
-          <IoIosInformationCircle size="27px" />
-          <IoIosInformationCircleOutline size="27px" />
+          <IoIosInformationCircle size="25px" />
+          <IoIosInformationCircleOutline size="25px" />
         </UnstyledButton>
         <InfoModal opened={modalOpen} onClose={() => setModalOpen(false)} />
       </Box>

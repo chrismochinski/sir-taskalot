@@ -7,12 +7,12 @@ require("./ipcHandlers.cjs");
 function createWindow() {
   const win = new BrowserWindow({
     width: 500,
-    height: 750,
+    height: 650,
     resizable: false,
     minWidth: 500,
     maxWidth: 500,
-    minHeight: 750,
-    maxHeight: 750,
+    minHeight: 650,
+    maxHeight: 650,
     frame: false,
     vibrancy: "under-window",
     titleBarStyle: "hidden",
