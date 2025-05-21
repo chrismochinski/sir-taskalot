@@ -14,7 +14,7 @@ export const colors = {
   lightBlue: "#C1EAFF", // light humility
   borderBlue: "#1D96D2", // dark humility
   lightOrange: "#FCE6D8",
-  darkBlue: '#187DAF',
+  darkBlue: "#187DAF",
   darkOrange: "#FF6105",
   white: "#ffffff",
   black: "#000000",
@@ -40,12 +40,13 @@ export const useGlobalStyles = createStyles(() => ({
       zIndex: 10,
     },
     h1: {
+      display: "inline-block",
       fontFamily: '"BioRhyme", serif',
       fontWeight: 800,
       textWrap: "balance",
       textAlign: "left",
       color: "#000",
-      fontSize: "clamp(1.75rem, 6vw, 2.125rem)",
+      fontSize: "clamp(1.65rem, 5.8vw, 2rem)",
       letterSpacing: "0.02em",
       textShadow: textVisibilityShadow,
       lineHeight: "1em",
@@ -53,6 +54,7 @@ export const useGlobalStyles = createStyles(() => ({
 
     // onboarding title
     h2: {
+      display: "inline-block",
       fontFamily: '"BioRhyme", serif',
       fontSize: "1.6rem",
       fontWeight: 800,
@@ -174,7 +176,7 @@ export const useGlobalStyles = createStyles(() => ({
     cursor: "pointer",
     lineHeight: "1.25em",
     fontSize: "14px",
-    height: '2.125rem',
+    height: "2.125rem",
     transition: "transform 250ms ease-in-out, box-shadow 250ms ease-in-out",
     transformOrigin: "50%",
     "&:hover": {
@@ -275,55 +277,13 @@ export const useGlobalStyles = createStyles(() => ({
     },
   },
 
-  // manually added to several sections of page edges
-  // to eliminate header bar (removed via main.cjs)
-  dragRegion: {
-    WebkitAppRegion: "drag",
+  collapseButton: {
+    zIndex: 1000,
     position: "absolute",
-    zIndex: -10,
-    "&#left": {
-      left: 0,
-      top: 0,
-      bottom: 0,
-      height: "100%",
-      background: "transparent",
-      width: "50px",
-    },
-    "&#right": {
-      right: 0,
-      top: 0,
-      bottom: 0,
-      height: "94%",
-      background: "transparent",
-      width: "50px",
-    },
-    "&#form-bottom": {
-      bottom: 0,
-      left: 0,
-      right: "80px", // space for help and info buttons
-      height: "55px",
-      background: "transparent",
-    },
-    "&#form-top": {
-      top: 0,
-      left: 0,
-      right: 0, // space for help and info buttons
-      height: "40px",
-      background: "transparent",
-    },
-    "&#onboard-top": {
-      top: 0,
-      left: 0,
-      right: 0,
-      height: "50vh",
-      background: "transparent",
-    },
-    "&#onboard-bottom": {
-      bottom: 0,
-      left: 0,
-      right: "80px", // space for help and info buttons
-      height: "30vh",
-      background: "transparent",
-    },
+    top: "0.5rem",
+    right: "0.5rem",
+    fontFamily: '"Archivo", sans-serif',
+    fontSize: "12px",
+    height: "25px",
   },
 }));

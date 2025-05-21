@@ -4,6 +4,7 @@ import { colors } from "../Globals";
 export const useInfoModalStyles = createStyles(() => ({
   infoModal: {
     zIndex: 20,
+    WebkitAppRegion: "no-drag",
     "& .mantine-Paper-root": {
       maxWidth: "380px",
       height: "500px",
@@ -13,12 +14,13 @@ export const useInfoModalStyles = createStyles(() => ({
           display: "none",
         },
         button: {
+          WebkitAppRegion: "no-drag",
           cursor: "pointer",
           backgroundColor: "#fff",
           borderRadius: "50%",
           background: colors.white,
-          height: '1rem',
-          minHeight: '1rem',
+          height: "1rem",
+          minHeight: "1rem",
           width: "1rem",
           minWidth: "1rem",
           stroke: colors.purple,
@@ -45,6 +47,10 @@ export const useInfoModalStyles = createStyles(() => ({
     alignItems: "flex-start",
     width: "100%",
     height: "100%",
+    WebkitAppRegion: "no-drag",
+    svg: {
+      WebkitAppRegion: "no-drag",
+    },
 
     h3: {
       fontSize: "24px",
@@ -54,6 +60,7 @@ export const useInfoModalStyles = createStyles(() => ({
       marginBlock: 0,
       lineHeight: "1.175em",
       textWrap: "balance",
+      WebkitAppRegion: "no-drag",
     },
     h4: {
       fontSize: "16px",
@@ -63,6 +70,7 @@ export const useInfoModalStyles = createStyles(() => ({
       marginBlock: 0,
       lineHeight: "1.175em",
       textWrap: "balance",
+      WebkitAppRegion: "no-drag",
     },
     p: {
       fontSize: "14px",
@@ -72,6 +80,10 @@ export const useInfoModalStyles = createStyles(() => ({
       marginBlock: 0,
       lineHeight: "1.15em",
       textWrap: "pretty",
+      WebkitAppRegion: "no-drag",
+    },
+    button: {
+          WebkitAppRegion: "no-drag",
     },
   },
 

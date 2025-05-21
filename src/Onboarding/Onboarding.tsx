@@ -15,7 +15,6 @@ export function Onboarding({ onSave }: OnboardingProps) {
 
   return (
     <Box className={classes.onboardingWrapper} w="100%" h="100%">
-      <Box className={globalClasses.dragRegion} id="onboard-top" />
       <Flex justify="center" align="center" gap="0.5rem" mb="1.5rem">
         <Image
           src={dragonButler}
@@ -61,7 +60,6 @@ export function Onboarding({ onSave }: OnboardingProps) {
         disabled={!name.trim()}>
         Go!
       </Button>
-      <Box className={globalClasses.dragRegion} id="onboard-bottom" />
     </Box>
   );
 }

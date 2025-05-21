@@ -8,10 +8,15 @@ type NewTicketFormStylesProps = {
 export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
     flexHeaderWrapper: {
-      zIndex: 2,
+      zIndex: 1,
       WebkitAppRegion: "drag", // can drag app by header text area
-      paddingBlock: "1rem 0.25rem",
+      paddingBlock: "0.5rem 0.25rem",
       maxWidth: "400px",
+      position: "relative",
+    },
+
+    dragonButler: {
+      WebkitAppRegion: "no-drag",
     },
 
     newTicketFormWrapper: {
@@ -127,12 +132,12 @@ export const useNewTicketFormStyles = createStyles(
 
     typeSubLabel: {
       position: "absolute",
-      display: 'block',
-      top: '100%',
+      display: "block",
+      top: "100%",
       fontSize: "12px",
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 500,
       color: ticketTypeStyle === "Story" ? `${colors.darkBlue}` : `${colors.darkOrange}`,
-    },  
+    },
   })
 );

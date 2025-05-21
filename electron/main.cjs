@@ -4,15 +4,19 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 require("./ipcHandlers.cjs");
 
+// handle collapse "stamp" vs "full"
+let mainWindow;
+let isCollapsed = false;
+
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 500,
     height: 650,
     resizable: false,
-    minWidth: 500,
+    minWidth: 120,
     maxWidth: 500,
-    minHeight: 650,
-    maxHeight: 650,
+    minHeight: 120, // WAS 500
+    maxHeight: 650, // WAS 650
     frame: false,
     vibrancy: "under-window",
     titleBarStyle: "hidden",
@@ -23,8 +27,26 @@ function createWindow() {
     },
   });
 
-  win.loadURL("http://localhost:5173");
+  mainWindow.loadURL("http://localhost:5173");
 }
+
+// 🧠 Add IPC listener to toggle collapse
+ipcMain.on("toggle-collapse", () => {
+  if (!mainWindow) return;
+
+  if (!isCollapsed) {
+    console.log("MAIN.CJS COLLAPSING!");
+    mainWindow.setBounds({ width: 120, height: 120 });
+  } else {
+    console.log("MAIN.CJS EXPANDING!");
+    mainWindow.setBounds({ width: 500, height: 650 });
+  }
+
+  console.log("mainWindow:", mainWindow.getBounds());
+  isCollapsed = !isCollapsed;
+
+  console.log("isCollapsed:", isCollapsed);
+});
 
 app.whenReady().then(() => {
   createWindow();

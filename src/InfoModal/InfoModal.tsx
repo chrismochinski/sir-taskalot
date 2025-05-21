@@ -1,5 +1,11 @@
 import { Modal, Box, Flex, Title, Text } from "@mantine/core";
-import { useInfoModalStyles, ThreeHandsIcon, MagicWandIcon, QuestionMarkIcon, PoundTheStoneIcon } from ".";
+import {
+  useInfoModalStyles,
+  ThreeHandsIcon,
+  MagicWandIcon,
+  QuestionMarkIcon,
+  PoundTheStoneIcon,
+} from ".";
 
 type InfoModalProps = {
   opened: boolean;
@@ -15,6 +21,12 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       className={classes.infoModal}
       opened={opened}
       onClose={onClose}
+      // revisit CLOSE BUTTON
+      withCloseButton
+      closeOnClickOutside
+      closeButtonProps={{
+        "aria-label": "Close modal",
+      }}
       title="What in tarnation is going on here?"
       centered
       transitionProps={{ transition: "slide-up", duration: 300 }}
@@ -54,11 +66,11 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
           <Box className={classes.modalTextBox}>
             <Title order={4}>Questions? Comments? Ideas?</Title>
             <Text component="p">
-              Bring 'em on! We love opportunities to make all of our workloads a tiny bit lighter. Reach out to Mo directly or tag #tech-marketing-site in Slack. We gotchu!
+              Bring 'em on! We love opportunities to make all of our workloads a tiny bit lighter.
+              Reach out to Mo directly or tag #tech-marketing-site in Slack. We gotchu!
             </Text>
           </Box>
         </Flex>
-
       </Box>
     </Modal>
   );

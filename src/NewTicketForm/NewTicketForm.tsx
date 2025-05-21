@@ -44,7 +44,7 @@ import {
 } from "@mantine/core";
 import { useNewTicketFormStyles, submitTicket } from ".";
 
-interface NewTicketFormProps {
+export interface NewTicketFormProps {
   reporter?: string;
   onResetReporter?: () => void;
 }
@@ -166,6 +166,7 @@ const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
         align="center"
         gap="min(0.25rem, 0.3vw)">
         <Image
+          className={classes.dragonButler}
           src={dragonButler}
           alt="Sir Taskalot - who happens to be a dragon"
           width="80px"
@@ -315,8 +316,6 @@ const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
           </Text>
         )}
       </Box>
-      <Box className={globalClasses.dragRegion} id="form-bottom" />
-      <Box className={globalClasses.dragRegion} id="form-top" />
     </Box>
   );
 }
