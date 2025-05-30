@@ -9,7 +9,7 @@ export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
     flexHeaderWrapper: {
       zIndex: 1,
-      paddingBlock: "0 0.25rem",
+      paddingBlock: "0 0.5rem",
       maxWidth: "400px",
       position: "relative",
     },

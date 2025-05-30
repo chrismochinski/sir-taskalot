@@ -49,7 +49,7 @@ function App() {
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Box className={globalClasses.appWrapper} my="0" py="0">
+      <Box className={globalClasses.appWrapper} my="0" pt="0" pb="0.5rem">
         <DragRegions reporter={reporterName} isCollapsed={isCollapsed} />
         {isCollapsed ? (
           <StampView handleCollapseToggle={handleCollapseToggle} />
