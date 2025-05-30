@@ -64,6 +64,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       fontSize: "1.6rem",
       fontWeight: 800,
       textWrap: "balance",
+      letterSpacing: '-0.015em',
 
       textShadow: textVisibilityShadow,
     },

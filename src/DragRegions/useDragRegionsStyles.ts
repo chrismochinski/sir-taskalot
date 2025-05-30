@@ -7,12 +7,12 @@ export const useDragRegionsStyles = createStyles(() => ({
     position: "absolute",
     WebkitAppRegion: "drag",
     zIndex: 2,
+    background: "transparent",
   },
 
   // ONBOARDING DRAG REGIONS
 
   onboardLeft: {
-    background: "pink",
     left: 0,
     top: 0,
     bottom: 0,
@@ -20,7 +20,6 @@ export const useDragRegionsStyles = createStyles(() => ({
   },
 
   onboardRight: {
-    background: "pink",
     right: 0,
     top: 0,
     bottom: "45px",
@@ -28,7 +27,6 @@ export const useDragRegionsStyles = createStyles(() => ({
   },
 
   onboardTop: {
-    background: "pink",
     top: 0,
     left: 0,
     right: 0,
@@ -36,7 +34,6 @@ export const useDragRegionsStyles = createStyles(() => ({
   },
 
   onboardBottom: {
-    background: "pink",
     bottom: 0,
     left: 0,
     right: "45px", // space for help and info buttons
@@ -46,7 +43,6 @@ export const useDragRegionsStyles = createStyles(() => ({
   // FORM VIEW DRAG REGIONS
 
   formLeft: {
-    background: "yellow",
     left: 0,
     top: 0,
     bottom: 0,
@@ -54,7 +50,6 @@ export const useDragRegionsStyles = createStyles(() => ({
   },
 
   formRight: {
-    background: "yellow",
     right: 0,
     top: 0,
     bottom: "40px",
@@ -62,14 +57,12 @@ export const useDragRegionsStyles = createStyles(() => ({
   },
 
   formTop: {
-    background: "yellow",
     top: 0,
     left: 0,
     right: 0,
     height: "25px",
   },
   formBottom: {
-    background: "yellow",
     bottom: 0,
     left: 0,
     right: "50px",
@@ -79,28 +72,24 @@ export const useDragRegionsStyles = createStyles(() => ({
   // STAMP VIEW DRAG REGIONS
 
   stampTop: {
-    background: "orange",
     top: 0,
     left: 0,
     right: 0,
     height: `${STAMP_REGION}px`,
   },
   stampBottom: {
-    background: "orange",
     bottom: 0,
     left: 0,
     right: 0,
     height: `${STAMP_REGION}px`,
   },
   stampLeft: {
-    background: "orange",
     top: 0,
     bottom: 0,
     left: 0,
     width: `${STAMP_REGION}px`,
   },
   stampRight: {
-    background: "orange",
     top: 0,
     bottom: 0,
     right: 0,

@@ -17,8 +17,8 @@ export function Onboarding(props: OnboardingProps) {
 
   return (
     <Box className={classes.onboardingWrapper} w="100%" h="100%">
-      <Flex justify="center" align="center" gap="0.5rem" mb="1.5rem">
-        <DragonButton handleCollapseToggle={handleCollapseToggle} />
+      <Flex justify="center" align="center" gap="0.125em" mb="1.5rem">
+        <DragonButton handleCollapseToggle={handleCollapseToggle} width={90} />
         <Box>
           <Title order={2}>Welcome to Sir Taskalot!</Title>
           <Text component="h3" fw={600}>
