@@ -1,4 +1,9 @@
 import { createStyles } from "@mantine/core";
+import { DIM } from ".";
+
+interface GlobalStylesProps {
+  isCollapsed?: boolean;
+}
 
 export const bounce = "cubic-bezier(0.12, 1.22, 0.63, 1.8)";
 export const textVisibilityShadow =
@@ -22,7 +27,7 @@ export const colors = {
   lightGray: "#F7F7F7",
 };
 
-export const useGlobalStyles = createStyles(() => ({
+export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesProps) => ({
   appWrapper: {
     position: "relative",
     backgroundColor: "#FFF",
@@ -33,8 +38,8 @@ export const useGlobalStyles = createStyles(() => ({
     overflow: "hidden",
     background: colors.lightGreen,
 
-    height: "650px",
-    width: "500px",
+    height: isCollapsed ? DIM.stamp : DIM.height,
+    width: isCollapsed ? DIM.stamp : DIM.width,
     "& h1, & h2, & h3, & h4, & h5, & h6, & a ": {
       WebkitAppRegion: "no-drag",
       zIndex: 10,
@@ -134,7 +139,7 @@ export const useGlobalStyles = createStyles(() => ({
       lineHeight: "1.25em",
       fontWeight: 400,
       textWrap: "pretty",
-      marginBlock: "0.175em",
+      marginBlock: 0,
       marginInline: "auto",
       textShadow: textVisibilityShadow,
     },
@@ -188,8 +193,8 @@ export const useGlobalStyles = createStyles(() => ({
   },
 
   blobWrapper: {
-    width: "500px",
-    height: "650px",
+    width: DIM.width,
+    height: DIM.height,
     position: "absolute",
     inset: 0,
     zIndex: 0,

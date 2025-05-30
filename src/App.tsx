@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { MantineProvider, Box, UnstyledButton, Button } from "@mantine/core";
+import { MantineProvider, Box, UnstyledButton } from "@mantine/core";
 import { NewTicketForm, Onboarding, InfoModal, useGlobalStyles, DragRegions } from ".";
 import { IoIosInformationCircle, IoIosInformationCircleOutline } from "react-icons/io";
+import { StampView } from "./StampView";
 
 function App() {
-  const { classes: globalClasses, cx } = useGlobalStyles();
-  const [reporterName, setReporterName] = useState<string | null>(null);
-  const [modalOpen, setModalOpen] = useState(false); // <- modal state
+  const [reporterName, setReporterName] = useState<string | null>(null); // reporter name state
+  const [modalOpen, setModalOpen] = useState(false); // modal state
+  const [isCollapsed, setIsCollapsed] = useState(false); // collapse or "stamp" state
+  const { classes: globalClasses, cx } = useGlobalStyles({ isCollapsed });
 
   // check localStorage for reporter name
   useEffect(() => {
@@ -33,14 +35,32 @@ function App() {
     console.log("🐉 Current Reporter:", reporterName || "Not set yet");
   }, [reporterName]);
 
+  const handleCollapseToggle = () => {
+    console.log("💥 Collapse button clicked!");
+    if (window.electron?.ipcRenderer?.send) {
+      window.electron.ipcRenderer.send("toggle-collapse", null);
+      if (setIsCollapsed) {
+        setIsCollapsed(!isCollapsed);
+      }
+    } else {
+      console.warn("Electron context not ready.");
+    }
+  };
+
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <Box className={globalClasses.appWrapper} my="0" py="0">
-        <DragRegions reporter={reporterName} />
-        {reporterName ? (
-          <NewTicketForm reporter={reporterName} onResetReporter={handleResetReporter} />
+        <DragRegions reporter={reporterName} isCollapsed={isCollapsed} />
+        {isCollapsed ? (
+          <StampView handleCollapseToggle={handleCollapseToggle} />
+        ) : reporterName ? (
+          <NewTicketForm
+            reporter={reporterName}
+            onResetReporter={handleResetReporter}
+            handleCollapseToggle={handleCollapseToggle}
+          />
         ) : (
-          <Onboarding onSave={handleSaveName} />
+          <Onboarding onSave={handleSaveName} handleCollapseToggle={handleCollapseToggle} />
         )}
         <Box
           id="blob-wrapper"
@@ -56,28 +76,19 @@ function App() {
             <path d="M156.4,339.5c31.8-2.5,59.4-26.8,80.2-48.5c28.3-29.5,40.5-47,56.1-85.1c14-34.3,20.7-75.6,2.3-111  c-18.1-34.8-55.7-58-90.4-72.3c-11.7-4.8-24.1-8.8-36.8-11.5l-0.9-0.9l-0.6,0.6c-27.7-5.8-56.6-6-82.4,3c-38.8,13.6-64,48.8-66.8,90.3c-3,43.9,17.8,88.3,33.7,128.8c5.3,13.5,10.4,27.1,14.9,40.9C77.5,309.9,111,343,156.4,339.5z" />
           </svg>
         </Box>
-
-        <UnstyledButton
-          className={globalClasses.infoButton}
-          onClick={() => setModalOpen(true)}
-          title="Info"
-          aria-label="Info"
-          aria-describedby="info">
-          <IoIosInformationCircle size="25px" />
-          <IoIosInformationCircleOutline size="25px" />
-        </UnstyledButton>
+        {!isCollapsed && (
+          <UnstyledButton
+            className={globalClasses.infoButton}
+            onClick={() => setModalOpen(true)}
+            title="Info"
+            aria-label="Info"
+            aria-describedby="info">
+            <IoIosInformationCircle size="25px" />
+            <IoIosInformationCircleOutline size="25px" />
+          </UnstyledButton>
+        )}
       </Box>
       <InfoModal opened={modalOpen} onClose={() => setModalOpen(false)} />
-      <Button
-        radius="xl"
-        className={globalClasses.collapseButton}
-        size="xs"
-        onClick={() => {
-          console.log("👉 Collapse button clicked!");
-          window.electron.ipcRenderer.send("toggle-collapse", null);
-        }}>
-        Squish
-      </Button>
     </MantineProvider>
   );
 }

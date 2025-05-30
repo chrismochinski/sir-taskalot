@@ -9,8 +9,7 @@ export const useNewTicketFormStyles = createStyles(
   (_, { ticketTypeStyle }: NewTicketFormStylesProps) => ({
     flexHeaderWrapper: {
       zIndex: 1,
-      WebkitAppRegion: "drag", // can drag app by header text area
-      paddingBlock: "0.5rem 0.25rem",
+      paddingBlock: "0 0.25rem",
       maxWidth: "400px",
       position: "relative",
     },
@@ -27,7 +26,7 @@ export const useNewTicketFormStyles = createStyles(
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      paddingBlock: "0 2rem",
+      paddingBlock: 0,
     },
 
     formFieldsBox: {
@@ -39,7 +38,7 @@ export const useNewTicketFormStyles = createStyles(
       width: "100%",
       padding: "1rem 1.25rem",
       gap: "0.5rem",
-      marginTop: "0.75rem",
+      marginTop: 0,
       backgroundColor: `${colors.white}da`,
       backdropFilter: "blur(7px)",
       WebkitBackdropFilter: "blur(7px)",

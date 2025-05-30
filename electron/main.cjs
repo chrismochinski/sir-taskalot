@@ -3,6 +3,7 @@ process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 require("./ipcHandlers.cjs");
+const { DIM } = require("../src/Globals/constants.ts");
 
 // handle collapse "stamp" vs "full"
 let mainWindow;
@@ -10,13 +11,13 @@ let isCollapsed = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 500,
-    height: 650,
+    width: DIM.width,
+    height: DIM.height,
     resizable: false,
-    minWidth: 120,
-    maxWidth: 500,
-    minHeight: 120, // WAS 500
-    maxHeight: 650, // WAS 650
+    minWidth: DIM.stamp,
+    maxWidth: DIM.width,
+    minHeight: DIM.stamp, 
+    maxHeight: DIM.height, 
     frame: false,
     vibrancy: "under-window",
     titleBarStyle: "hidden",
@@ -36,10 +37,10 @@ ipcMain.on("toggle-collapse", () => {
 
   if (!isCollapsed) {
     console.log("MAIN.CJS COLLAPSING!");
-    mainWindow.setBounds({ width: 120, height: 120 });
+    mainWindow.setBounds({ width: DIM.stamp, height: DIM.stamp });
   } else {
     console.log("MAIN.CJS EXPANDING!");
-    mainWindow.setBounds({ width: 500, height: 650 });
+    mainWindow.setBounds({ width: DIM.width, height: DIM.height });
   }
 
   console.log("mainWindow:", mainWindow.getBounds());

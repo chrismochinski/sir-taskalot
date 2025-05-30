@@ -6,7 +6,7 @@ export const useInfoModalStyles = createStyles(() => ({
     zIndex: 20,
     WebkitAppRegion: "no-drag",
     "& .mantine-Paper-root": {
-      maxWidth: "380px",
+      maxWidth: "400px",
       height: "500px",
       "& .mantine-Modal-header": {
         paddingBottom: 0,
@@ -19,10 +19,11 @@ export const useInfoModalStyles = createStyles(() => ({
           backgroundColor: "#fff",
           borderRadius: "50%",
           background: colors.white,
-          height: "1rem",
-          minHeight: "1rem",
-          width: "1rem",
-          minWidth: "1rem",
+          height: "calc(1rem + 4px)",
+          minHeight: "calc(1rem + 4px)",
+          width: "calc(1rem + 4px)",
+          minWidth: "calc(1rem + 4px)",
+          padding: "2px",
           stroke: colors.purple,
           "&:hover": {
             background: colors.purple,
@@ -53,7 +54,7 @@ export const useInfoModalStyles = createStyles(() => ({
     },
 
     h3: {
-      fontSize: "24px",
+      fontSize: "22px",
       fontWeight: 700,
       fontFamily: '"BioRhyme", serif',
       color: `${colors.black}`,
@@ -83,7 +84,7 @@ export const useInfoModalStyles = createStyles(() => ({
       WebkitAppRegion: "no-drag",
     },
     button: {
-          WebkitAppRegion: "no-drag",
+      WebkitAppRegion: "no-drag",
     },
   },
 

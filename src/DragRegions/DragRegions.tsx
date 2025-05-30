@@ -3,19 +3,44 @@ import { useDragRegionsStyles } from ".";
 
 export type DragRegionsProps = {
   reporter?: string | null;
-}
+  isCollapsed?: boolean;
+};
 
-export function DragRegions(props: DragRegionsProps) {
-  const { reporter } = props;
-  const { classes } = useDragRegionsStyles({ reporter });
+type RegionKey =
+  | "formBottom"
+  | "formTop"
+  | "formLeft"
+  | "formRight"
+  | "onboardLeft"
+  | "onboardRight"
+  | "onboardTop"
+  | "onboardBottom"
+  | "stampTop"
+  | "stampBottom"
+  | "stampLeft"
+  | "stampRight";
+  
+  
+  export function DragRegions(props: DragRegionsProps) {
+    const { reporter, isCollapsed } = props;
+    const { classes, cx } = useDragRegionsStyles();
+    
+    const getRegionKeys = (reporter: string | null, isCollapsed: boolean): RegionKey[] => {
+      if (isCollapsed) return ["stampTop", "stampBottom", "stampLeft", "stampRight"];
+      if (reporter) return ["formBottom", "formTop", "formLeft", "formRight"];
+      return ["onboardLeft", "onboardRight", "onboardTop", "onboardBottom"];;
+    };
+    
+    const regionKeys = getRegionKeys(reporter ?? null, !!isCollapsed);
+  
+  console.log('isCollapsed', isCollapsed);
+  console.log('reporter', reporter);
+
   return (
     <>
-      <Box className={classes.dragRegion} id="form-bottom" />
-      <Box className={classes.dragRegion} id="form-top" />
-      <Box className={classes.dragRegion} id="left" />
-      <Box className={classes.dragRegion} id="right" />
-      <Box className={classes.dragRegion} id="onboard-top" />
-      <Box className={classes.dragRegion} id="onboard-bottom" />
+      {regionKeys.map((key) => (
+        <Box key={key} className={cx(classes.dragRegion, classes[key])} data-region={key} />
+      ))}
     </>
   );
 }

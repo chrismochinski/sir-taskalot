@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { useEffect, useState } from "react";
 import { FaBug, FaBook } from "react-icons/fa";
-import { useGlobalStyles } from "../Globals";
+import { useGlobalStyles, DragonButton } from "..";
 
 // rich text editor imports
 import { RichTextEditor, Link } from "@mantine/tiptap";
@@ -27,7 +27,6 @@ import LowIcon from "../assets/jira/Low.png";
 import MediumIcon from "../assets/jira/Medium.png";
 import HighIcon from "../assets/jira/High.png";
 import HighestIcon from "../assets/jira/Highest.png";
-import dragonButler from "../assets/dragon-butler.png";
 
 // mantine imports and stuff
 import {
@@ -40,13 +39,15 @@ import {
   SegmentedControl,
   Flex,
   Image,
-  SelectItemProps
+  SelectItemProps,
 } from "@mantine/core";
 import { useNewTicketFormStyles, submitTicket } from ".";
 
 export interface NewTicketFormProps {
   reporter?: string;
   onResetReporter?: () => void;
+  isCollapsed?: boolean;
+  handleCollapseToggle?: () => void;
 }
 
 interface PriorityOptionProps extends SelectItemProps {
@@ -70,7 +71,7 @@ const clearIcon = () => <RiFormatClear size={iconSize + 2} />;
  * @returns NewTicketForm - the NewTicketForm component
  */
 export function NewTicketForm(props: NewTicketFormProps) {
-  const { reporter, onResetReporter } = props;
+  const { reporter, onResetReporter, handleCollapseToggle, isCollapsed } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [descriptionJson, setDescriptionJson] = useState({});
@@ -80,8 +81,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
   const [ticketType, setTicketType] = useState<"Bug" | "Story">("Story");
   const [slackThread, setSlackThread] = useState("");
 
-  // IMPORTANT RICH TEXT EDITOR STUFF
-
+  // rich text editor setup
   const rteEditor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -97,10 +97,10 @@ export function NewTicketForm(props: NewTicketFormProps) {
       setDescriptionJson(editor.getJSON()); // JIRA
     },
   });
-  // IMPORTANT RICH TEXT EDITOR STUFF
+  // end rich text editor setup
 
   const { classes, cx } = useNewTicketFormStyles({ ticketTypeStyle: ticketType });
-  const { classes: globalClasses } = useGlobalStyles();
+  const { classes: globalClasses } = useGlobalStyles({ isCollapsed });
 
   // Save reporter name to localStorage on change
   useEffect(() => {
@@ -145,18 +145,17 @@ export function NewTicketForm(props: NewTicketFormProps) {
     { value: "Lowest", label: "Lowest", icon: LowestIcon },
   ];
 
-// Custom item component with forwardRef
-const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
-  ({ label, icon, ...rest }: PriorityOptionProps, ref) => (
-    <Flex ref={ref} {...rest} gap="0.5rem" align="center">
-      <Image src={icon} width={12} height={12} alt={`${label} icon`} />
-      <Text>{label}</Text>
-    </Flex>
-  )
-);
+  // Custom item component with forwardRef
+  const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
+    ({ label, icon, ...rest }: PriorityOptionProps, ref) => (
+      <Flex ref={ref} {...rest} gap="0.5rem" align="center">
+        <Image src={icon} width={12} height={12} alt={`${label} icon`} />
+        <Text>{label}</Text>
+      </Flex>
+    )
+  );
 
   SelectItem.displayName = "SelectItem"; // Required for forwardRef
-
 
   return (
     <Box className={cx(classes.newTicketFormWrapper)} pt="0" my="0">
@@ -165,14 +164,7 @@ const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
         justify="center"
         align="center"
         gap="min(0.25rem, 0.3vw)">
-        <Image
-          className={classes.dragonButler}
-          src={dragonButler}
-          alt="Sir Taskalot - who happens to be a dragon"
-          width="80px"
-          m={0}
-          p={0}
-        />
+        <DragonButton handleCollapseToggle={handleCollapseToggle} />
         <Box>
           <Title order={1}>
             SIR TASKALOT
@@ -231,28 +223,28 @@ const SelectItem = forwardRef<HTMLDivElement, PriorityOptionProps>(
         </Box>
 
         <Box className={classes.priorityTypeFlex}>
-           <Select
-      size="xs"
-      radius="xl"
-      w="115px"
-      label="Priority"
-      placeholder="Select priority"
-      data={priorityOptions}
-      value={priority}
-      onChange={(value) =>
-        setPriority(value as "Low" | "Lowest" | "Medium" | "Highest" | "High")
-      }
-      icon={
-        priority ? (
-          <Image
-            height={12}
-            width={12}
-            src={priorityOptions.find((p) => p.value === priority)?.icon}
+          <Select
+            size="xs"
+            radius="xl"
+            w="115px"
+            label="Priority"
+            placeholder="Select priority"
+            data={priorityOptions}
+            value={priority}
+            onChange={(value) =>
+              setPriority(value as "Low" | "Lowest" | "Medium" | "Highest" | "High")
+            }
+            icon={
+              priority ? (
+                <Image
+                  height={12}
+                  width={12}
+                  src={priorityOptions.find((p) => p.value === priority)?.icon}
+                />
+              ) : null
+            }
+            itemComponent={SelectItem}
           />
-        ) : null
-      }
-      itemComponent={SelectItem}
-    />
           <Box w="min-content" pos="relative">
             <Text component="label">Ticket Type</Text>
 

@@ -21,12 +21,6 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       className={classes.infoModal}
       opened={opened}
       onClose={onClose}
-      // revisit CLOSE BUTTON
-      withCloseButton
-      closeOnClickOutside
-      closeButtonProps={{
-        "aria-label": "Close modal",
-      }}
       title="What in tarnation is going on here?"
       centered
       transitionProps={{ transition: "slide-up", duration: 300 }}

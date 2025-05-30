@@ -1,27 +1,24 @@
 import { useState } from "react";
-import { Box, Button, Image, TextInput, Title, Text, Flex } from "@mantine/core";
-import dragonButler from "../assets/dragon-butler.png";
+import { Box, Button, TextInput, Title, Text, Flex } from "@mantine/core";
 import { useOnboardingStyles } from ".";
-import { useGlobalStyles } from "../Globals/";
+import { useGlobalStyles, DragonButton } from "..";
 
 type OnboardingProps = {
   onSave: (name: string) => void;
+  isCollapsed?: boolean;
+  handleCollapseToggle?: () => void;
 };
 
-export function Onboarding({ onSave }: OnboardingProps) {
+export function Onboarding(props: OnboardingProps) {
+  const { onSave, handleCollapseToggle, isCollapsed } = props;
   const { classes, cx } = useOnboardingStyles();
-  const { classes: globalClasses } = useGlobalStyles();
+  const { classes: globalClasses } = useGlobalStyles({isCollapsed});
   const [name, setName] = useState("");
 
   return (
     <Box className={classes.onboardingWrapper} w="100%" h="100%">
       <Flex justify="center" align="center" gap="0.5rem" mb="1.5rem">
-        <Image
-          src={dragonButler}
-          alt="Sir Taskalot - who happens to be a dragon"
-          width="90px"
-          height="auto"
-        />
+        <DragonButton handleCollapseToggle={handleCollapseToggle} />
         <Box>
           <Title order={2}>Welcome to Sir Taskalot!</Title>
           <Text component="h3" fw={600}>

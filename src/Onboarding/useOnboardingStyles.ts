@@ -1,10 +1,10 @@
 import { createStyles } from "@mantine/core";
-import { colors } from "../Globals/";
+import { colors, DIM } from "..";
 
 export const useOnboardingStyles = createStyles(() => ({
   onboardingWrapper: {
-    height: "650px",
-    width: "500px",
+    height: DIM.height,
+    width: DIM.width,
     textAlign: "left",
     display: "flex",
     flexDirection: "column",
