@@ -1,7 +1,6 @@
 import { forwardRef } from "react";
 import { useEffect, useState } from "react";
-import { FaBug, FaBook } from "react-icons/fa";
-import { useGlobalStyles, DragonButton } from "..";
+import { useGlobalStyles, DragonButton, ImageUploader } from "..";
 
 // rich text editor imports
 import { RichTextEditor, Link } from "@mantine/tiptap";
@@ -20,6 +19,7 @@ import {
   RiListOrdered2,
 } from "react-icons/ri";
 import { BiLink, BiUnlink } from "react-icons/bi";
+import { MdLibraryAdd, MdBugReport } from "react-icons/md";
 
 // jira priority icons + asset(s)
 import LowestIcon from "../assets/jira/Lowest.png";
@@ -222,6 +222,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
           </RichTextEditor>
         </Box>
 
+        <ImageUploader />
+        
         <Box className={classes.priorityTypeFlex}>
           <Select
             size="xs"
@@ -256,8 +258,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
                 {
                   value: "Story",
                   label: (
-                    <Flex w="92px" justify="center" align="center" gap="0.5rem">
-                      <FaBook size={14} />
+                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                      <MdLibraryAdd size={13} />
                       <Text component="span">New</Text>
                     </Flex>
                   ),
@@ -265,8 +267,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
                 {
                   value: "Bug",
                   label: (
-                    <Flex w="92px" justify="center" align="center" gap="0.5rem">
-                      <FaBug size={14} />
+                    <Flex w="90px" justify="center" align="center" gap="0.5rem">
+                      <MdBugReport size={16} />
                       <Text component="span">Bug</Text>
                     </Flex>
                   ),
@@ -294,7 +296,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
         <Button
           onClick={handleSubmit}
           mt="0.5rem"
-          mb="1rem"
+          mb="0.75rem"
           mx="auto"
           className={globalClasses.button}>
           Submit Ticket

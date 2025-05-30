@@ -143,14 +143,24 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       marginBlock: 0,
       marginInline: "auto",
       textShadow: textVisibilityShadow,
+      // if it has any data-placeholder string attribute, make purple
+      "&[data-placeholder]": {
+        color: colors.black,
+        fontFamily: '"Roboto", sans-serif', 
+      },
     },
     input: {
-      // fontSize: "13px", // set in TextInput size prop
       borderWidth: "1.5px",
+      borderColor: colors.gray,
       background: "#ffffff99",
       paddingInline: "calc(2rem / 3)",
       "&:focus": {
         borderColor: "#1D96D2",
+      },
+      '&::placeholder': {
+        color: colors.black,
+        opacity: 0.4,
+        fontFamily: '"Roboto", sans-serif', 
       },
     },
     textArea: {
@@ -160,6 +170,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
         borderColor: "#1D96D2",
       },
     },
+  
   },
 
   trademark: {

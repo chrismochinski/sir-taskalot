@@ -2,8 +2,8 @@ import { createStyles } from "@mantine/core";
 
 export const useStampViewStyles = createStyles(() => ({
   stampViewWrapper: {
-    width: "120px",
-    height: "120px",
+    width: '100%',
+    height: '100%',
     position: "absolute",
     inset: 0,
     margin: "auto",

@@ -49,7 +49,7 @@ function App() {
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Box className={globalClasses.appWrapper} my="0" pt="0" pb="0.5rem">
+      <Box className={globalClasses.appWrapper} my="0" py="0">
         <DragRegions reporter={reporterName} isCollapsed={isCollapsed} />
         {isCollapsed ? (
           <StampView handleCollapseToggle={handleCollapseToggle} />
@@ -64,7 +64,7 @@ function App() {
         )}
         <Box
           id="blob-wrapper"
-          className={cx(globalClasses.blobWrapper, !reporterName && "paused")}
+          className={cx(globalClasses.blobWrapper, !reporterName || (isCollapsed && "paused"))}
           m="0"
           p="0">
           <svg

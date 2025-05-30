@@ -36,9 +36,10 @@ export const useNewTicketFormStyles = createStyles(
       justifyContent: "center",
       alignItems: "flex-start",
       width: "100%",
-      padding: "1rem 1.25rem",
+      padding: "0.75rem 1rem",
       gap: "0.5rem",
       marginTop: 0,
+      marginBottom: "0.7rem",
       backgroundColor: `${colors.white}da`,
       backdropFilter: "blur(7px)",
       WebkitBackdropFilter: "blur(7px)",
@@ -61,7 +62,6 @@ export const useNewTicketFormStyles = createStyles(
 
     ticketType: {
       backgroundColor: `${colors.white}`,
-      // border: `0.0625rem solid ${colors.gray}`,
       marginBlock: "0",
       "& .mantine-SegmentedControl-indicator": {
         transition: "all 300ms ease",

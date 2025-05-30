@@ -29,8 +29,8 @@ export const useDragRegionsStyles = createStyles(() => ({
   onboardTop: {
     top: 0,
     left: 0,
-    right: 0,
-    height: "175px",
+    right: "80px", // modal close x
+    height: "170px",
   },
 
   onboardBottom: {
