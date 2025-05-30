@@ -64,7 +64,7 @@ function App() {
         )}
         <Box
           id="blob-wrapper"
-          className={cx(globalClasses.blobWrapper, !reporterName || (isCollapsed && "paused"))}
+          className={cx(globalClasses.blobWrapper, (!reporterName || isCollapsed ? "paused" : ''))}
           m="0"
           p="0">
           <svg
