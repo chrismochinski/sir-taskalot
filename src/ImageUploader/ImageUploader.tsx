@@ -117,9 +117,9 @@ const { classes, cx } = useImageUploaderStyles({ imageCount: previews.length });
               setPreviews((prev) => prev.filter((_, i) => i !== idx));
             }}>
             {deleteHoveredIndex === idx ? (
-              <TiDeleteOutline fill={colors.red} size={18} className={classes.removeImageIcon} />
+              <TiDeleteOutline fill={colors.red} size={previews.length < 5 ? 18 : 15} className={classes.removeImageIcon} />
             ) : (
-              <TiDelete fill={colors.red} size={18} className={classes.removeImageIcon} />
+              <TiDelete fill={colors.red} size={previews.length < 5 ? 18 : 15} className={classes.removeImageIcon} />
             )}
           </UnstyledButton>
 
