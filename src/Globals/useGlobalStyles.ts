@@ -265,9 +265,9 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     "&:before": {
       position: "absolute",
       content: "'Quick App Info'",
-      top: "50%",
+      top: "52%",
       transform: "translateY(-50%) translateX(-25px)",
-      right: "115%",
+      right: "116%",
       fontFamily: '"Archivo", sans-serif',
       fontWeight: 500,
       letterSpacing: "0.02em",

@@ -1,19 +1,21 @@
+const fs = require("fs");
+const path = require("path");
+const FormData = require("form-data");
 const { ipcMain } = require("electron");
 const { fetch } = require("undici");
 require("dotenv").config();
+const axios = require("axios");
 
 // TIPTAP TO ADF CONVERSION
 function tiptapToADF(tiptapJSON) {
   const convertNode = (node) => {
     switch (node.type) {
-      // IDEA finding JIRA format...latest updated
       case "paragraph":
         return {
           type: "paragraph",
           content: node.content?.map(convertNode).filter(Boolean),
         };
 
-      // idea last friday updates
       case "text":
         return {
           type: "text",
@@ -28,17 +30,21 @@ function tiptapToADF(tiptapJSON) {
                 case "underline":
                   return { type: "underline" };
                 case "link":
-                  return {
-                    type: "link",
-                    attrs: {
-                      href: mark.attrs.href,
-                    },
-                  };
+                  return { type: "link", attrs: { href: mark.attrs.href } };
                 default:
                   return null;
               }
             })
             .filter(Boolean),
+        };
+
+      // These two are key
+      case "bold":
+      case "italic":
+        // wrap in paragraph if somehow hit here
+        return {
+          type: "paragraph",
+          content: [convertNode({ type: "text", text: node.text, marks: [node] })],
         };
 
       case "bulletList":
@@ -67,6 +73,13 @@ function tiptapToADF(tiptapJSON) {
         };
 
       default:
+        // 🔥 Safe fallback: wrap unknown or text-ish nodes in paragraph
+        if (node.text) {
+          return {
+            type: "paragraph",
+            content: [convertNode({ type: "text", text: node.text, marks: node.marks })],
+          };
+        }
         return null;
     }
   };
@@ -120,7 +133,6 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
 
     // idea DEBUG
     console.log("🧾👀 Jira ADF Content JSON sent:", JSON.stringify(jiraADF, null, 2));
-
 
     const jiraPayload = {
       fields: {
@@ -267,6 +279,52 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
       throw new Error("❌ Jira ticket creation failed");
     }
 
+    // idea move to separate file later
+
+    // 🖼️ Upload image previews (if any)
+    if (payload.previews?.length > 0) {
+      for (let i = 0; i < payload.previews.length; i++) {
+        const base64 = payload.previews[i];
+        const base64Data = base64.split(",")[1];
+        const filePath = path.join(__dirname, `jira_upload_${i}.png`);
+        fs.writeFileSync(filePath, Buffer.from(base64Data, "base64"));
+
+        console.log("📂 Uploading file:", filePath, fs.existsSync(filePath));
+
+        const form = new FormData();
+        form.append("file", fs.createReadStream(filePath));
+
+        console.log("📤 Posting form to Jira with headers:", form.getHeaders());
+
+        try {
+          const response = await axios.post(
+            `https://characterstrong.atlassian.net/rest/api/3/issue/${jiraResult.key}/attachments`,
+            form,
+            {
+              headers: {
+                ...form.getHeaders(),
+                Authorization: `Basic ${Buffer.from(`${jiraEmail}:${jiraToken}`).toString(
+                  "base64"
+                )}`,
+                "X-Atlassian-Token": "no-check",
+              },
+            }
+          );
+
+          console.log("📨 Upload response status:", response.status);
+          console.log("📨 Upload response headers:", response.headers);
+
+          console.log(`📎 Uploaded attachment ${i + 1}:`, response.data);
+        } catch (err) {
+          console.error("❌ Axios upload error:", err.response?.data || err.message);
+        }
+
+        fs.unlinkSync(filePath); // Clean up temp file
+      }
+    }
+
+    // idea move to separate file later
+
     // ✅ 2. Use Jira ticket key in the Slack message
     const jiraTicketUrl = `https://characterstrong.atlassian.net/browse/${jiraResult.key}`;
     const priorityEmoji = priorityEmojiMap[payload.priority] || "";
@@ -313,6 +371,20 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
               },
             ]
           : []),
+        ...(payload.previews?.length > 0
+          ? [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `🖼️ *${payload.previews.length} image${
+                    payload.previews.length === 1 ? "" : "s"
+                  } attached to Jira ticket*`,
+                },
+              },
+            ]
+          : []),
+
         ...(payload.slackThread
           ? [
               {

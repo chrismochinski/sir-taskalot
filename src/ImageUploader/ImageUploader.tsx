@@ -4,16 +4,20 @@ import { useDropzone } from "react-dropzone";
 import { colors } from "..";
 import { BiImageAdd, BiSolidImageAdd } from "react-icons/bi";
 import { TiDelete, TiDeleteOutline } from "react-icons/ti";
-
 import { useImageUploaderStyles } from ".";
 
-export function ImageUploader() {
-  const [previews, setPreviews] = useState<string[]>([]);
+type ImageUploaderProps = {
+  previews: string[];
+  setPreviews: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+export function ImageUploader({ previews, setPreviews }: ImageUploaderProps) {
+  // State management
   const [isHovered, setIsHovered] = useState(false);
   const [deleteHoveredIndex, setDeleteHoveredIndex] = useState<number | null>(null);
   const [hoveredImageIndex, setHoveredImageIndex] = useState<number | null>(null);
   const [fullImage, setFullImage] = useState<string | null>(null);
-const { classes, cx } = useImageUploaderStyles({ imageCount: previews.length });
+  const { classes, cx } = useImageUploaderStyles({ imageCount: previews.length });
 
   // Dropzone for drag + click
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -66,9 +70,15 @@ const { classes, cx } = useImageUploaderStyles({ imageCount: previews.length });
         {...getRootProps()}>
         <Flex justify="center" align="center" gap="0.5rem">
           {showSolidIcon ? (
-            <BiSolidImageAdd size={previews.length < 4 ? 18 : previews.length >= 5 ? 24 : 28} fill={colors.borderBlue} />
+            <BiSolidImageAdd
+              size={previews.length < 4 ? 18 : previews.length >= 5 ? 24 : 28}
+              fill={colors.borderBlue}
+            />
           ) : (
-            <BiImageAdd size={previews.length < 4 ? 18 : previews.length >= 5 ? 24 : 28} fill={`${colors.black}70`} />
+            <BiImageAdd
+              size={previews.length < 4 ? 18 : previews.length >= 5 ? 24 : 28}
+              fill={`${colors.black}70`}
+            />
           )}
           {previews.length < 4 && <Text component="label">Drag, Click, or Paste</Text>}
         </Flex>
@@ -117,9 +127,17 @@ const { classes, cx } = useImageUploaderStyles({ imageCount: previews.length });
               setPreviews((prev) => prev.filter((_, i) => i !== idx));
             }}>
             {deleteHoveredIndex === idx ? (
-              <TiDeleteOutline fill={colors.red} size={previews.length < 5 ? 18 : 15} className={classes.removeImageIcon} />
+              <TiDeleteOutline
+                fill={colors.red}
+                size={previews.length < 5 ? 18 : 15}
+                className={classes.removeImageIcon}
+              />
             ) : (
-              <TiDelete fill={colors.red} size={previews.length < 5 ? 18 : 15} className={classes.removeImageIcon} />
+              <TiDelete
+                fill={colors.red}
+                size={previews.length < 5 ? 18 : 15}
+                className={classes.removeImageIcon}
+              />
             )}
           </UnstyledButton>
 

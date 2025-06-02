@@ -6,6 +6,7 @@ type TicketPayload = {
   ticketType: 'Bug' | 'Story';
   slackThread?: string;
   reporter?: string;
+  previews?: string[]; // Array of image URLs
 };
 
 export async function submitTicket(payload: TicketPayload): Promise<boolean> {

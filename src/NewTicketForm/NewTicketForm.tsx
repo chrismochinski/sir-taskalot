@@ -81,6 +81,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
   const [ticketType, setTicketType] = useState<"Bug" | "Story">("Story");
   const [slackThread, setSlackThread] = useState("");
 
+const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
   // rich text editor setup
   const rteEditor = useEditor({
     extensions: [
@@ -116,6 +118,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
       ticketType,
       slackThread,
       reporter,
+      previews: imagePreviews,
     });
 
     if (success) {
@@ -222,8 +225,8 @@ export function NewTicketForm(props: NewTicketFormProps) {
           </RichTextEditor>
         </Box>
 
-        <ImageUploader />
-        
+        <ImageUploader previews={imagePreviews} setPreviews={setImagePreviews} />
+
         <Box className={classes.priorityTypeFlex}>
           <Select
             size="xs"
