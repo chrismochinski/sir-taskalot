@@ -134,6 +134,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
       setSlackThread("");
       setPriority("Medium");
       setTicketType("Story");
+      setImagePreviews([]); // 
     } else {
       alert("Slack post failed.");
     }
