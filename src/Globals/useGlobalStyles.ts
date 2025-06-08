@@ -65,7 +65,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       fontSize: "1.6rem",
       fontWeight: 800,
       textWrap: "balance",
-      letterSpacing: '-0.015em',
+      letterSpacing: "-0.015em",
 
       textShadow: textVisibilityShadow,
     },
@@ -147,7 +147,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       // if it has any data-placeholder string attribute, make purple
       "&[data-placeholder]": {
         color: colors.black,
-        fontFamily: '"Roboto", sans-serif', 
+        fontFamily: '"Roboto", sans-serif',
       },
     },
     input: {
@@ -158,10 +158,10 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       "&:focus": {
         borderColor: "#1D96D2",
       },
-      '&::placeholder': {
+      "&::placeholder": {
         color: colors.black,
         opacity: 0.4,
-        fontFamily: '"Roboto", sans-serif', 
+        fontFamily: '"Roboto", sans-serif',
       },
     },
     textArea: {
@@ -171,7 +171,6 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
         borderColor: "#1D96D2",
       },
     },
-  
   },
 
   trademark: {
@@ -266,7 +265,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     "&:before": {
       position: "absolute",
       content: "'Quick App Info'",
-      top: "50%",
+      top: "48%",
       transform: "translateY(-50%) translateX(-25px)",
       right: "116%",
       fontFamily: '"Roboto", sans-serif',
@@ -274,7 +273,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       letterSpacing: "0.02em",
       fontSize: "12px",
       width: "max-content",
-      color: `${colors.darkGray}90`,
+      color: colors.darkGray,
       transition: "transform 170ms ease-out, opacity 170ms ease-out",
       opacity: 0,
       pointerEvents: "none",

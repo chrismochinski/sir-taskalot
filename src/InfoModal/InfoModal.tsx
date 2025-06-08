@@ -1,4 +1,4 @@
-import { Modal, Box, Flex, Title, Text } from "@mantine/core";
+import { Modal, Box, Flex, Image, Title, Text } from "@mantine/core";
 import {
   useInfoModalStyles,
   ThreeHandsIcon,
@@ -6,6 +6,8 @@ import {
   QuestionMarkIcon,
   PoundTheStoneIcon,
 } from ".";
+
+import dragonBotImage from "../assets/DragonBotTight.svg";
 
 type InfoModalProps = {
   opened: boolean;
@@ -51,6 +53,21 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
               Just fill out the form with whatever context you can provide. This will create a
               ticket in Jira and assign it to us. It will also alert and provide a link to the Jira
               request in Slack. Blam.
+            </Text>
+          </Box>
+        </Flex>
+
+        <Flex className={classes.modalFlexRow}>
+          <Image
+            className={classes.modalDragonBotImage}
+            src={dragonBotImage}
+            alt="DragonBot, our dragon butler helper friend"
+          />
+          <Box className={classes.modalTextBox}>
+            <Title order={4}>Who's this guy?</Title>
+            <Text component="p">
+              That's DragonBot, our dragon butler friend. Wherever you see him (other than here),
+              click him to squish/expand this app. Close this popup and give it a try!
             </Text>
           </Box>
         </Flex>

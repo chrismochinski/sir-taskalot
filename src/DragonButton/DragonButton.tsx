@@ -11,7 +11,7 @@ export type DragonButtonProps = {
 export function DragonButton(props: DragonButtonProps) {
   const { handleCollapseToggle, width = 70, isCollapsed } = props;
   const [isBlinking, setIsBlinking] = useState(false);
-  const { classes } = useDragonButtonStyles();
+  const { classes } = useDragonButtonStyles({ isCollapsed });
 
   // random blinking function - blink every 4-10 seconds
   useEffect(() => {

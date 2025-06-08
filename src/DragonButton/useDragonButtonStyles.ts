@@ -1,6 +1,10 @@
 import { createStyles } from "@mantine/core";
 
-export const useDragonButtonStyles = createStyles(() => ({
+type DragonButtonStylesParams = {
+  isCollapsed?: boolean;
+};
+
+export const useDragonButtonStyles = createStyles((_, { isCollapsed }: DragonButtonStylesParams) => ({
   dragonButton: {
     cursor: "pointer",
     flex: 0,
@@ -37,7 +41,7 @@ export const useDragonButtonStyles = createStyles(() => ({
     "&:hover": {
       svg: {
         "&#dragon-bot": {
-          transform: " scale(1.05)",
+          transform: isCollapsed ? "scale(1.04)" : "none",
           "& #mouths": {
             "& #smile": {
               opacity: 0,

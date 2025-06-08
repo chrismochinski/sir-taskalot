@@ -7,7 +7,7 @@ export const useInfoModalStyles = createStyles(() => ({
     WebkitAppRegion: "no-drag",
     "& .mantine-Paper-root": {
       maxWidth: "400px",
-      height: "500px",
+      height: "540px",
       "& .mantine-Modal-header": {
         paddingBottom: 0,
         h2: {
@@ -34,7 +34,7 @@ export const useInfoModalStyles = createStyles(() => ({
         },
       },
       "& .mantine-Modal-body": {
-        height: "440px",
+        height: "480px",
         width: "100%",
       },
     },
@@ -54,7 +54,7 @@ export const useInfoModalStyles = createStyles(() => ({
     },
 
     h3: {
-      fontSize: "22px",
+      fontSize: "20px",
       fontWeight: 700,
       fontFamily: '"BioRhyme", serif',
       color: `${colors.black}`,
@@ -74,7 +74,7 @@ export const useInfoModalStyles = createStyles(() => ({
       WebkitAppRegion: "no-drag",
     },
     p: {
-      fontSize: "14px",
+      fontSize: "13px",
       fontWeight: 400,
       fontFamily: '"Roboto", sans-serif',
       color: `${colors.black}`,
@@ -109,9 +109,14 @@ export const useInfoModalStyles = createStyles(() => ({
     width: "100%",
     gap: "0.5rem",
     svg: {
-      flexBasis: "15%",
-      maxWidth: "15%",
+      flexBasis: "14%",
+      maxWidth: "14%",
     },
+  },
+
+  modalDragonBotImage: {
+    flexBasis: "14%",
+    maxWidth: "14%",
   },
 
   modalTextBox: {
