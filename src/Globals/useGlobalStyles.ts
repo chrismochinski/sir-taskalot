@@ -24,6 +24,7 @@ export const colors = {
   white: "#ffffff",
   black: "#000000",
   gray: "#D4D6D8", // border gray
+  darkGray: "#777777", // text gray
   lightGray: "#F7F7F7",
 };
 
@@ -273,7 +274,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       letterSpacing: "0.02em",
       fontSize: "12px",
       width: "max-content",
-      color: colors.purple,
+      color: `${colors.darkGray}90`,
       transition: "transform 170ms ease-out, opacity 170ms ease-out",
       opacity: 0,
       pointerEvents: "none",

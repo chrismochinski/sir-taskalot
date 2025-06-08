@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { UnstyledButton } from "@mantine/core";
 import { useDragonButtonStyles } from "./useDragonButtonStyles";
 
@@ -9,7 +10,30 @@ export type DragonButtonProps = {
 
 export function DragonButton(props: DragonButtonProps) {
   const { handleCollapseToggle, width = 70, isCollapsed } = props;
+  const [isBlinking, setIsBlinking] = useState(false);
   const { classes } = useDragonButtonStyles();
+
+  // random blinking function - blink every 4-10 seconds
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const blink = () => {
+      setIsBlinking(true);
+
+      setTimeout(() => {
+        setIsBlinking(false);
+
+        const nextBlink = Math.floor(Math.random() * (10000 - 4000 + 1)) + 4000;
+        timeoutId = setTimeout(blink, nextBlink); // schedule next blink
+      }, 200); // blink duration
+    };
+
+    // Start first blink cycle
+    const initialBlink = Math.floor(Math.random() * (10000 - 4000 + 1)) + 4000;
+    timeoutId = setTimeout(blink, initialBlink);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   return (
     <UnstyledButton className={classes.dragonButton} onClick={handleCollapseToggle}>
@@ -490,30 +514,46 @@ export function DragonButton(props: DragonButtonProps) {
           <g id="eye-l">
             <path
               id="left-closed"
-              opacity="0"
+              opacity={isBlinking ? "1" : "0"}
               d="M509.044 391.674C509.435 396.628 493.656 392.017 464.137 394.6C434.617 397.182 419.778 404.472 419.387 399.518C418.995 394.565 433.2 379.245 462.719 376.662C492.239 374.079 508.653 386.721 509.044 391.674Z"
               fill="black"
             />
             <path
               id="left-black"
+              opacity={isBlinking ? "0" : "1"}
               d="M515.234 372.424C515.234 406.665 497.476 434.424 463.234 434.424C428.993 434.424 411.234 406.665 411.234 372.424C411.234 338.182 428.993 310.424 463.234 310.424C497.476 310.424 515.234 338.182 515.234 372.424Z"
               fill="black"
             />
-            <circle id="left-white" cx="482" cy="356" r="17" fill="white" />
+            <circle
+              id="left-white"
+              opacity={isBlinking ? "0" : "1"}
+              cx="482"
+              cy="356"
+              r="17"
+              fill="white"
+            />
           </g>
           <g id="eye-r">
             <path
               id="right-closed"
-              opacity="0"
+              opacity={isBlinking ? "1" : "0"}
               d="M663.268 400.514C662.855 405.465 648.094 398.116 618.54 395.402C588.985 392.688 573.232 397.235 573.645 392.283C574.058 387.332 590.48 374.757 620.034 377.471C649.588 380.185 663.681 395.562 663.268 400.514Z"
               fill="black"
             />
             <path
               id="right-black"
+              opacity={isBlinking ? "0" : "1"}
               d="M670.422 371.945C670.422 406.028 652.793 433.656 618.711 433.656C584.629 433.656 567 406.028 567 371.945C567 337.863 584.629 310.234 618.711 310.234C652.793 310.234 670.422 337.863 670.422 371.945Z"
               fill="black"
             />
-            <circle id="right-white" cx="638.5" cy="355.5" r="16.5" fill="white" />
+            <circle
+              id="right-white"
+              opacity={isBlinking ? "0" : "1"}
+              cx="638.5"
+              cy="355.5"
+              r="16.5"
+              fill="white"
+            />
           </g>
           <circle
             id="button-white"
