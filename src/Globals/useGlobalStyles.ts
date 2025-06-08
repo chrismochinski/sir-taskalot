@@ -39,7 +39,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     background: colors.lightGreen,
 
     height: isCollapsed ? DIM.stamp : DIM.height,
-    width: isCollapsed ? DIM.stamp : DIM.width,
+    width: isCollapsed ? DIM.stampWidth : DIM.width,
     "& h1, & h2, & h3, & h4, & h5, & h6, & a ": {
       WebkitAppRegion: "no-drag",
       zIndex: 10,
@@ -246,8 +246,8 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
 
   infoButton: {
     position: "absolute",
-    bottom: "0.4rem",
-    right: "0.7rem",
+    bottom: "0.25rem",
+    right: "0.5rem",
     cursor: "pointer",
     zIndex: 10,
     "& svg": {
@@ -265,10 +265,10 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     "&:before": {
       position: "absolute",
       content: "'Quick App Info'",
-      top: "52%",
+      top: "50%",
       transform: "translateY(-50%) translateX(-25px)",
       right: "116%",
-      fontFamily: '"Archivo", sans-serif',
+      fontFamily: '"Roboto", sans-serif',
       fontWeight: 500,
       letterSpacing: "0.02em",
       fontSize: "12px",
@@ -281,7 +281,6 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     "&:hover": {
       "&:before": {
         transform: "translateY(-50%) translateX(0px)",
-
         opacity: 1,
       },
     },
@@ -292,15 +291,5 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     "&:hover > svg:last-of-type": {
       opacity: 0,
     },
-  },
-
-  collapseButton: {
-    zIndex: 1000,
-    position: "absolute",
-    top: "0.5rem",
-    right: "0.5rem",
-    fontFamily: '"Archivo", sans-serif',
-    fontSize: "12px",
-    height: "25px",
   },
 }));

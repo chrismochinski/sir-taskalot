@@ -14,7 +14,7 @@ function createWindow() {
     width: DIM.width,
     height: DIM.height,
     resizable: false,
-    minWidth: DIM.stamp,
+    minWidth: DIM.stampWidth,
     maxWidth: DIM.width,
     minHeight: DIM.stamp, 
     maxHeight: DIM.height, 
@@ -22,6 +22,9 @@ function createWindow() {
     vibrancy: "under-window",
     titleBarStyle: "hidden",
     vibrancy: "under-window",
+    fullscreenable: false,
+    maximizable: false,
+    icon: path.join(__dirname, "../src/assets/icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -37,7 +40,7 @@ ipcMain.on("toggle-collapse", () => {
 
   if (!isCollapsed) {
     console.log("MAIN.CJS COLLAPSING!");
-    mainWindow.setBounds({ width: DIM.stamp, height: DIM.stamp });
+    mainWindow.setBounds({ width: DIM.stampWidth, height: DIM.stamp });
   } else {
     console.log("MAIN.CJS EXPANDING!");
     mainWindow.setBounds({ width: DIM.width, height: DIM.height });

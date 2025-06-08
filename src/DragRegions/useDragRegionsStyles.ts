@@ -1,7 +1,5 @@
 import { createStyles } from "@mantine/core";
 
-const STAMP_REGION = 25;
-
 export const useDragRegionsStyles = createStyles(() => ({
   dragRegion: {
     position: "absolute",
@@ -46,14 +44,14 @@ export const useDragRegionsStyles = createStyles(() => ({
     left: 0,
     top: 0,
     bottom: 0,
-    width: "49px",
+    width: "29px",
   },
 
   formRight: {
     right: 0,
     top: 0,
     bottom: "40px",
-    width: "49px",
+    width: "29px",
   },
 
   formTop: {
@@ -75,24 +73,24 @@ export const useDragRegionsStyles = createStyles(() => ({
     top: 0,
     left: 0,
     right: 0,
-    height: `${STAMP_REGION}px`,
+    height: "30px",
   },
   stampBottom: {
     bottom: 0,
     left: 0,
     right: 0,
-    height: `${STAMP_REGION}px`,
+    height: "10px",
   },
   stampLeft: {
     top: 0,
     bottom: 0,
     left: 0,
-    width: `${STAMP_REGION}px`,
+    width: "14px",
   },
   stampRight: {
     top: 0,
     bottom: 0,
     right: 0,
-    width: `${STAMP_REGION}px`,
+    width: "14px",
   },
 }));

@@ -30,11 +30,6 @@ function App() {
     setReporterName(null);
   };
 
-  // check reporter name on change
-  useEffect(() => {
-    console.log("🐉 Current Reporter:", reporterName || "Not set yet");
-  }, [reporterName]);
-
   const handleCollapseToggle = () => {
     console.log("💥 Collapse button clicked!");
     if (window.electron?.ipcRenderer?.send) {
@@ -49,10 +44,10 @@ function App() {
 
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Box className={globalClasses.appWrapper} my="0" py="0">
-        <DragRegions reporter={reporterName} isCollapsed={isCollapsed} />
+      <Box className={globalClasses.appWrapper} my="0" pb="0" pt="5px">
+        <DragRegions reporter={reporterName} isCollapsed={isCollapsed}/>
         {isCollapsed ? (
-          <StampView handleCollapseToggle={handleCollapseToggle} />
+          <StampView handleCollapseToggle={handleCollapseToggle} isCollapsed={isCollapsed} />
         ) : reporterName ? (
           <NewTicketForm
             reporter={reporterName}
@@ -83,8 +78,8 @@ function App() {
             title="Info"
             aria-label="Info"
             aria-describedby="info">
-            <IoIosInformationCircle size="25px" />
-            <IoIosInformationCircleOutline size="25px" />
+            <IoIosInformationCircle size="24px" />
+            <IoIosInformationCircleOutline size="24px" />
           </UnstyledButton>
         )}
       </Box>

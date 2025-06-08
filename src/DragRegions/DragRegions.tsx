@@ -19,22 +19,18 @@ type RegionKey =
   | "stampBottom"
   | "stampLeft"
   | "stampRight";
-  
-  
-  export function DragRegions(props: DragRegionsProps) {
-    const { reporter, isCollapsed } = props;
-    const { classes, cx } = useDragRegionsStyles();
-    
-    const getRegionKeys = (reporter: string | null, isCollapsed: boolean): RegionKey[] => {
-      if (isCollapsed) return ["stampTop", "stampBottom", "stampLeft", "stampRight"];
-      if (reporter) return ["formBottom", "formTop", "formLeft", "formRight"];
-      return ["onboardLeft", "onboardRight", "onboardTop", "onboardBottom"];;
-    };
-    
-    const regionKeys = getRegionKeys(reporter ?? null, !!isCollapsed);
-  
-  console.log('isCollapsed', isCollapsed);
-  console.log('reporter', reporter);
+
+export function DragRegions(props: DragRegionsProps) {
+  const { reporter, isCollapsed } = props;
+  const { classes, cx } = useDragRegionsStyles();
+
+  const getRegionKeys = (reporter: string | null, isCollapsed: boolean): RegionKey[] => {
+    if (isCollapsed) return ["stampTop", "stampBottom", "stampLeft", "stampRight"];
+    if (reporter) return ["formBottom", "formTop", "formLeft", "formRight"];
+    return ["onboardLeft", "onboardRight", "onboardTop", "onboardBottom"];
+  };
+
+  const regionKeys = getRegionKeys(reporter ?? null, !!isCollapsed);
 
   return (
     <>

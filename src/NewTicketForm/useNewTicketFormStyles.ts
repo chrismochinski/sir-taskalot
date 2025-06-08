@@ -90,6 +90,7 @@ export const useNewTicketFormStyles = createStyles(
     },
 
     richTextEditor: {
+      borderWidth: "1.5px",
       borderRadius: "10px",
       "& .mantine-TypographyStylesProvider-root": {
         borderRadius: "0 0 10px 10px",

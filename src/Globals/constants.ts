@@ -5,7 +5,8 @@ Particularly important since this app is not resizable
 
 // App dimensions, collapsed and expanded, used everywhere ⚠️ CHANGE WITH CAUTION ⚠️
 export const DIM = {
-  width: 490,
+  width: 460,
   height: 665,
-  stamp: 120,
+  stamp: 100,
+  stampWidth: 100,
 }
