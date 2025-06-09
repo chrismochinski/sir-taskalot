@@ -41,7 +41,9 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
           <PoundTheStoneIcon />
           <Box className={classes.modalTextBox}>
             <Title order={4}>Why are we using it?</Title>
-            <Text component="p">Jira is chaotic. Slack is busy. This form takes care of both.</Text>
+            <Text component="p">
+              Jira can be overwhelming. Slack can be busy. This form takes care of both.
+            </Text>
           </Box>
         </Flex>
 
@@ -77,8 +79,9 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
           <Box className={classes.modalTextBox}>
             <Title order={4}>Questions? Comments? Ideas?</Title>
             <Text component="p">
-              Bring 'em on! We love opportunities to make all of our workloads a tiny bit lighter.
-              Reach out to Mo directly or tag #tech-marketing-site in Slack. We gotchu!
+              Two of the things to which we are most dedicated are crafting a satisfying user
+              experience and always getting better at what we do. We'd love the opportunity to nail
+              this app. Reach out to Mo directly or tag #tech-marketing-site in Slack. We gotchu!
             </Text>
           </Box>
         </Flex>

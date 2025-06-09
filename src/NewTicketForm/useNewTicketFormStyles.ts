@@ -128,6 +128,7 @@ export const useNewTicketFormStyles = createStyles(
 
     rteToolbar: {
       borderRadius: "10px 10px 0 0",
+      borderBottom: `1.5px solid ${colors.gray}`,
     },
 
     typeSubLabel: {

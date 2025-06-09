@@ -54,7 +54,7 @@ export const useInfoModalStyles = createStyles(() => ({
     },
 
     h3: {
-      fontSize: "20px",
+      fontSize: "22px",
       fontWeight: 700,
       fontFamily: '"BioRhyme", serif',
       color: `${colors.black}`,
@@ -119,7 +119,7 @@ export const useInfoModalStyles = createStyles(() => ({
     maxWidth: "14%",
   },
 
-  modalTextBox: {
+    modalTextBox: {
     flex: 1,
   },
 }));
