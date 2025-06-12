@@ -112,7 +112,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
 
-  const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
+  // const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
+  // IDEA // REVISIT // IDEA // REVISIT // IDEA // REVISIT
+  // idea NOW USING DRAGON CHANNEL AS OF 6/11/25
+  const webhookUrl = process.env.VITE_SLACK_DRAGON_CHANNEL_WEBHOOK_URL;
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
   const jiraEmail = process.env.VITE_JIRA_EMAIL;
   const projectKey = process.env.VITE_PROJECT_KEY;
@@ -329,21 +332,27 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     const jiraTicketUrl = `https://characterstrong.atlassian.net/browse/${jiraResult.key}`;
     const priorityEmoji = priorityEmojiMap[payload.priority] || "";
 
+    // IDEA // REVISIT
+    // removing header block for now - unnecessary "branding"
+    // IDEA // REVISIT
+
     const slackPayload = {
       blocks: [
-        {
-          type: "header",
-          text: {
-            type: "plain_text",
-            text: ":dragon-butler: SIR TASKALOT :jira:",
-            emoji: true,
-          },
-        },
+        // {
+        //   type: "header",
+        //   text: {
+        //     type: "plain_text",
+        //     text: ":dragonbot: SIR TASKALOT :jira:",
+        //     emoji: true,
+        //   },
+        // },
         {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `🧾 *New Ticket Submitted*${payload.reporter ? ` by *${payload.reporter}*` : ""}`,
+            text: `:ticket-star: *New Ticket Submitted*${
+              payload.reporter ? ` by *${payload.reporter}*` : ""
+            }`,
           },
         },
         {
