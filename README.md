@@ -5,6 +5,10 @@
 
 _Making internal work requests magical (and stupid simple)_
 
+  <img src="./src/assets/app-screenshot.png" alt="Sir Taskalot App Screenshot" width="360"  />
+
+<hr />
+
 Sir Taskalot is a focused, delightful desktop app for **non-technical team members** to submit tickets — with no context switching, no clunky Jira fields, and no Slack confusion.
 
 Requests submitted through this app are instantly routed to Slack (for visibility) and Jira (for tracking), with formatting and metadata handled automagically in the background.
