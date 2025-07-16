@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { MantineProvider, Box, UnstyledButton } from "@mantine/core";
-import { NewTicketForm, Onboarding, InfoModal, useGlobalStyles, DragRegions } from ".";
 import {
-  RiInformation2Fill,
-  RiInformation2Line,
-  RiSettings4Fill,
-  RiSettings4Line,
-} from "react-icons/ri";
-import { StampView } from "./StampView";
+  NewTicketForm,
+  Onboarding,
+  InfoModal,
+  SettingsModal,
+  useGlobalStyles,
+  DragRegions,
+  StampView,
+  InfoIconButton,
+} from ".";
+import { RiSettings4Fill, RiSettings4Line } from "react-icons/ri";
 
 function App() {
   const [reporterName, setReporterName] = useState<string | null>(null); // reporter name state
   const [infoModalOpen, setInfoModalOpen] = useState(false); // modal state
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false); // settings modal state
   const [isCollapsed, setIsCollapsed] = useState(false); // collapse or "stamp" state
   const { classes: globalClasses, cx } = useGlobalStyles({ isCollapsed });
 
@@ -50,17 +54,7 @@ function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <Box className={globalClasses.appWrapper} my="0" pb="0" pt="5px">
-        {!isCollapsed && (
-          <UnstyledButton
-            className={globalClasses.iconButton}
-            onClick={() => setInfoModalOpen(true)}
-            title="Info"
-            aria-label="Info"
-            aria-describedby="info">
-            <RiInformation2Fill size="22px" />
-            <RiInformation2Line size="22px" />
-          </UnstyledButton>
-        )}
+        {!isCollapsed && <InfoIconButton onClick={() => setInfoModalOpen(true)} />}
         <DragRegions reporter={reporterName} isCollapsed={isCollapsed} />
         {isCollapsed ? (
           <StampView handleCollapseToggle={handleCollapseToggle} isCollapsed={isCollapsed} />
@@ -90,7 +84,7 @@ function App() {
         {!isCollapsed && (
           <UnstyledButton
             className={globalClasses.iconButton}
-            onClick={() => setInfoModalOpen(true)}
+            onClick={() => setSettingsModalOpen(true)}
             title="Advanced Settings"
             aria-label="Advanced Settings"
             aria-describedby="advanced-settings">
@@ -100,6 +94,7 @@ function App() {
         )}
       </Box>
       <InfoModal opened={infoModalOpen} onClose={() => setInfoModalOpen(false)} />
+      <SettingsModal opened={settingsModalOpen} onClose={() => setSettingsModalOpen(false)} />
     </MantineProvider>
   );
 }
