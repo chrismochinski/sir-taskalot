@@ -244,52 +244,93 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     },
   },
 
-  infoButton: {
+  // info and settings buttons
+
+  iconButton: {
     position: "absolute",
-    top: "0.35rem",
     right: "0.5rem",
     cursor: "pointer",
     zIndex: 10,
-    "& svg": {
-      fill: colors.purple,
-      stroke: colors.purple,
+
+    svg: {
+      transformOrigin: "50% 50%",
+      transformBox: "fill-box",
+      transition: "transform 150ms ease-out, opacity 150ms ease-out",
+      transform: "rotate(0deg)",
       "&:first-of-type": {
         opacity: 0,
         position: "absolute",
         borderRadius: "50%",
       },
       "&:last-of-type": {
-        opacity: 0.7,
+        opacity: 0.3,
       },
     },
     "&:before": {
       position: "absolute",
-      content: "'Quick App Info'",
       top: "48%",
-      transform: "translateY(-50%) translateX(-25px)",
-      right: "116%",
+      transform: "translateY(-50%) translateX(-15px)",
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 500,
       letterSpacing: "0.02em",
       fontSize: "12px",
       width: "max-content",
       color: colors.darkGray,
-      transition: "transform 170ms ease-out, opacity 170ms ease-out",
+      transition: "transform 150ms ease-out, opacity 150ms ease-out",
       opacity: 0,
       pointerEvents: "none",
     },
     "&:hover": {
+      
+      transition: "transform 110ms ease-out, opacity 110ms ease-out",
       "&:before": {
+        transition: "transform 110ms ease-out, opacity 110ms ease-out",
         transform: "translateY(-50%) translateX(0px)",
-        opacity: 1,
+        opacity: 0.8,
       },
     },
 
     "&:hover > svg:first-of-type": {
-      opacity: 0.9,
+      opacity: 0.2,
     },
     "&:hover > svg:last-of-type": {
-      opacity: 0,
+      opacity: 1,
+    },
+
+    // INFO BUTTON FOR MODAL - TOP RIGHT
+    '&[title="Info"]': {
+      top: "0.35rem",
+      svg: {
+        fill: colors.purple,
+        stroke: colors.purple,
+      },
+
+      "&:before": {
+        content: "'App Info'",
+        right: "25px",
+      },
+      '&:hover': {
+        svg: {
+          transform: 'rotateY(180deg)',
+        },
+      },
+    },
+    // SETTINGS BUTTON FOR MODAL - BOTTOM RIGHT
+    '&[title="Advanced Settings"]': {
+      bottom: "0.35rem",
+      svg: {
+        fill: colors.darkBlue,
+        stroke: colors.darkBlue,
+      },
+      "&:before": {
+        right: "26px",
+        content: "'Advanced Settings'",
+      },
+      '&:hover': {
+        svg: {
+          transform: 'rotate(90deg)',
+        },
+      },
     },
   },
 }));

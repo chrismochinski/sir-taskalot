@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { MantineProvider, Box, UnstyledButton } from "@mantine/core";
 import { NewTicketForm, Onboarding, InfoModal, useGlobalStyles, DragRegions } from ".";
-import { IoIosInformationCircle, IoIosInformationCircleOutline } from "react-icons/io";
+import {
+  RiInformation2Fill,
+  RiInformation2Line,
+  RiSettings4Fill,
+  RiSettings4Line,
+} from "react-icons/ri";
 import { StampView } from "./StampView";
 
 function App() {
   const [reporterName, setReporterName] = useState<string | null>(null); // reporter name state
-  const [modalOpen, setModalOpen] = useState(false); // modal state
+  const [infoModalOpen, setInfoModalOpen] = useState(false); // modal state
   const [isCollapsed, setIsCollapsed] = useState(false); // collapse or "stamp" state
   const { classes: globalClasses, cx } = useGlobalStyles({ isCollapsed });
 
@@ -45,7 +50,18 @@ function App() {
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <Box className={globalClasses.appWrapper} my="0" pb="0" pt="5px">
-        <DragRegions reporter={reporterName} isCollapsed={isCollapsed}/>
+        {!isCollapsed && (
+          <UnstyledButton
+            className={globalClasses.iconButton}
+            onClick={() => setInfoModalOpen(true)}
+            title="Info"
+            aria-label="Info"
+            aria-describedby="info">
+            <RiInformation2Fill size="22px" />
+            <RiInformation2Line size="22px" />
+          </UnstyledButton>
+        )}
+        <DragRegions reporter={reporterName} isCollapsed={isCollapsed} />
         {isCollapsed ? (
           <StampView handleCollapseToggle={handleCollapseToggle} isCollapsed={isCollapsed} />
         ) : reporterName ? (
@@ -59,7 +75,7 @@ function App() {
         )}
         <Box
           id="blob-wrapper"
-          className={cx(globalClasses.blobWrapper, (!reporterName || isCollapsed ? "paused" : ''))}
+          className={cx(globalClasses.blobWrapper, !reporterName || isCollapsed ? "paused" : "")}
           m="0"
           p="0">
           <svg
@@ -73,17 +89,17 @@ function App() {
         </Box>
         {!isCollapsed && (
           <UnstyledButton
-            className={globalClasses.infoButton}
-            onClick={() => setModalOpen(true)}
-            title="Info"
-            aria-label="Info"
-            aria-describedby="info">
-            <IoIosInformationCircle size="24px" />
-            <IoIosInformationCircleOutline size="24px" />
+            className={globalClasses.iconButton}
+            onClick={() => setInfoModalOpen(true)}
+            title="Advanced Settings"
+            aria-label="Advanced Settings"
+            aria-describedby="advanced-settings">
+            <RiSettings4Fill size="22px" />
+            <RiSettings4Line size="22px" />
           </UnstyledButton>
         )}
       </Box>
-      <InfoModal opened={modalOpen} onClose={() => setModalOpen(false)} />
+      <InfoModal opened={infoModalOpen} onClose={() => setInfoModalOpen(false)} />
     </MantineProvider>
   );
 }
