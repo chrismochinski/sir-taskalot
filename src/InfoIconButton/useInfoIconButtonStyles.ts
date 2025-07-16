@@ -18,6 +18,19 @@ export const useInfoIconButtonStyles = createStyles(() => ({
       position: "absolute",
       borderRadius: "50%",
       opacity: 0.4,
+      transformOrigin: "50% 50%",
+      transformBox: "fill-box",
+      transition: "transform 150ms ease-out, opacity 150ms ease-out",
+      "& path, & circle": {
+        transformOrigin: "50% 50%",
+        transformBox: "fill-box",
+      },
+      "& circle#i-dot": {
+        transition: "cx 150ms ease, cy 150ms ease, transform 150ms ease, fill 150ms ease",
+      },
+      "& path#i-body, & path#i-circle": {
+        transition: "d 150ms ease, transform 150ms ease",
+      },
     },
     "&:before": {
       position: "absolute",
@@ -40,6 +53,19 @@ export const useInfoIconButtonStyles = createStyles(() => ({
         transition: "transform 110ms ease-out, opacity 110ms ease-out",
         transform: "translateY(-50%) translateX(0px)",
         opacity: 0.8,
+      },
+      svg: {
+        opacity: 1,
+        "& circle#i-circle": {
+          
+          fill: `${colors.purple}27`,
+        },
+        "& circle#i-dot": {
+          transform: 'translateY(-1px) translateX(1px) scale(0.85)',
+        },
+        "& path#i-body": {
+          transform: "translateY(1px) translateX(1px) scale(0.85)",
+        },
       },
     },
   },
