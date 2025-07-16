@@ -19,8 +19,8 @@ export const useDragRegionsStyles = createStyles(() => ({
 
   onboardRight: {
     right: 0,
-    top: 0,
-    bottom: "45px",
+    bottom: "45px", // add advanced settings bottom right, move info modal button to top
+    top: "45px",
     width: "45px",
   },
 
@@ -49,7 +49,7 @@ export const useDragRegionsStyles = createStyles(() => ({
 
   formRight: {
     right: 0,
-    top: 0,
+    top: "40px", // add advanced settings bottom right, move info modal button to top
     bottom: "40px",
     width: "29px",
   },
@@ -57,7 +57,7 @@ export const useDragRegionsStyles = createStyles(() => ({
   formTop: {
     top: 0,
     left: 0,
-    right: 0,
+    right: "40px", // add advanced settings bottom right, move info modal button to top
     height: "25px",
   },
   formBottom: {

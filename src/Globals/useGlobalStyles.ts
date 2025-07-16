@@ -246,7 +246,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
 
   infoButton: {
     position: "absolute",
-    bottom: "0.25rem",
+    top: "0.35rem",
     right: "0.5rem",
     cursor: "pointer",
     zIndex: 10,
