@@ -25,7 +25,7 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       onClose={onClose}
       title="What in tarnation is going on here?"
       centered
-      transitionProps={{ transition: "slide-up", duration: 300 }}
+      transitionProps={{ transition: "slide-down", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
         <Flex className={classes.modalFlexRow}>

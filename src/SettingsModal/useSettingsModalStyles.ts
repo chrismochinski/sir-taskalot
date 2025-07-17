@@ -114,6 +114,40 @@ export const useSettingsModalStyles = createStyles(() => ({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     width: "100%",
-    rowGap: '0.35rem',
+  },
+
+  radioGroup: {
+    width: "100%",
+    
+
+    "& .mantine-RadioGroup-label": {
+      fontSize: "16px",
+      fontWeight: 600,
+      fontFamily: '"Archivo", sans-serif',
+      color: `${colors.black}`,
+      textWrap: "pretty",
+      WebkitAppRegion: "no-drag",
+      lineHeight: 'normal',
+    },
+
+    '& .mantine-RadioGroup-description': {
+      fontFamily: '"Roboto", sans-serif',
+      fontSize: "13px",
+      lineHeight: 'normal',
+      color: `${colors.darkGray}`,
+      fontStyle: "italic",
+    },
+  },
+
+  innerRadioGroup: {
+    width: "100%",
+    display: "flex",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    label: {
+      paddingLeft: '0.35rem',
+    }
   },
 }));

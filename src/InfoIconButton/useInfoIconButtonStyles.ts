@@ -20,16 +20,16 @@ export const useInfoIconButtonStyles = createStyles(() => ({
       opacity: 0.4,
       transformOrigin: "50% 50%",
       transformBox: "fill-box",
-      transition: "transform 150ms ease-out, opacity 150ms ease-out",
+      transition: "transform 110ms ease-out, opacity 110ms ease-out",
       "& path, & circle": {
         transformOrigin: "50% 50%",
         transformBox: "fill-box",
       },
       "& circle#i-dot": {
-        transition: "cx 150ms ease, cy 150ms ease, transform 150ms ease, fill 150ms ease",
+        transition: "cx 110ms ease, cy 110ms ease, transform 110ms ease, fill 110ms ease",
       },
       "& path#i-body, & path#i-circle": {
-        transition: "d 150ms ease, transform 150ms ease",
+        transition: "d 110ms ease, transform 110ms ease",
       },
     },
     "&:before": {
@@ -42,7 +42,7 @@ export const useInfoIconButtonStyles = createStyles(() => ({
       fontSize: "12px",
       width: "max-content",
       color: colors.darkGray,
-      transition: "transform 150ms ease-out, opacity 150ms ease-out",
+      transition: "transform 110ms ease-out, opacity 110ms ease-out",
       opacity: 0,
       pointerEvents: "none",
       content: "'App Info'",
