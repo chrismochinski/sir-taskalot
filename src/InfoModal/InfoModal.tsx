@@ -7,6 +7,7 @@ import {
   PoundTheStoneIcon,
 } from ".";
 
+import longGreenSquiggle from "../assets/long-green-squiggle.svg";
 import dragonBotImage from "../assets/DragonBotTight.svg";
 
 type InfoModalProps = {
@@ -23,11 +24,18 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       className={classes.infoModal}
       opened={opened}
       onClose={onClose}
-      title="What in tarnation is going on here?"
+      title="APP INFO"
       centered
       transitionProps={{ transition: "slide-down", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
+        <Image
+          maw="200px"
+          src={longGreenSquiggle}
+          alt="Green fancy scribble"
+          className={classes.scribble}
+        />
+
         <Flex className={classes.modalFlexRow}>
           <ThreeHandsIcon />
           <Box className={classes.modalTextBox}>

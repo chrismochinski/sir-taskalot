@@ -17,7 +17,7 @@ export const useInfoIconButtonStyles = createStyles(() => ({
     svg: {
       position: "absolute",
       borderRadius: "50%",
-      opacity: 0.4,
+      opacity: 0.5,
       transformOrigin: "50% 50%",
       transformBox: "fill-box",
       transition: "transform 110ms ease-out, opacity 110ms ease-out",
@@ -26,10 +26,10 @@ export const useInfoIconButtonStyles = createStyles(() => ({
         transformBox: "fill-box",
       },
       "& circle#i-dot": {
-        transition: "cx 110ms ease, cy 110ms ease, transform 110ms ease, fill 110ms ease",
+        transition: "cx 320ms ease-out, cy 320ms ease-out, transform 320ms ease-out, fill 320ms ease-out",
       },
       "& path#i-body, & path#i-circle": {
-        transition: "d 110ms ease, transform 110ms ease",
+        transition: "d 320ms ease-out, transform 320ms ease-out",
       },
     },
     "&:before": {

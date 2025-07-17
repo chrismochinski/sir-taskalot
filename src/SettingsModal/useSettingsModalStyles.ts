@@ -7,15 +7,15 @@ export const useSettingsModalStyles = createStyles(() => ({
     WebkitAppRegion: "no-drag",
     "& .mantine-Paper-root": {
       maxWidth: "400px",
-
       "& .mantine-Modal-header": {
         h2: {
           display: "inline-block",
           fontFamily: '"BioRhyme", serif',
-          fontSize: "1.25rem",
+          fontSize: "1.375rem",
           fontWeight: 700,
           textWrap: "balance",
           letterSpacing: "-0.015em",
+         
         },
         button: {
           WebkitAppRegion: "no-drag",
@@ -43,6 +43,18 @@ export const useSettingsModalStyles = createStyles(() => ({
     },
   },
 
+scribble: {
+    position: "absolute",
+    top: "calc(1rem - 0.1em)",
+    left: "59%",
+    zIndex: 1000,
+    figure: {
+      img: {
+        
+      },
+    },
+  },
+
   modalInner: {
     padding: "0 0.75rem 1rem",
     display: "flex",
@@ -57,36 +69,6 @@ export const useSettingsModalStyles = createStyles(() => ({
       WebkitAppRegion: "no-drag",
     },
 
-    h3: {
-      fontSize: "22px",
-      fontWeight: 700,
-      fontFamily: '"BioRhyme", serif',
-      color: `${colors.black}`,
-      marginBlock: 0,
-      lineHeight: "1.175em",
-      textWrap: "balance",
-      WebkitAppRegion: "no-drag",
-    },
-    h4: {
-      fontSize: "16px",
-      fontWeight: 700,
-      fontFamily: '"Archivo", sans-serif',
-      color: `${colors.black}`,
-      marginBlock: 0,
-      lineHeight: "1.175em",
-      textWrap: "balance",
-      WebkitAppRegion: "no-drag",
-    },
-    p: {
-      fontSize: "13px",
-      fontWeight: 400,
-      fontFamily: '"Roboto", sans-serif',
-      color: `${colors.black}`,
-      marginBlock: 0,
-      lineHeight: "1.15em",
-      textWrap: "pretty",
-      WebkitAppRegion: "no-drag",
-    },
     button: {
       WebkitAppRegion: "no-drag",
     },
@@ -120,7 +102,7 @@ export const useSettingsModalStyles = createStyles(() => ({
     width: "100%",
 
     "& .mantine-RadioGroup-label": {
-      fontSize: "16px",
+      fontSize: "18px",
       fontWeight: 600,
       fontFamily: '"Archivo", sans-serif',
       color: `${colors.black}`,
@@ -131,7 +113,8 @@ export const useSettingsModalStyles = createStyles(() => ({
 
     "& .mantine-RadioGroup-description": {
       fontFamily: '"Roboto", sans-serif',
-      fontSize: "13px",
+      fontSize: "14px",
+      marginTop: "1px",
       lineHeight: "normal",
       color: `${colors.darkGray}`,
       fontStyle: "italic",
@@ -152,13 +135,36 @@ export const useSettingsModalStyles = createStyles(() => ({
     "& .mantine-Radio-root": {
       cursor: "pointer",
       borderRadius: "8px",
-      padding: "2px 4px",
-      '& input, & label': {
+      padding: "3px 6px",
+      "& input, & label": {
         cursor: "pointer",
+        fontSize: "13px",
       },
       "&:hover": {
-        backgroundColor: colors.lightBlue,
+        backgroundColor: colors.lightGreen,
       },
+    },
+  },
+
+  segmentedControlTitle: {
+    marginBottom: "10px",
+    h5: {
+      fontSize: "18px",
+      fontWeight: 600,
+      fontFamily: '"Archivo", sans-serif',
+      color: `${colors.black}`,
+      textWrap: "pretty",
+      WebkitAppRegion: "no-drag",
+      lineHeight: "normal",
+    },
+    h6: {
+      fontFamily: '"Roboto", sans-serif',
+      fontSize: "14px",
+      marginTop: "1px",
+      lineHeight: "normal",
+      color: `${colors.darkGray}`,
+      fontStyle: "italic",
+      fontWeight: 400,
     },
   },
 }));

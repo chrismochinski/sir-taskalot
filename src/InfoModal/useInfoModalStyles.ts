@@ -7,11 +7,15 @@ export const useInfoModalStyles = createStyles(() => ({
     WebkitAppRegion: "no-drag",
     "& .mantine-Paper-root": {
       maxWidth: "400px",
-      height: "540px",
+      height: "530px",
       "& .mantine-Modal-header": {
-        paddingBottom: 0,
         h2: {
-          display: "none",
+          display: "inline-block",
+          fontFamily: '"BioRhyme", serif',
+          fontSize: "1.375rem",
+          fontWeight: 700,
+          textWrap: "balance",
+          letterSpacing: "-0.015em",
         },
         button: {
           WebkitAppRegion: "no-drag",
@@ -40,11 +44,23 @@ export const useInfoModalStyles = createStyles(() => ({
     },
   },
 
+  scribble: {
+    position: "absolute",
+    top: "calc(0.4em + 1rem)",
+    left: "36%",
+    zIndex: 1000,
+    figure: {
+      img: {
+        
+      },
+    },
+  },
+
   modalInner: {
-    padding: "0 1rem 0.75rem",
+    padding: "0 0.75rem 0.5rem",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "flex-start",
     width: "100%",
     height: "100%",
@@ -54,9 +70,9 @@ export const useInfoModalStyles = createStyles(() => ({
     },
 
     h3: {
-      fontSize: "22px",
-      fontWeight: 700,
-      fontFamily: '"BioRhyme", serif',
+      fontSize: "18px",
+      fontWeight: 800,
+      fontFamily: '"Archivo", sans-serif',
       color: `${colors.black}`,
       marginBlock: 0,
       lineHeight: "1.175em",
@@ -119,7 +135,7 @@ export const useInfoModalStyles = createStyles(() => ({
     maxWidth: "14%",
   },
 
-    modalTextBox: {
+  modalTextBox: {
     flex: 1,
   },
 }));

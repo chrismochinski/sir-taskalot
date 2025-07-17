@@ -252,8 +252,11 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     right: "0.5rem",
     cursor: "pointer",
     zIndex: 10,
+    bottom: "0.35rem",
 
     svg: {
+      fill: colors.darkBlue,
+      stroke: colors.darkBlue,
       transformOrigin: "50% 50%",
       transformBox: "fill-box",
       transition: "transform 150ms ease-out, opacity 150ms ease-out",
@@ -264,10 +267,12 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
         borderRadius: "50%",
       },
       "&:last-of-type": {
-        opacity: 0.4,
+        opacity: 0.5,
       },
     },
     "&:before": {
+      right: "26px",
+      content: "'Advanced Settings'",
       position: "absolute",
       top: "48%",
       transform: "translateY(-50%) translateX(-15px)",
@@ -283,6 +288,9 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     },
     "&:hover": {
       transition: "transform 110ms ease-out, opacity 110ms ease-out",
+      svg: {
+        transform: "rotate(90deg)",
+      },
       "&:before": {
         transition: "transform 110ms ease-out, opacity 110ms ease-out",
         transform: "translateY(-50%) translateX(0px)",
@@ -297,43 +305,5 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
       opacity: 1,
     },
 
-    // deletelater
-    // // INFO BUTTON FOR MODAL - TOP RIGHT
-    // '&[title="Info"]': {
-    //   top: "0.35rem",
-    //   svg: {
-    //     fill: colors.purple,
-    //     stroke: colors.purple,
-    //   },
-
-    //   "&:before": {
-    //     content: "'App Info'",
-    //     right: "25px",
-    //   },
-    //   '&:hover': {
-    //     svg: {
-    //       transform: 'rotateY(180deg)',
-    //     },
-    //   },
-    // },
-    // deletelater
-
-    // SETTINGS BUTTON FOR MODAL - BOTTOM RIGHT
-    '&[title="Advanced Settings"]': {
-      bottom: "0.35rem",
-      svg: {
-        fill: colors.darkBlue,
-        stroke: colors.darkBlue,
-      },
-      "&:before": {
-        right: "26px",
-        content: "'Advanced Settings'",
-      },
-      "&:hover": {
-        svg: {
-          transform: "rotate(90deg)",
-        },
-      },
-    },
   },
 }));
