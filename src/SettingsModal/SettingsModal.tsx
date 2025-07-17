@@ -19,8 +19,8 @@ type SettingsModalProps = {
  */
 export function SettingsModal({ opened, onClose }: SettingsModalProps) {
   const { classes } = useSettingsModalStyles();
-  const [jiraStatus, setJiraStatus] = useState("New");
-  // const [slackChannel, setSlackChannel] = useState("dragon");
+  const [jiraStatus, setJiraStatus] = useState("new");
+  const [slackChannel, setSlackChannel] = useState("dragon");
 
   return (
     <Modal
@@ -42,38 +42,39 @@ export function SettingsModal({ opened, onClose }: SettingsModalProps) {
               name="jiraStatus"
               label="Jira Status"
               description='Defaults to "New"'
-              size="sm"
+              size="xs"
               
               >
-              <Group position="left" spacing="md" mt="8px" className={classes.innerRadioGroup}>
-                <Radio color="dark" value="New" label="New" />
-                <Radio color="dark" value="To Do" label="To Do" />
+              <Group position="left" spacing="sm" mt="8px" className={classes.innerRadioGroup}>
+                <Radio value="new" label="New" />
+                <Radio value="to-do" label="To Do" />
+              </Group>
+            </Radio.Group>
+          </Box>
+        </Flex>
+        
+        <Flex className={classes.modalFlexRow}>
+          <Box className={classes.settingTitleAndSwitch}>
+            <Radio.Group
+              className={classes.radioGroup}
+              value={slackChannel}
+              onChange={setSlackChannel}
+              name="slackChannel"
+              label="Slack Channel"
+              description='Defaults to "#pe-team-dragon"'
+              size="xs"
+              
+              >
+              <Group position="left" spacing="sm" mt="8px" className={classes.innerRadioGroup}>
+                <Radio value="dragon" label="Dragon" />
+                <Radio value="test" label="Test" />
+                <Radio value="none" label="No Slack Message" />
               </Group>
             </Radio.Group>
           </Box>
         </Flex>
 
-        {/* EVERYTHING BELOW HERE I WILL GET TO LATER  */}
-        <Flex className={classes.modalFlexRow}>
-          <Box className={classes.settingTitleAndSwitch}>
-            <Title order={4}>Set me as owner</Title>
-            <Text component="p">Defaults to no, requires Jira account API info</Text>
-          </Box>
-        </Flex>
-
-        <Flex className={classes.modalFlexRow}>
-          <Box className={classes.settingTitleAndSwitch}>
-            <Title order={4}>Slack Channel</Title>
-            <Text component="p">Defaults to #pe-team-dragon</Text>
-          </Box>
-        </Flex>
-
-        <Flex className={classes.modalFlexRow}>
-          <Box className={classes.settingTitleAndSwitch}>
-            <Title order={4}>Questions? Comments? Ideas?</Title>
-            <Text component="p">ANOTHER SETTING HUZZAH PANCAKE</Text>
-          </Box>
-        </Flex>
+       
       </Box>
     </Modal>
   );

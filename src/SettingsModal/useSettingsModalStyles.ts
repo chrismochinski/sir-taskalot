@@ -38,18 +38,18 @@ export const useSettingsModalStyles = createStyles(() => ({
         },
       },
       "& .mantine-Modal-body": {
-        height: "300px",
         width: "100%",
       },
     },
   },
 
   modalInner: {
-    padding: "0 1rem 0.75rem",
+    padding: "0 0.75rem 1rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    gap: "2rem",
     width: "100%",
     height: "100%",
     WebkitAppRegion: "no-drag",
@@ -118,7 +118,6 @@ export const useSettingsModalStyles = createStyles(() => ({
 
   radioGroup: {
     width: "100%",
-    
 
     "& .mantine-RadioGroup-label": {
       fontSize: "16px",
@@ -127,13 +126,13 @@ export const useSettingsModalStyles = createStyles(() => ({
       color: `${colors.black}`,
       textWrap: "pretty",
       WebkitAppRegion: "no-drag",
-      lineHeight: 'normal',
+      lineHeight: "normal",
     },
 
-    '& .mantine-RadioGroup-description': {
+    "& .mantine-RadioGroup-description": {
       fontFamily: '"Roboto", sans-serif',
       fontSize: "13px",
-      lineHeight: 'normal',
+      lineHeight: "normal",
       color: `${colors.darkGray}`,
       fontStyle: "italic",
     },
@@ -147,7 +146,19 @@ export const useSettingsModalStyles = createStyles(() => ({
     justifyContent: "flex-start",
     alignItems: "center",
     label: {
-      paddingLeft: '0.35rem',
-    }
+      paddingLeft: "0.35rem",
+    },
+
+    "& .mantine-Radio-root": {
+      cursor: "pointer",
+      borderRadius: "8px",
+      padding: "2px 4px",
+      '& input, & label': {
+        cursor: "pointer",
+      },
+      "&:hover": {
+        backgroundColor: colors.lightBlue,
+      },
+    },
   },
 }));
