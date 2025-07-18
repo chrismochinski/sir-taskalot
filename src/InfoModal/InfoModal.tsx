@@ -7,7 +7,6 @@ import {
   PoundTheStoneIcon,
 } from ".";
 
-import longGreenSquiggle from "../assets/long-green-squiggle.svg";
 import dragonBotImage from "../assets/DragonBotTight.svg";
 import { SquiggleMedium } from "../SvgShapes";
 
