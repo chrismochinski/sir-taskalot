@@ -15,7 +15,6 @@ export const useSettingsModalStyles = createStyles(() => ({
           fontWeight: 700,
           textWrap: "balance",
           letterSpacing: "-0.015em",
-         
         },
         button: {
           WebkitAppRegion: "no-drag",
@@ -43,16 +42,11 @@ export const useSettingsModalStyles = createStyles(() => ({
     },
   },
 
-scribble: {
+  scribble: {
     position: "absolute",
     top: "calc(1rem - 0.1em)",
     left: "59%",
     zIndex: 1000,
-    figure: {
-      img: {
-        
-      },
-    },
   },
 
   modalInner: {
@@ -65,9 +59,7 @@ scribble: {
     width: "100%",
     height: "100%",
     WebkitAppRegion: "no-drag",
-    svg: {
-      WebkitAppRegion: "no-drag",
-    },
+
 
     button: {
       WebkitAppRegion: "no-drag",

@@ -44,18 +44,6 @@ export const useInfoModalStyles = createStyles(() => ({
     },
   },
 
-  scribble: {
-    position: "absolute",
-    top: "calc(0.4em + 1rem)",
-    left: "36%",
-    zIndex: 1000,
-    figure: {
-      img: {
-        
-      },
-    },
-  },
-
   modalInner: {
     padding: "0 0.75rem 0.5rem",
     display: "flex",

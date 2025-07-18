@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Modal, Box, Flex, Title, Image, Radio, Group, SegmentedControl } from "@mantine/core";
+import { Modal, Box, Flex, Title, Radio, Group, SegmentedControl } from "@mantine/core";
 import { useSettingsModalStyles } from ".";
-import greenFancyScribble from "../assets/green-fancy-scribble.svg";
+import { FancyScribble } from "..";
 
 type SettingsModalProps = {
   opened: boolean;
@@ -34,11 +34,10 @@ export function SettingsModal({ opened, onClose }: SettingsModalProps) {
       transitionProps={{ transition: "slide-up", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
-        <Image
-          maw="115px"
-          src={greenFancyScribble}
-          alt="Green fancy scribble"
-          className={classes.scribble}
+        <FancyScribble
+          color={"#41E894"}
+          width="115px"
+          styles={{ position: "absolute", top: "1rem", left: "59%", zIndex: 1000 }}
         />
         <Flex className={classes.modalFlexRow}>
           <Box className={classes.settingTitleAndSwitch}>

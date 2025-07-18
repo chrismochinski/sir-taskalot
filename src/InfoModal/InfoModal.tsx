@@ -9,6 +9,7 @@ import {
 
 import longGreenSquiggle from "../assets/long-green-squiggle.svg";
 import dragonBotImage from "../assets/DragonBotTight.svg";
+import { SquiggleMedium } from "../SvgShapes";
 
 type InfoModalProps = {
   opened: boolean;
@@ -29,11 +30,10 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       transitionProps={{ transition: "slide-down", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
-        <Image
-          maw="200px"
-          src={longGreenSquiggle}
-          alt="Green fancy scribble"
-          className={classes.scribble}
+        <SquiggleMedium
+          color="#41E894"
+          width="200px"
+          styles={{ position: "absolute", top: "calc(0.3em + 1rem", left: "37%", zIndex: 1000 }}
         />
 
         <Flex className={classes.modalFlexRow}>
