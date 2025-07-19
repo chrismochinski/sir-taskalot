@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Modal, Box, Flex, Title, Radio, Group, SegmentedControl } from "@mantine/core";
+import { Modal, Box, Flex, Title, Image, Radio, Group, SegmentedControl } from "@mantine/core";
 import { useSettingsModalStyles } from ".";
 import { FancyScribble } from "..";
+import beardBurgerIcon from "../assets/beard-burger.svg";
 
 type SettingsModalProps = {
   opened: boolean;
@@ -97,7 +98,7 @@ export function SettingsModal({ opened, onClose }: SettingsModalProps) {
                 { label: "3", value: "3" },
                 { label: "5", value: "5" },
                 { label: "8", value: "8" },
-                { label: "🍔", value: "☕" }, // revisit replace with cheeseburger with a beard
+                { label: <Image src={beardBurgerIcon} alt="Beard Burger" width="20px" />,  value: "burger" },
               ]}
             />
           </Box>
