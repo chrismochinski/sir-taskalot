@@ -27,9 +27,9 @@ export const useSettingsModalStyles = createStyles(() => ({
           width: "calc(1rem + 4px)",
           minWidth: "calc(1rem + 4px)",
           padding: "2px",
-          stroke: colors.purple,
+          stroke: colors.darkBlue,
           "&:hover": {
-            background: colors.purple,
+            background: colors.darkBlue,
             svg: {
               stroke: "#FFF",
             },
@@ -59,7 +59,6 @@ export const useSettingsModalStyles = createStyles(() => ({
     width: "100%",
     height: "100%",
     WebkitAppRegion: "no-drag",
-
 
     button: {
       WebkitAppRegion: "no-drag",
@@ -157,6 +156,33 @@ export const useSettingsModalStyles = createStyles(() => ({
       color: `${colors.darkGray}`,
       fontStyle: "italic",
       fontWeight: 400,
+    },
+  },
+
+  storyPointsSegmentedControl: {
+    "& .mantine-SegmentedControl-control": {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "38px", // static because active span is wack
+      borderStyle: "none",
+      borderWidth: 0,
+      borderRadius: "0.5rem",
+      "&:not(:first-of-type)": {
+        borderStyle: "none",
+        borderWidth: 0,
+      },
+      label: {
+        paddingInline: "1em",
+      },
+      "&:hover": {
+        backgroundColor: `${colors.lightBlue}60`,
+      },
+    },
+    "& span.mantine-SegmentedControl-indicator": {
+      backgroundColor: colors.lightBlue,
+      height: "38px",
     },
   },
 }));

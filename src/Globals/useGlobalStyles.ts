@@ -246,8 +246,7 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
 
   // info and settings buttons
 
-  // deletelater NOW ANIMATED FILE IN InfoIconButton
-  iconButton: {
+  advancedSettingsIconButton: {
     position: "absolute",
     right: "0.5rem",
     cursor: "pointer",

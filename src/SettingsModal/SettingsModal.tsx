@@ -84,8 +84,8 @@ export function SettingsModal({ opened, onClose }: SettingsModalProps) {
               <Title order={6}>Defaults to no settings (not 0, just no setting)</Title>
             </Box>
             <SegmentedControl
+              className={classes.storyPointsSegmentedControl}
               fullWidth
-              w="80%"
               radius="md"
               size="sm"
               value={storyPoints}
@@ -98,7 +98,10 @@ export function SettingsModal({ opened, onClose }: SettingsModalProps) {
                 { label: "3", value: "3" },
                 { label: "5", value: "5" },
                 { label: "8", value: "8" },
-                { label: <Image src={beardBurgerIcon} alt="Beard Burger" width="20px" />,  value: "burger" },
+                {
+                  label: <Image src={beardBurgerIcon} alt="Beard Burger" width="22px" />,
+                  value: "burger",
+                },
               ]}
             />
           </Box>

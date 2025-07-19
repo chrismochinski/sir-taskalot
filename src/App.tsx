@@ -83,7 +83,7 @@ function App() {
         </Box>
         {!isCollapsed && (
           <UnstyledButton
-            className={globalClasses.iconButton}
+            className={globalClasses.advancedSettingsIconButton}
             onClick={() => setSettingsModalOpen(true)}
             title="Advanced Settings"
             aria-label="Advanced Settings"
