@@ -119,6 +119,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
       slackThread,
       reporter,
       previews: imagePreviews,
+      slackChannel: "dragon", // Default to dragon channel
     });
 
     if (success) {

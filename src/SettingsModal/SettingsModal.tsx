@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Modal, Box, Flex, Title, Image, Radio, Group, SegmentedControl } from "@mantine/core";
 import { useSettingsModalStyles } from ".";
-import { FancyScribble } from "..";
-import beardBurgerIcon from "../assets/beard-burger.svg";
+import { FancyScribble, colors } from "..";
+import beardBurgerIcon from "../assets/beard-burger-v2.svg";
 
 type SettingsModalProps = {
   opened: boolean;
   onClose: () => void;
+  slackChannel: "dragon" | "test" | "none";
+  setSlackChannel: (value: "dragon" | "test" | "none") => void;
 };
 
 /**
@@ -18,10 +20,10 @@ type SettingsModalProps = {
  * 2. set the Slack channel they'll send the message to (#pe-team-dragon, #workflow-tests, or no slack message)
  * @returns JSX.Element
  */
-export function SettingsModal({ opened, onClose }: SettingsModalProps) {
+export function SettingsModal(props: SettingsModalProps) {
+  const { opened, onClose, slackChannel, setSlackChannel } = props;
   const { classes } = useSettingsModalStyles();
   const [jiraStatus, setJiraStatus] = useState("new");
-  const [slackChannel, setSlackChannel] = useState("dragon");
   const [storyPoints, setStoryPoints] = useState<string>("unset"); // Default to none / "unset"
 
   return (
@@ -36,7 +38,7 @@ export function SettingsModal({ opened, onClose }: SettingsModalProps) {
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
         <FancyScribble
-          color={"#41E894"}
+          color={`${colors.green}70`}
           width="115px"
           styles={{ position: "absolute", top: "1rem", left: "59%", zIndex: 1000 }}
         />

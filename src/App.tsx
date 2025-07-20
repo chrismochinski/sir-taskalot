@@ -15,9 +15,12 @@ import { RiSettings4Fill, RiSettings4Line } from "react-icons/ri";
 function App() {
   const [reporterName, setReporterName] = useState<string | null>(null); // reporter name state
   const [infoModalOpen, setInfoModalOpen] = useState(false); // modal state
-  const [settingsModalOpen, setSettingsModalOpen] = useState(false); // settings modal state
   const [isCollapsed, setIsCollapsed] = useState(false); // collapse or "stamp" state
   const { classes: globalClasses, cx } = useGlobalStyles({ isCollapsed });
+
+  // ADVANCED SETTINGS STUFF
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [slackChannel, setSlackChannel] = useState<"dragon" | "test" | "none">("dragon");
 
   // check localStorage for reporter name
   useEffect(() => {
@@ -88,13 +91,18 @@ function App() {
             title="Advanced Settings"
             aria-label="Advanced Settings"
             aria-describedby="advanced-settings">
-            <RiSettings4Fill size="22px" />
-            <RiSettings4Line size="22px" />
+            <RiSettings4Fill size="24px" />
+            <RiSettings4Line size="24px" />
           </UnstyledButton>
         )}
       </Box>
       <InfoModal opened={infoModalOpen} onClose={() => setInfoModalOpen(false)} />
-      <SettingsModal opened={settingsModalOpen} onClose={() => setSettingsModalOpen(false)} />
+      <SettingsModal
+        opened={settingsModalOpen}
+        onClose={() => setSettingsModalOpen(false)}
+        slackChannel={slackChannel}
+        setSlackChannel={setSlackChannel}
+      />
     </MantineProvider>
   );
 }

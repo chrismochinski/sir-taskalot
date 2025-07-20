@@ -117,8 +117,20 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
 
   // idea TEMPORARY - TOGGLE SLACK DRAGON CHANNEL OR TEST CHANNEL
   // const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
-  const webhookUrl = process.env.VITE_SLACK_DRAGON_CHANNEL_WEBHOOK_URL;
+  // const webhookUrl = process.env.VITE_SLACK_DRAGON_CHANNEL_WEBHOOK_URL;
+
+  let webhookUrl = null;
+
+  if (payload.slackChannel === "dragon") {
+    webhookUrl = process.env.VITE_SLACK_DRAGON_CHANNEL_WEBHOOK_URL;
+  } else if (payload.slackChannel === "test") {
+    webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
+  }
+
+  // fallback/default ?????
+
   // idea END TOGGLE NEED THIS TO BE IN ADVANCED SETTINGS INCOMING
+
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
   const jiraEmail = process.env.VITE_JIRA_EMAIL;
   const projectKey = process.env.VITE_PROJECT_KEY;
@@ -133,11 +145,9 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   };
   try {
     // 📨 1. POST TO JIRA FIRST
-
-    // idea convert JSON for Jira
     const jiraADF = tiptapToADF(payload.descriptionJson);
 
-    // idea DEBUG
+    // revisit // deletelater
     console.log("🧾👀 Jira ADF Content JSON sent:", JSON.stringify(jiraADF, null, 2));
 
     const jiraPayload = {
@@ -400,8 +410,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     };
 
     // ✅ 3. POST TO SLACK (now that we have ticket key)
-    if (webhookUrl) {
-      console.log("📨 Posting to Slack...");
+    if (slackChannel === "none") {
+      console.log("💬 No Slack message (channel set to 'none').");
+    } else if (webhookUrl) {
+      console.log(`📨 Posting to Slack (${slackChannel} channel)...`);
       const slackRes = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -412,7 +424,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
       console.log("✅ Slack status:", slackRes.status);
       console.log("📬 Slack response:", slackText);
     } else {
-      console.warn("⚠️ No Slack webhook URL found!");
+      console.log(`ℹ️ Slack channel '${slackChannel}' selected, but no webhook URL is defined.`);
     }
 
     return { success: true, key: jiraResult.key };

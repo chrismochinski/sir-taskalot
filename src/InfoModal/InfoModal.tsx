@@ -8,7 +8,7 @@ import {
 } from ".";
 
 import dragonBotImage from "../assets/DragonBotTight.svg";
-import { SquiggleMedium } from "../SvgShapes";
+import { SquiggleMedium, colors } from "..";
 
 type InfoModalProps = {
   opened: boolean;
@@ -30,7 +30,7 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
         <SquiggleMedium
-          color="#41E894"
+          color={`${colors.green}70`}
           width="200px"
           styles={{ position: "absolute", top: "calc(0.3em + 1rem", left: "37%", zIndex: 1000 }}
         />
