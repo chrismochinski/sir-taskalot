@@ -66,6 +66,7 @@ function App() {
             reporter={reporterName}
             onResetReporter={handleResetReporter}
             handleCollapseToggle={handleCollapseToggle}
+            slackChannel={slackChannel}
           />
         ) : (
           <Onboarding onSave={handleSaveName} handleCollapseToggle={handleCollapseToggle} />

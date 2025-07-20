@@ -410,10 +410,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     };
 
     // ✅ 3. POST TO SLACK (now that we have ticket key)
-    if (slackChannel === "none") {
+    if (payload.slackChannel === "none") {
       console.log("💬 No Slack message (channel set to 'none').");
     } else if (webhookUrl) {
-      console.log(`📨 Posting to Slack (${slackChannel} channel)...`);
+      console.log(`📨 Posting to Slack (${payload.slackChannel} channel)...`);
       const slackRes = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -424,7 +424,9 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
       console.log("✅ Slack status:", slackRes.status);
       console.log("📬 Slack response:", slackText);
     } else {
-      console.log(`ℹ️ Slack channel '${slackChannel}' selected, but no webhook URL is defined.`);
+      console.log(
+        `ℹ️ Slack channel '${payload.slackChannel}' selected, but no webhook URL is defined.`
+      );
     }
 
     return { success: true, key: jiraResult.key };

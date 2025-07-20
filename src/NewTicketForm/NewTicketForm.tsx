@@ -48,6 +48,7 @@ export interface NewTicketFormProps {
   onResetReporter?: () => void;
   isCollapsed?: boolean;
   handleCollapseToggle?: () => void;
+  slackChannel?: "dragon" | "test" | "none";
 }
 
 interface PriorityOptionProps extends SelectItemProps {
@@ -71,7 +72,7 @@ const clearIcon = () => <RiFormatClear size={iconSize + 2} />;
  * @returns NewTicketForm - the NewTicketForm component
  */
 export function NewTicketForm(props: NewTicketFormProps) {
-  const { reporter, onResetReporter, handleCollapseToggle, isCollapsed } = props;
+  const { reporter, onResetReporter, handleCollapseToggle, isCollapsed, slackChannel } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [descriptionJson, setDescriptionJson] = useState({});
@@ -119,7 +120,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
       slackThread,
       reporter,
       previews: imagePreviews,
-      slackChannel: "dragon", // Default to dragon channel
+      slackChannel,
     });
 
     if (success) {
