@@ -4,11 +4,15 @@ import { useSettingsModalStyles } from ".";
 import { FancyScribble, colors } from "..";
 import beardBurgerIcon from "../assets/beard-burger-v2.svg";
 
+export type StoryPointsValue = "1" | "2" | "3" | "5" | "8" | "13" | "unset" | null;
+
 type SettingsModalProps = {
   opened: boolean;
   onClose: () => void;
   slackChannel: "dragon" | "test" | "none";
   setSlackChannel: (value: "dragon" | "test" | "none") => void;
+  storyPoints: StoryPointsValue;
+  setStoryPoints: (value: StoryPointsValue) => void;
 };
 
 /**
@@ -21,10 +25,9 @@ type SettingsModalProps = {
  * @returns JSX.Element
  */
 export function SettingsModal(props: SettingsModalProps) {
-  const { opened, onClose, slackChannel, setSlackChannel } = props;
+  const { opened, onClose, slackChannel, setSlackChannel, storyPoints, setStoryPoints } = props;
   const { classes } = useSettingsModalStyles();
   const [jiraStatus, setJiraStatus] = useState("new");
-  const [storyPoints, setStoryPoints] = useState<string>("unset"); // Default to none / "unset"
 
   return (
     <Modal
@@ -90,11 +93,11 @@ export function SettingsModal(props: SettingsModalProps) {
               fullWidth
               radius="md"
               size="sm"
-              value={storyPoints}
-              onChange={setStoryPoints}
+              value={storyPoints ?? "unset"} // default to "unset" if null
+              onChange={(value) => setStoryPoints(value as StoryPointsValue)}
               name="storyPoints"
               data={[
-                { label: "None", value: "unset" }, // default
+                { label: "None", value: "unset" }, // default, sends nothing
                 { label: "1", value: "1" },
                 { label: "2", value: "2" },
                 { label: "3", value: "3" },
@@ -102,7 +105,7 @@ export function SettingsModal(props: SettingsModalProps) {
                 { label: "8", value: "8" },
                 {
                   label: <Image src={beardBurgerIcon} alt="Beard Burger" width="22px" />,
-                  value: "burger",
+                  value: "13",
                 },
               ]}
             />

@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { useEffect, useState } from "react";
-import { useGlobalStyles, DragonButton, ImageUploader } from "..";
+import { useGlobalStyles, DragonButton, ImageUploader, StoryPointsValue } from "..";
 
 // rich text editor imports
 import { RichTextEditor, Link } from "@mantine/tiptap";
@@ -48,7 +48,16 @@ export interface NewTicketFormProps {
   onResetReporter?: () => void;
   isCollapsed?: boolean;
   handleCollapseToggle?: () => void;
+  /**
+   * SlackChannel is an optional prop that can be used to set the Slack channel.
+   * If not provided, it defaults to "#pe-team-dragon"
+   */
   slackChannel?: "dragon" | "test" | "none";
+  /**
+   * StoryPoints is an optional prop that can be used to set the story points value.
+   * If not provided, it defaults to "unset" (must be set manually later in Jira)
+   */
+  storyPoints?: StoryPointsValue;
 }
 
 interface PriorityOptionProps extends SelectItemProps {
@@ -72,7 +81,14 @@ const clearIcon = () => <RiFormatClear size={iconSize + 2} />;
  * @returns NewTicketForm - the NewTicketForm component
  */
 export function NewTicketForm(props: NewTicketFormProps) {
-  const { reporter, onResetReporter, handleCollapseToggle, isCollapsed, slackChannel } = props;
+  const {
+    reporter,
+    onResetReporter,
+    handleCollapseToggle,
+    isCollapsed,
+    slackChannel,
+    storyPoints,
+  } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [descriptionJson, setDescriptionJson] = useState({});
@@ -82,7 +98,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
   const [ticketType, setTicketType] = useState<"Bug" | "Story">("Story");
   const [slackThread, setSlackThread] = useState("");
 
-const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
   // rich text editor setup
   const rteEditor = useEditor({
@@ -121,6 +137,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
       reporter,
       previews: imagePreviews,
       slackChannel,
+      storyPoints, // StoryPointsValue
     });
 
     if (success) {
@@ -136,7 +153,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
       setSlackThread("");
       setPriority("Medium");
       setTicketType("Story");
-      setImagePreviews([]); // 
+      setImagePreviews([]); //
     } else {
       alert("Slack post failed.");
     }

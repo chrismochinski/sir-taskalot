@@ -115,9 +115,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
 
-  // idea TEMPORARY - TOGGLE SLACK DRAGON CHANNEL OR TEST CHANNEL
-  // const webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
-  // const webhookUrl = process.env.VITE_SLACK_DRAGON_CHANNEL_WEBHOOK_URL;
+  // ADVANCED SETTINGS
 
   let webhookUrl = null;
 
@@ -127,9 +125,14 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     webhookUrl = process.env.VITE_SLACK_TEST_CHANNEL_WEBHOOK_URL;
   }
 
-  // fallback/default ?????
+  // story points from string to useable number for jira
+  let parsedPoints = null;
 
-  // idea END TOGGLE NEED THIS TO BE IN ADVANCED SETTINGS INCOMING
+  if (payload.storyPoints && payload.storyPoints !== "unset") {
+    parsedPoints = Number(payload.storyPoints);
+  }
+
+  // END ADVANCED SETTINGS
 
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
   const jiraEmail = process.env.VITE_JIRA_EMAIL;
@@ -159,6 +162,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
           id: { Lowest: "5", Low: "4", Medium: "3", High: "2", Highest: "1" }[payload.priority],
         },
         customfield_10001: teamId,
+        customfield_10032: parsedPoints,
         ...(payload.slackThread && { customfield_10084: payload.slackThread }),
         description: {
           type: "doc",

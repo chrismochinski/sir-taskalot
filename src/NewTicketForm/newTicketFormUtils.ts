@@ -1,3 +1,5 @@
+import { StoryPointsValue } from "..";
+
 type TicketPayload = {
   title: string;
   description: string; // Slack HTML
@@ -7,7 +9,8 @@ type TicketPayload = {
   slackThread?: string;
   reporter?: string;
   previews?: string[]; // image previews array
-  slackChannel?: "dragon" | "test" | "none"; 
+  slackChannel?: "dragon" | "test" | "none";
+  storyPoints?: StoryPointsValue;
 };
 
 export async function submitTicket(payload: TicketPayload): Promise<boolean> {

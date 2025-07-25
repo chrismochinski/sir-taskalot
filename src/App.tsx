@@ -9,6 +9,7 @@ import {
   DragRegions,
   StampView,
   InfoIconButton,
+  StoryPointsValue,
 } from ".";
 import { RiSettings4Fill, RiSettings4Line } from "react-icons/ri";
 
@@ -21,6 +22,7 @@ function App() {
   // ADVANCED SETTINGS STUFF
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [slackChannel, setSlackChannel] = useState<"dragon" | "test" | "none">("dragon");
+  const [storyPoints, setStoryPoints] = useState<StoryPointsValue>(null);
 
   // check localStorage for reporter name
   useEffect(() => {
@@ -67,6 +69,7 @@ function App() {
             onResetReporter={handleResetReporter}
             handleCollapseToggle={handleCollapseToggle}
             slackChannel={slackChannel}
+            storyPoints={storyPoints}
           />
         ) : (
           <Onboarding onSave={handleSaveName} handleCollapseToggle={handleCollapseToggle} />
@@ -103,6 +106,8 @@ function App() {
         onClose={() => setSettingsModalOpen(false)}
         slackChannel={slackChannel}
         setSlackChannel={setSlackChannel}
+        storyPoints={storyPoints}
+        setStoryPoints={setStoryPoints}
       />
     </MantineProvider>
   );
