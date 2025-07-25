@@ -128,7 +128,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   // story points from string to useable number for jira
   let parsedPoints = null;
 
-  if (payload.storyPoints && payload.storyPoints !== "unset") {
+  if (payload.storyPoints !== null && payload.storyPoints !== "unset") {
     parsedPoints = Number(payload.storyPoints);
   }
 
@@ -294,6 +294,13 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
 
     const jiraResult = await jiraResponse.json();
     console.log("✅ Jira response:", jiraResult);
+
+    // log story points as set number or null if null
+    if (parsedPoints !== null) {
+      console.log("📊 Story Points set to:", parsedPoints);
+    } else {
+      console.log("📊 Story Points unset");
+    }
 
     if (!jiraResult.key) {
       throw new Error("❌ Jira ticket creation failed");
