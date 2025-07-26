@@ -115,7 +115,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
   // Fix markdown links: [text](url) → <url|text>
   slackMarkdown = slackMarkdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "<$2|$1>");
 
-  // ADVANCED SETTINGS
+  // ----------- FROM ADVANCED SETTINGS -----------
 
   let webhookUrl = null;
 
@@ -132,7 +132,10 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     parsedPoints = Number(payload.storyPoints);
   }
 
-  // END ADVANCED SETTINGS
+  // transition ID to To Do if selected
+  const transitionId = jiraStatusToTransitionMap[payload.jiraStatusId];
+
+  // ----------- END ADVANCED SETTINGS -----------
 
   const jiraToken = process.env.VITE_JIRA_API_TOKEN;
   const jiraEmail = process.env.VITE_JIRA_EMAIL;
@@ -306,7 +309,31 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
       throw new Error("❌ Jira ticket creation failed");
     }
 
-    // idea move to separate file later
+    // IDEA ADVANCED SETTINGS move to separate file later
+
+    // CHANGE STATUS TO TO-DO IF APPLICABLE
+
+    console.log("checking status id which is:", payload.jiraStatusId);
+    if (payload.jiraStatusId === "10006") {
+      console.log("🔄 Attempting status transition to To Do...");
+
+      const transitionRes = await fetch(
+        `https://characterstrong.atlassian.net/rest/api/3/issue/${jiraResult.key}/transitions`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${Buffer.from(`${jiraEmail}:${jiraToken}`).toString("base64")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            transition: { id: "10006" },
+          }),
+        }
+      );
+
+      const transText = await transitionRes.text();
+      console.log("📦 Transition response:", transitionRes.status, transText);
+    }
 
     // 🖼️ Upload image previews (if any)
     if (payload.previews?.length > 0) {

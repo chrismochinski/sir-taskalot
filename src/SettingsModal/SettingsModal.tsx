@@ -1,10 +1,20 @@
-import { useState } from "react";
 import { Modal, Box, Flex, Title, Image, Radio, Group, SegmentedControl } from "@mantine/core";
 import { useSettingsModalStyles } from ".";
 import { FancyScribble, colors } from "..";
 import beardBurgerIcon from "../assets/beard-burger-v2.svg";
 
 export type StoryPointsValue = "1" | "2" | "3" | "5" | "8" | "13" | "unset" | null;
+
+export type JiraStatusIdType = "10003" | "10006" | "3" | "10045" | "10005" | "10025";
+
+export const jiraStatusToTransitionMap: Record<JiraStatusIdType, string> = {
+  "10003": "11", // default New
+  "10006": "3", // To-Do
+  "3": "21", // Doing
+  "10045": "27", // Ready For Strategic Planning
+  "10005": "2", // Ready For Estimation
+  "10025": "8", // Needs Additional Info
+};
 
 type SettingsModalProps = {
   opened: boolean;
@@ -13,6 +23,8 @@ type SettingsModalProps = {
   setSlackChannel: (value: "dragon" | "test" | "none") => void;
   storyPoints: StoryPointsValue;
   setStoryPoints: (value: StoryPointsValue) => void;
+  jiraStatusId: JiraStatusIdType;
+  setJiraStatusId: (value: JiraStatusIdType) => void;
 };
 
 /**
@@ -25,9 +37,17 @@ type SettingsModalProps = {
  * @returns JSX.Element
  */
 export function SettingsModal(props: SettingsModalProps) {
-  const { opened, onClose, slackChannel, setSlackChannel, storyPoints, setStoryPoints } = props;
+  const {
+    opened,
+    onClose,
+    slackChannel,
+    setSlackChannel,
+    storyPoints,
+    setStoryPoints,
+    jiraStatusId,
+    setJiraStatusId,
+  } = props;
   const { classes } = useSettingsModalStyles();
-  const [jiraStatus, setJiraStatus] = useState("new");
 
   return (
     <Modal
@@ -49,15 +69,15 @@ export function SettingsModal(props: SettingsModalProps) {
           <Box className={classes.settingTitleAndSwitch}>
             <Radio.Group
               className={classes.radioGroup}
-              value={jiraStatus}
-              onChange={setJiraStatus}
+              value={jiraStatusId}
+              onChange={setJiraStatusId}
               name="jiraStatus"
               label="Jira Status"
               description='Defaults to "New"'
               size="xs">
               <Group position="left" spacing="sm" mt="8px" className={classes.innerRadioGroup}>
-                <Radio value="new" label="New" />
-                <Radio value="to-do" label="To Do" />
+                <Radio value="10003" label="New" />
+                <Radio value="10006" label="To Do" />
               </Group>
             </Radio.Group>
           </Box>

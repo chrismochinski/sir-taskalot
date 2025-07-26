@@ -1,4 +1,4 @@
-import { StoryPointsValue } from "..";
+import { StoryPointsValue, JiraStatusIdType } from "..";
 
 type TicketPayload = {
   title: string;
@@ -11,6 +11,7 @@ type TicketPayload = {
   previews?: string[]; // image previews array
   slackChannel?: "dragon" | "test" | "none";
   storyPoints?: StoryPointsValue;
+  jiraStatusId?: JiraStatusIdType
 };
 
 export async function submitTicket(payload: TicketPayload): Promise<boolean> {

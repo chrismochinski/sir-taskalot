@@ -10,6 +10,7 @@ import {
   StampView,
   InfoIconButton,
   StoryPointsValue,
+  JiraStatusIdType,
 } from ".";
 import { RiSettings4Fill, RiSettings4Line } from "react-icons/ri";
 
@@ -23,6 +24,7 @@ function App() {
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
   const [slackChannel, setSlackChannel] = useState<"dragon" | "test" | "none">("dragon");
   const [storyPoints, setStoryPoints] = useState<StoryPointsValue>(null);
+  const [jiraStatusId, setJiraStatusId] = useState<JiraStatusIdType>("10003");
 
   // check localStorage for reporter name
   useEffect(() => {
@@ -70,6 +72,7 @@ function App() {
             handleCollapseToggle={handleCollapseToggle}
             slackChannel={slackChannel}
             storyPoints={storyPoints}
+            jiraStatusId={jiraStatusId}
           />
         ) : (
           <Onboarding onSave={handleSaveName} handleCollapseToggle={handleCollapseToggle} />
@@ -108,9 +111,49 @@ function App() {
         setSlackChannel={setSlackChannel}
         storyPoints={storyPoints}
         setStoryPoints={setStoryPoints}
+        jiraStatusId={jiraStatusId}
+        setJiraStatusId={setJiraStatusId}
       />
     </MantineProvider>
   );
 }
 
 export default App;
+
+/* 
+GET STATUS IDS AND STUFF:
+
+curl -u mo.mochinski@characterstrong.com:ATATT3xFfGF0NpsQqm84tPdlOUtGiPBvE_g3cp9vodwjaMNgCkF7r00FZvTHwLLAeKD2CFmw0yHWv3PZqcg8W5m-eHvGIfQ_nFIY6U7RKirb21KrrAJktJ7EFyMVR5FfyIIivUhloRit8sic2DXs124D-Q0C22A7YCks9VXNvrFLDV_DWwov_sY=386AA66D \
+  -H "Accept: application/json" \
+  "https://characterstrong.atlassian.net/rest/api/3/project/CS/statuses"
+*/
+
+/* 
+BETTER LIST VERSION
+
+curl -u mo.mochinski@characterstrong.com:ATATT3xFfGF0NpsQqm84tPdlOUtGiPBvE_g3cp9vodwjaMNgCkF7r00FZvTHwLLAeKD2CFmw0yHWv3PZqcg8W5m-eHvGIfQ_nFIY6U7RKirb21KrrAJktJ7EFyMVR5FfyIIivUhloRit8sic2DXs124D-Q0C22A7YCks9VXNvrFLDV_DWwov_sY=386AA66D \
+  -H "Accept: application/json" \
+  "https://characterstrong.atlassian.net/rest/api/3/project/CS/statuses" | jq -r '.[] | .statuses[] | "\(.id) \t \(.name)"' | sort | uniq
+
+*/
+
+/* 
+GET LIST OF AVAILABLE TRANSITIONS
+
+curl -s -u mo.mochinski@characterstrong.com:ATATT3xFfGF0NpsQqm84tPdlOUtGiPBvE_g3cp9vodwjaMNgCkF7r00FZvTHwLLAeKD2CFmw0yHWv3PZqcg8W5m-eHvGIfQ_nFIY6U7RKirb21KrrAJktJ7EFyMVR5FfyIIivUhloRit8sic2DXs124D-Q0C22A7YCks9VXNvrFLDV_DWwov_sY=386AA66D \
+  -X GET \
+  -H "Accept: application/json" \
+  "https://characterstrong.atlassian.net/rest/api/3/issue/CS-1234/transitions" \
+  | jq .
+*/
+
+/*
+GET TRANSITION ID????
+transition_id=$(curl -s -u mo.mochinski@characterstrong.com:ATATT3xFfGF0NpsQqm84tPdlOUtGiPBvE_g3cp9vodwjaMNgCkF7r00FZvTHwLLAeKD2CFmw0yHWv3PZqcg8W5m-eHvGIfQ_nFIY6U7RKirb21KrrAJktJ7EFyMVR5FfyIIivUhloRit8sic2DXs124D-Q0C22A7YCks9VXNvrFLDV_DWwov_sY=386AA66D \
+  -H "Accept: application/json" \
+  "https://characterstrong.atlassian.net/rest/api/3/issue/CS-1234/transitions" \
+  | jq -r '.transitions[] | select(.to.name == "To-Do") | .id')
+
+echo "Transition to-do ID is: $transition_id"
+
+*/

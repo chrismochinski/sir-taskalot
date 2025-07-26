@@ -1,6 +1,12 @@
 import { forwardRef } from "react";
 import { useEffect, useState } from "react";
-import { useGlobalStyles, DragonButton, ImageUploader, StoryPointsValue } from "..";
+import {
+  useGlobalStyles,
+  DragonButton,
+  ImageUploader,
+  StoryPointsValue,
+  JiraStatusIdType,
+} from "..";
 
 // rich text editor imports
 import { RichTextEditor, Link } from "@mantine/tiptap";
@@ -58,6 +64,7 @@ export interface NewTicketFormProps {
    * If not provided, it defaults to "unset" (must be set manually later in Jira)
    */
   storyPoints?: StoryPointsValue;
+  jiraStatusId?: JiraStatusIdType;
 }
 
 interface PriorityOptionProps extends SelectItemProps {
@@ -88,6 +95,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
     isCollapsed,
     slackChannel,
     storyPoints,
+    jiraStatusId,
   } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -138,6 +146,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
       previews: imagePreviews,
       slackChannel,
       storyPoints, // StoryPointsValue
+      jiraStatusId, // JiraStatusIdType
     });
 
     if (success) {
