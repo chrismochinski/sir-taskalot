@@ -10,3 +10,4 @@ export const DIM = {
   stamp: 100,
   stampWidth: 100,
 }
+

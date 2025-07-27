@@ -132,8 +132,22 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
     parsedPoints = Number(payload.storyPoints);
   }
 
-  // transition ID to To Do if selected
-  const transitionId = jiraStatusToTransitionMap[payload.jiraStatusId];
+  function getTransitionIdFromStatus(statusId) {
+    switch (statusId) {
+      case "10006":
+        return "3"; // To Do
+      case "3":
+        return "21"; // Doing
+      case "10045":
+        return "27"; // Ready For Strategic Planning
+      case "10005":
+        return "2"; // Ready For Estimation
+      case "10025":
+        return "8"; // Needs Additional Info
+      default:
+        return null; // no transition needed (e.g. "New")
+    }
+  }
 
   // ----------- END ADVANCED SETTINGS -----------
 
@@ -311,28 +325,46 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
 
     // IDEA ADVANCED SETTINGS move to separate file later
 
-    // CHANGE STATUS TO TO-DO IF APPLICABLE
+    // 🌀 OPTIONAL STATUS TRANSITION BASED ON SELECTED ADVANCED STATUS
+    const transitionId = getTransitionIdFromStatus(payload.jiraStatusId);
+    const issueKey = jiraResult.key;
 
-    console.log("checking status id which is:", payload.jiraStatusId);
-    if (payload.jiraStatusId === "10006") {
-      console.log("🔄 Attempting status transition to To Do...");
+    if (transitionId) {
+      console.log(
+        `🔄 Attempting to transition issue ${issueKey} using transition ID: ${transitionId}`
+      );
 
       const transitionRes = await fetch(
-        `https://characterstrong.atlassian.net/rest/api/3/issue/${jiraResult.key}/transitions`,
+        `https://characterstrong.atlassian.net/rest/api/3/issue/${issueKey}/transitions`,
         {
           method: "POST",
           headers: {
             Authorization: `Basic ${Buffer.from(`${jiraEmail}:${jiraToken}`).toString("base64")}`,
+            Accept: "application/json",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            transition: { id: "10006" },
+            transition: { id: transitionId },
           }),
         }
       );
 
-      const transText = await transitionRes.text();
-      console.log("📦 Transition response:", transitionRes.status, transText);
+      // post transition response, accept empty body
+      let transitionResult;
+      try {
+        transitionResult = await transitionRes.json();
+      } catch {
+        transitionResult = {};
+        console.warn("⚠️ Jira transition response body was empty.");
+      }
+
+      if (!transitionRes.ok) {
+        console.error("⚠️ Jira status transition failed:", transitionResult);
+      } else {
+        console.log("✅ Jira status transition successful:", transitionResult);
+      }
+    } else {
+      console.log("ℹ️ No transition needed for status:", payload.jiraStatusId);
     }
 
     // 🖼️ Upload image previews (if any)
@@ -458,9 +490,13 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
         body: JSON.stringify(slackPayload),
       });
 
-      const slackText = await slackRes.text();
       console.log("✅ Slack status:", slackRes.status);
-      console.log("📬 Slack response:", slackText);
+      try {
+        const slackText = await slackRes.text();
+        console.log("📬 Slack response:", slackText || "(no content)");
+      } catch (err) {
+        console.warn("📭 Slack response could not be read:", err.message);
+      }
     } else {
       console.log(
         `ℹ️ Slack channel '${payload.slackChannel}' selected, but no webhook URL is defined.`

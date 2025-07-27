@@ -7,14 +7,14 @@ export type StoryPointsValue = "1" | "2" | "3" | "5" | "8" | "13" | "unset" | nu
 
 export type JiraStatusIdType = "10003" | "10006" | "3" | "10045" | "10005" | "10025";
 
-export const jiraStatusToTransitionMap: Record<JiraStatusIdType, string> = {
-  "10003": "11", // default New
-  "10006": "3", // To-Do
-  "3": "21", // Doing
-  "10045": "27", // Ready For Strategic Planning
-  "10005": "2", // Ready For Estimation
-  "10025": "8", // Needs Additional Info
-};
+// export const jiraStatusToTransitionMap: Record<JiraStatusIdType, string> = {
+//   "10003": "11", // default New
+//   "10006": "3", // To-Do
+//   "3": "21", // Doing
+//   "10045": "27", // Ready For Strategic Planning
+//   "10005": "2", // Ready For Estimation
+//   "10025": "8", // Needs Additional Info
+// };
 
 type SettingsModalProps = {
   opened: boolean;
