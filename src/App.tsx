@@ -11,6 +11,7 @@ import {
   InfoIconButton,
   StoryPointsValue,
   JiraStatusIdType,
+  EpicOption,
 } from ".";
 import { RiSettings4Fill, RiSettings4Line } from "react-icons/ri";
 
@@ -25,6 +26,8 @@ function App() {
   const [slackChannel, setSlackChannel] = useState<"dragon" | "test" | "none">("dragon");
   const [storyPoints, setStoryPoints] = useState<StoryPointsValue>(null);
   const [jiraStatusId, setJiraStatusId] = useState<JiraStatusIdType>("10003");
+  const [epics, setEpics] = useState<EpicOption[]>([]);
+  const [selectedEpic, setSelectedEpic] = useState<string | null>(null);
 
   // check localStorage for reporter name
   useEffect(() => {
@@ -113,6 +116,10 @@ function App() {
         setStoryPoints={setStoryPoints}
         jiraStatusId={jiraStatusId}
         setJiraStatusId={setJiraStatusId}
+        epics={epics}
+        setEpics={setEpics}
+        selectedEpic={selectedEpic}
+        setSelectedEpic={setSelectedEpic}
       />
     </MantineProvider>
   );

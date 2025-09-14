@@ -5,10 +5,6 @@ interface GlobalStylesProps {
   isCollapsed?: boolean;
 }
 
-export const bounce = "cubic-bezier(0.12, 1.22, 0.63, 1.8)";
-export const textVisibilityShadow =
-  "0.03em 0.03em 0.1em #FFFFFF42, -0.03em -0.03em 0.1em #FFFFFF42, 0.03em -0.03em 0.1em #FFFFFF42, -0.03em 0.03em 0.1em #FFFFFF42";
-
 // create color scheme object called "colors" to export and import into other files
 export const colors = {
   purple: "#5E3393",
@@ -27,6 +23,10 @@ export const colors = {
   darkGray: "#777777", // text gray
   lightGray: "#F7F7F7",
 };
+
+export const bounce = "cubic-bezier(0.12, 1.22, 0.63, 1.8)";
+export const textVisibilityShadow =
+  "0.03em 0.03em 0.1em #FFFFFF42, -0.03em -0.03em 0.1em #FFFFFF42, 0.03em -0.03em 0.1em #FFFFFF42, -0.03em 0.03em 0.1em #FFFFFF42";
 
 export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesProps) => ({
   appWrapper: {
@@ -303,6 +303,48 @@ export const useGlobalStyles = createStyles((_, { isCollapsed }: GlobalStylesPro
     "&:hover > svg:last-of-type": {
       opacity: 1,
     },
+  },
 
+  modal: {
+    zIndex: 20,
+    WebkitAppRegion: "no-drag",
+    "& .mantine-Paper-root": {
+      maxWidth: "400px",
+      "& .mantine-Modal-header": {
+        background: colors.lightGreen,
+        padding: "0.35em 0.5em",
+        margin: "7px",
+        borderRadius: "10px 10px 3px 3px",
+        h2: {
+          display: "inline-block",
+          fontFamily: '"BioRhyme", serif',
+          fontSize: "1.15rem",
+          fontWeight: 700,
+          textWrap: "balance",
+          letterSpacing: "-0.015em",
+        },
+        button: {
+          WebkitAppRegion: "no-drag",
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          borderRadius: "50%",
+          height: "calc(1rem + 4px)",
+          minHeight: "calc(1rem + 4px)",
+          width: "calc(1rem + 4px)",
+          minWidth: "calc(1rem + 4px)",
+          padding: "2px",
+          stroke: colors.darkBlue,
+          "&:hover": {
+            background: colors.darkBlue,
+            svg: {
+              stroke: "#FFF",
+            },
+          },
+        },
+      },
+      "& .mantine-Modal-body": {
+        width: "100%",
+      },
+    },
   },
 }));

@@ -3,26 +3,16 @@ import { colors } from "../Globals";
 
 export const useInfoModalStyles = createStyles(() => ({
   infoModal: {
-    zIndex: 20,
-    WebkitAppRegion: "no-drag",
     "& .mantine-Paper-root": {
-      maxWidth: "400px",
       height: "530px",
       "& .mantine-Modal-header": {
         h2: {
-          display: "inline-block",
-          fontFamily: '"BioRhyme", serif',
-          fontSize: "1.375rem",
-          fontWeight: 700,
-          textWrap: "balance",
-          letterSpacing: "-0.015em",
+          
         },
         button: {
-          WebkitAppRegion: "no-drag",
-          cursor: "pointer",
-          backgroundColor: "#fff",
-          borderRadius: "50%",
-          background: colors.white,
+       
+          // background: colors.white,
+          
           height: "calc(1rem + 4px)",
           minHeight: "calc(1rem + 4px)",
           width: "calc(1rem + 4px)",

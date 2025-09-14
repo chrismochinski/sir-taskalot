@@ -1,19 +1,45 @@
-import { Modal, Box, Flex, Title, Image, Radio, Group, SegmentedControl } from "@mantine/core";
+import { useEffect, useCallback } from "react";
+// import { useGlobalStyles } from "..";
+import {
+  Modal,
+  Box,
+  Flex,
+  Title,
+  Image,
+  Radio,
+  Group,
+  SegmentedControl,
+  Select,
+} from "@mantine/core";
 import { useSettingsModalStyles } from ".";
-import { FancyScribble, colors } from "..";
 import beardBurgerIcon from "../assets/beard-burger-v2.svg";
+import { useGlobalStyles } from "../Globals";
 
 export type StoryPointsValue = "1" | "2" | "3" | "5" | "8" | "13" | "unset" | null;
 
 export type JiraStatusIdType = "10003" | "10006" | "3" | "10045" | "10005" | "10025";
 
+export type EpicOption = {
+  value: string;
+  label: string;
+};
+
+type JiraEpic = {
+  id: string;
+  key: string;
+  fields: {
+    summary: string;
+    // ! MORE??
+  };
+};
+
 // export const jiraStatusToTransitionMap: Record<JiraStatusIdType, string> = {
-//   "10003": "11", // default New
-//   "10006": "3", // To-Do
-//   "3": "21", // Doing
-//   "10045": "27", // Ready For Strategic Planning
-//   "10005": "2", // Ready For Estimation
-//   "10025": "8", // Needs Additional Info
+//   "10003": "11",     // default New
+//   "10006": "3",      // To-Do
+//   "3": "21",         // Doing
+//   "10045": "27",     // Ready For Strategic Planning
+//   "10005": "2",      // Ready For Estimation
+//   "10025": "8",      // Needs Additional Info
 // };
 
 type SettingsModalProps = {
@@ -25,6 +51,10 @@ type SettingsModalProps = {
   setStoryPoints: (value: StoryPointsValue) => void;
   jiraStatusId: JiraStatusIdType;
   setJiraStatusId: (value: JiraStatusIdType) => void;
+  epics: EpicOption[];
+  setEpics: (value: EpicOption[]) => void;
+  selectedEpic: string | null;
+  setSelectedEpic: (value: string | null) => void;
 };
 
 /**
@@ -46,13 +76,39 @@ export function SettingsModal(props: SettingsModalProps) {
     setStoryPoints,
     jiraStatusId,
     setJiraStatusId,
+    epics,
+    setEpics,
+    selectedEpic,
+    setSelectedEpic,
   } = props;
   const { classes } = useSettingsModalStyles();
+  const { classes: globalClasses } = useGlobalStyles({isCollapsed: false});
+
+  const fetchEpics = useCallback(async () => {
+    try {
+      const result: JiraEpic[] = await window.electron.ipcRenderer.invoke("get-epics", undefined);
+
+      const mapped = result.map((epic) => ({
+        value: epic.key,
+        label: `${epic.key}: ${epic.fields.summary}`,
+      }));
+
+      setEpics(mapped);
+    } catch (err) {
+      console.error("❌ Error fetching epics:", err);
+    }
+  }, [setEpics]);
+
+  useEffect(() => {
+    if (opened) {
+      fetchEpics();
+    }
+  }, [opened, fetchEpics]);
 
   return (
     <Modal
       overlayProps={{ opacity: 0.7, blur: 3 }}
-      className={classes.settingsModal}
+      className={globalClasses.modal}
       opened={opened}
       onClose={onClose}
       title="Advanced Settings"
@@ -60,15 +116,15 @@ export function SettingsModal(props: SettingsModalProps) {
       transitionProps={{ transition: "slide-up", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
-        <FancyScribble
+        {/* <FancyScribble
           color={`${colors.green}70`}
           width="115px"
           styles={{ position: "absolute", top: "1rem", left: "59%", zIndex: 1000 }}
-        />
+        /> */}
         <Flex className={classes.modalFlexRow}>
           <Box className={classes.settingTitleAndSwitch}>
             <Radio.Group
-              className={classes.radioGroup}
+              className={classes.radioSelectGroup}
               value={jiraStatusId}
               onChange={setJiraStatusId}
               name="jiraStatus"
@@ -86,7 +142,7 @@ export function SettingsModal(props: SettingsModalProps) {
         <Flex className={classes.modalFlexRow}>
           <Box className={classes.settingTitleAndSwitch}>
             <Radio.Group
-              className={classes.radioGroup}
+              className={classes.radioSelectGroup}
               value={slackChannel}
               onChange={setSlackChannel}
               name="slackChannel"
@@ -104,7 +160,7 @@ export function SettingsModal(props: SettingsModalProps) {
 
         <Flex className={classes.modalFlexRow}>
           <Box className={classes.settingTitleAndSwitch}>
-            <Box className={classes.segmentedControlTitle}>
+            <Box className={classes.flexSectionTitle}>
               <Title order={5}>Story Points</Title>
               <Title order={6}>Defaults to no settings (not 0, just no setting)</Title>
             </Box>
@@ -128,6 +184,27 @@ export function SettingsModal(props: SettingsModalProps) {
                   value: "13",
                 },
               ]}
+            />
+          </Box>
+        </Flex>
+
+        <Flex className={classes.modalFlexRow}>
+          <Box className={classes.settingTitleAndSwitch}>
+            <Select
+              className={classes.radioSelectGroup}
+              data={epics}
+              maw="300px"
+              radius="xl"
+              label="Parent Epic"
+              description="Optional: Associate new tickets with an Epic"
+              placeholder="Add Parent Epic..."
+              value={selectedEpic}
+              onChange={setSelectedEpic}
+              searchable
+              clearable
+              nothingFound="No active epics"
+              size="xs"
+              withinPortal
             />
           </Box>
         </Flex>

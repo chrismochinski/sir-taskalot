@@ -1,53 +1,27 @@
 import { createStyles } from "@mantine/core";
 import { colors } from "../Globals";
 
-export const useSettingsModalStyles = createStyles(() => ({
-  settingsModal: {
-    zIndex: 20,
-    WebkitAppRegion: "no-drag",
-    "& .mantine-Paper-root": {
-      maxWidth: "400px",
-      "& .mantine-Modal-header": {
-        h2: {
-          display: "inline-block",
-          fontFamily: '"BioRhyme", serif',
-          fontSize: "1.375rem",
-          fontWeight: 700,
-          textWrap: "balance",
-          letterSpacing: "-0.015em",
-        },
-        button: {
-          WebkitAppRegion: "no-drag",
-          cursor: "pointer",
-          backgroundColor: "#fff",
-          borderRadius: "50%",
-          background: colors.white,
-          height: "calc(1rem + 4px)",
-          minHeight: "calc(1rem + 4px)",
-          width: "calc(1rem + 4px)",
-          minWidth: "calc(1rem + 4px)",
-          padding: "2px",
-          stroke: colors.darkBlue,
-          "&:hover": {
-            background: colors.darkBlue,
-            svg: {
-              stroke: "#FFF",
-            },
-          },
-        },
-      },
-      "& .mantine-Modal-body": {
-        width: "100%",
-      },
-    },
-  },
+const flexSectionTitleStyles = {
+  fontSize: "17px",
+  fontWeight: 600,
+  fontFamily: '"Archivo", sans-serif',
+  color: `${colors.black}`,
+  textWrap: "pretty",
+  WebkitAppRegion: "no-drag",
+  lineHeight: "normal",
+};
 
-  scribble: {
-    position: "absolute",
-    top: "calc(1rem - 0.1em)",
-    left: "59%",
-    zIndex: 1000,
-  },
+const flexSectionDescriptionStyles = {
+  fontFamily: '"Roboto", sans-serif',
+  fontSize: "12px",
+  fontWeight: 400,
+  lineHeight: "normal",
+  color: `${colors.darkGray}`,
+  fontStyle: "italic",
+};
+
+export const useSettingsModalStyles = createStyles(() => ({
+
 
   modalInner: {
     padding: "0 0.75rem 1rem",
@@ -89,26 +63,15 @@ export const useSettingsModalStyles = createStyles(() => ({
     width: "100%",
   },
 
-  radioGroup: {
+  radioSelectGroup: {
     width: "100%",
 
-    "& .mantine-RadioGroup-label": {
-      fontSize: "18px",
-      fontWeight: 600,
-      fontFamily: '"Archivo", sans-serif',
-      color: `${colors.black}`,
-      textWrap: "pretty",
-      WebkitAppRegion: "no-drag",
-      lineHeight: "normal",
+    '& [class*="-label"]': {
+      ...flexSectionTitleStyles,
     },
 
-    "& .mantine-RadioGroup-description": {
-      fontFamily: '"Roboto", sans-serif',
-      fontSize: "14px",
-      marginTop: "1px",
-      lineHeight: "normal",
-      color: `${colors.darkGray}`,
-      fontStyle: "italic",
+    '& [class*="-description"]': {
+      ...flexSectionDescriptionStyles,
     },
   },
 
@@ -137,25 +100,13 @@ export const useSettingsModalStyles = createStyles(() => ({
     },
   },
 
-  segmentedControlTitle: {
+  flexSectionTitle: {
     marginBottom: "10px",
     h5: {
-      fontSize: "18px",
-      fontWeight: 600,
-      fontFamily: '"Archivo", sans-serif',
-      color: `${colors.black}`,
-      textWrap: "pretty",
-      WebkitAppRegion: "no-drag",
-      lineHeight: "normal",
+      ...flexSectionTitleStyles,
     },
     h6: {
-      fontFamily: '"Roboto", sans-serif',
-      fontSize: "14px",
-      marginTop: "1px",
-      lineHeight: "normal",
-      color: `${colors.darkGray}`,
-      fontStyle: "italic",
-      fontWeight: 400,
+      ...flexSectionDescriptionStyles,
     },
   },
 
@@ -185,4 +136,6 @@ export const useSettingsModalStyles = createStyles(() => ({
       height: "38px",
     },
   },
+
+  select: {},
 }));

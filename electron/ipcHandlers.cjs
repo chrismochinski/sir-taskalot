@@ -1,3 +1,7 @@
+// ipcHandler modules
+const registerGetEpics = require("./ipc/getEpics.cjs");
+
+// register ipc handlers
 const fs = require("fs");
 const path = require("path");
 const FormData = require("form-data");
@@ -5,6 +9,13 @@ const { ipcMain } = require("electron");
 const { fetch } = require("undici");
 require("dotenv").config();
 const axios = require("axios");
+
+// IDEA - 
+
+// working on modularizing ipc handlers - starting with getEpics idea
+registerGetEpics(ipcMain);
+
+// IDEA END
 
 // TIPTAP TO ADF CONVERSION
 function tiptapToADF(tiptapJSON) {

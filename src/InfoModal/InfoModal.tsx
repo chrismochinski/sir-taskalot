@@ -8,7 +8,7 @@ import {
 } from ".";
 
 import dragonBotImage from "../assets/DragonBotTight.svg";
-import { SquiggleMedium, colors } from "..";
+import { useGlobalStyles } from "..";
 
 type InfoModalProps = {
   opened: boolean;
@@ -16,12 +16,13 @@ type InfoModalProps = {
 };
 
 export function InfoModal({ opened, onClose }: InfoModalProps) {
-  const { classes } = useInfoModalStyles();
+  const { classes, cx } = useInfoModalStyles();
+  const { classes: globalClasses } = useGlobalStyles({ isCollapsed: false });
 
   return (
     <Modal
       overlayProps={{ opacity: 0.7, blur: 3 }}
-      className={classes.infoModal}
+      className={cx(globalClasses.modal, classes.infoModal)}
       opened={opened}
       onClose={onClose}
       title="APP INFO"
@@ -29,11 +30,11 @@ export function InfoModal({ opened, onClose }: InfoModalProps) {
       transitionProps={{ transition: "slide-down", duration: 300 }}
       radius="lg">
       <Box className={classes.modalInner} id="modal-inner">
-        <SquiggleMedium
+        {/* <SquiggleMedium
           color={`${colors.green}70`}
           width="200px"
           styles={{ position: "absolute", top: "calc(0.3em + 1rem", left: "37%", zIndex: 1000 }}
-        />
+        /> */}
 
         <Flex className={classes.modalFlexRow}>
           <ThreeHandsIcon />
