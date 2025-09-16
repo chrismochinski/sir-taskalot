@@ -95,7 +95,7 @@ export function SettingsModal(props: SettingsModalProps) {
 
       setEpics(mapped);
     } catch (err) {
-      console.error("❌ Error fetching epics:", err);
+      console.error("❌ [SettingsModal] Error fetching epics:", err);
     }
   }, [setEpics]);
 
@@ -193,7 +193,7 @@ export function SettingsModal(props: SettingsModalProps) {
             <Select
               className={classes.radioSelectGroup}
               data={epics}
-              maw="300px"
+              // maw="300px"
               radius="xl"
               label="Parent Epic"
               description="Optional: Associate new tickets with an Epic"

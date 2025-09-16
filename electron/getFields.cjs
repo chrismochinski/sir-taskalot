@@ -1,10 +1,13 @@
 const axios = require("axios");
 require("dotenv").config({ path: "../.env" });
 
+/**
+ * Note that this function is temporary and not used in the app
+ * It was used to fetch the custom field IDs for "Squad" fields in Jira
+ * Run this file with `node electron/getFields.cjs` to see the output
+ * Information required for parent epic feature in advanced settings
+ */
 (async () => {
-  console.log("🔐 Email:", process.env.VITE_JIRA_EMAIL);
-  console.log("🔐 Token:", process.env.VITE_JIRA_API_TOKEN);
-
   const auth = Buffer.from(
     `${process.env.VITE_JIRA_EMAIL}:${process.env.VITE_JIRA_API_TOKEN}`
   ).toString("base64");
