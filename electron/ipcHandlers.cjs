@@ -1,4 +1,5 @@
 // ipcHandler modules
+// ! to do - move more stuff to modules!
 const registerGetEpics = require("./ipc/getEpics.cjs");
 
 // register ipc handlers
@@ -10,12 +11,8 @@ const { fetch } = require("undici");
 require("dotenv").config();
 const axios = require("axios");
 
-// IDEA - 
-
-// working on modularizing ipc handlers - starting with getEpics idea
+// ! to do - move more stuff to modules!
 registerGetEpics(ipcMain);
-
-// IDEA END
 
 // TIPTAP TO ADF CONVERSION
 function tiptapToADF(tiptapJSON) {
@@ -192,6 +189,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
         customfield_10001: teamId,
         customfield_10032: parsedPoints,
         ...(payload.slackThread && { customfield_10084: payload.slackThread }),
+        ...(payload.selectedEpic && { customfield_10014: payload.selectedEpic }),
         description: {
           type: "doc",
           version: 1,
@@ -451,6 +449,23 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
             text: `*Title:* ${payload.title}\n*Type:* ${payload.ticketType}\n*Priority:* ${payload.priority} ${priorityEmoji}`,
           },
         },
+
+        // ? --------------------- ADVANCED SETTINGS ---------------------
+
+        ...(payload.selectedEpic !== null
+          ? [
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*Epic Link:* <https://characterstrong.atlassian.net/browse/${payload.selectedEpic}|${payload.selectedEpic}>`,
+                },
+              },
+            ]
+          : []),
+
+        // ? --------------------- END ADVANCED SETTINGS ---------------------
+
         ...(payload.description
           ? [
               {

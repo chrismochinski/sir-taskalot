@@ -12,6 +12,7 @@ type TicketPayload = {
   slackChannel?: "dragon" | "test" | "none";
   storyPoints?: StoryPointsValue;
   jiraStatusId?: JiraStatusIdType
+  selectedEpic?: string | null;
 };
 
 export async function submitTicket(payload: TicketPayload): Promise<boolean> {

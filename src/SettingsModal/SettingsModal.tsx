@@ -24,7 +24,7 @@ export type EpicOption = {
   label: string;
 };
 
-type JiraEpic = {
+export type JiraEpic = {
   id: string;
   key: string;
   fields: {

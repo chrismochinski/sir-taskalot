@@ -64,7 +64,22 @@ export interface NewTicketFormProps {
    * If not provided, it defaults to "unset" (must be set manually later in Jira)
    */
   storyPoints?: StoryPointsValue;
+  /**
+   * JiraStatusId is an optional prop that can be used to set the initial Jira status ID.
+   * RECORD IF NEEDED TO ADD MORE LATER
+   * "10003": "11",   // default New
+   * "10006": "3",    // To-Do  
+   * "3": "21",       // Doing 
+   * "10045": "27",   // Ready For Strategic Planning 
+   * "10005": "2",    // Ready For Estimation 
+   * "10025": "8",    // Needs Additional Info
+   */
   jiraStatusId?: JiraStatusIdType;
+  /**
+   * Selectable via dropdown - populates active Jira epics associated with team or user
+   * Can be null/none if not needed
+   */
+  selectedEpic?: string | null;
 }
 
 interface PriorityOptionProps extends SelectItemProps {
@@ -96,6 +111,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
     slackChannel,
     storyPoints,
     jiraStatusId,
+    selectedEpic,
   } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -147,7 +163,10 @@ export function NewTicketForm(props: NewTicketFormProps) {
       slackChannel,
       storyPoints, // StoryPointsValue
       jiraStatusId, // JiraStatusIdType
+      selectedEpic, // string | null
     });
+
+    // ! TO DO - WIPE ADV SETTINGS ON SUBMIT???
 
     if (success) {
       alert("Ticket submitted 🚀");

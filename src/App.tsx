@@ -76,6 +76,7 @@ function App() {
             slackChannel={slackChannel}
             storyPoints={storyPoints}
             jiraStatusId={jiraStatusId}
+            selectedEpic={selectedEpic}
           />
         ) : (
           <Onboarding onSave={handleSaveName} handleCollapseToggle={handleCollapseToggle} />
