@@ -458,7 +458,7 @@ ipcMain.handle("submit-ticket", async (_event, payload) => {
                 type: "section",
                 text: {
                   type: "mrkdwn",
-                  text: `*Epic Link:* <https://characterstrong.atlassian.net/browse/${payload.selectedEpic}|${payload.selectedEpic}>`,
+                  text: `*Parent Epic:* <https://characterstrong.atlassian.net/browse/${payload.selectedEpic}|${payload.selectedEpic}>`,
                 },
               },
             ]
