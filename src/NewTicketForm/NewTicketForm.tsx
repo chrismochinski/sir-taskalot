@@ -80,6 +80,7 @@ export interface NewTicketFormProps {
    * Can be null/none if not needed
    */
   selectedEpic?: string | null;
+  resetAdvancedSettings?: () => void;
 }
 
 interface PriorityOptionProps extends SelectItemProps {
@@ -112,6 +113,7 @@ export function NewTicketForm(props: NewTicketFormProps) {
     storyPoints,
     jiraStatusId,
     selectedEpic,
+    resetAdvancedSettings,
   } = props;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -181,7 +183,11 @@ export function NewTicketForm(props: NewTicketFormProps) {
       setSlackThread("");
       setPriority("Medium");
       setTicketType("Story");
-      setImagePreviews([]); //
+      setImagePreviews([]); 
+
+      if (resetAdvancedSettings) {
+        resetAdvancedSettings(); // App.tsx helper
+      }
     } else {
       alert("Slack post failed.");
     }

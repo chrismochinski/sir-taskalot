@@ -61,6 +61,13 @@ function App() {
     }
   };
 
+  const resetAdvancedSettings = () => {
+    setSlackChannel("dragon"); // default
+    setStoryPoints(null); // default to none/unset
+    setJiraStatusId("10003"); // default "New"
+    setSelectedEpic(null); // clear epic selection
+  };
+
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
       <Box className={globalClasses.appWrapper} my="0" pb="0" pt="5px">
@@ -77,6 +84,7 @@ function App() {
             storyPoints={storyPoints}
             jiraStatusId={jiraStatusId}
             selectedEpic={selectedEpic}
+            resetAdvancedSettings={resetAdvancedSettings} // App.tsx helper  
           />
         ) : (
           <Onboarding onSave={handleSaveName} handleCollapseToggle={handleCollapseToggle} />
